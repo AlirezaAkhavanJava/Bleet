@@ -1,144 +1,138 @@
-/* =========================================================
-   BLEET - HOME PAGE SECTIONS
-   Independent styles for all sections below the hero.
-   Theme: Ice Gray / Onyx Black
-   ========================================================= */
+/* =========================================
+   BLEET — HOME SECTIONS
+   ========================================= */
 
-/* =========================================================
-   1. GLOBAL SECTION VARIABLES
-   ========================================================= */
-
-:root {
-  --home-onyx: #17191c;
-  --home-dark: #25292e;
-  --home-gray: #737a83;
-  --home-light-gray: #f3f5f7;
-  --home-border: #e8ebef;
-  --home-white: #ffffff;
-  --home-accent: #dce6ed;
-  --home-radius: 18px;
-  --home-transition: 0.3s ease;
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
-/* =========================================================
-   2. COMMON SECTION STYLES
-   ========================================================= */
-
-.home-section {
-  width: 100%;
-  margin: 100px 0;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.home-section-heading {
+/* Trust bar */
+.trust-bar {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.trust-item {
   display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.3s var(--ease-out),
+    box-shadow 0.3s var(--ease-out);
+}
+
+.trust-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.trust-item > i {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #edf1f5;
+  font-size: 1.4rem;
+}
+
+.trust-item strong {
+  display: block;
+  font-size: 1.1rem;
+}
+
+.trust-item span {
+  font-size: 0.95rem;
+  color: var(--color-muted);
+}
+
+/* Section scaffolding */
+.section {
+  padding-top: 88px;
+}
+
+.section-heading {
+  display: flex;
+  flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 25px;
+  gap: 16px 24px;
   margin-bottom: 32px;
 }
 
-.home-eyebrow {
-  display: inline-block;
-  margin-bottom: 12px;
-  color: #858d96;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
+.section-heading.is-centered {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-.home-section-heading h2,
-.benefits-intro h2 {
-  margin: 0;
-  color: var(--home-onyx);
-  font-size: clamp(27px, 3vw, 36px);
-  font-weight: 700;
-  letter-spacing: -1px;
+.section-heading h2,
+.benefits-intro h2,
+.newsletter h2 {
+  font-size: clamp(2rem, 3.5vw, 2.9rem);
+  letter-spacing: -0.03em;
 }
 
-.home-section-heading p {
-  margin: 10px 0 0;
-  color: var(--home-gray);
-  font-size: 14px;
-  line-height: 1.7;
+.section-heading p:not(.kicker) {
+  margin-top: 6px;
+  font-size: 1.1rem;
+  color: var(--color-muted);
 }
 
-.home-text-link,
-.home-primary-link {
+.text-link {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  color: var(--home-onyx);
-  font-size: 13px;
-  font-weight: 700;
+  gap: 8px;
+  font-weight: 600;
   text-decoration: none;
-  white-space: nowrap;
-  transition: var(--home-transition);
 }
 
-.home-text-link:hover,
-.home-primary-link:hover {
-  gap: 15px;
-  color: #737e89;
+.text-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s var(--ease-out);
 }
 
-/* =========================================================
-   3. TRUST BAR
-   ========================================================= */
-
-.home-trust {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  padding: 28px 32px;
-  margin-top: 35px;
-  background: var(--home-white);
-  border: 1px solid var(--home-border);
-  border-radius: var(--home-radius);
-  box-shadow: 0 8px 30px rgba(20, 30, 40, 0.035);
+.text-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
-.home-trust-item {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  min-width: 0;
+.text-link i {
+  transition: transform 0.3s var(--ease-out);
 }
 
-.home-trust-item > i {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 43px;
-  height: 43px;
-  color: var(--home-onyx);
-  background: var(--home-light-gray);
-  border-radius: 13px;
-  font-size: 17px;
+.text-link:hover i {
+  transform: translateX(4px);
 }
 
-.home-trust-item div {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.home-trust-item strong {
-  color: var(--home-onyx);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.home-trust-item span {
-  color: var(--home-gray);
-  font-size: 11px;
-  line-height: 1.5;
-}
-
-/* =========================================================
-   4. POPULAR DESTINATIONS
-   ========================================================= */
-
+/* Destinations */
 .destination-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -148,137 +142,113 @@
 .destination-card {
   position: relative;
   display: flex;
-  align-items: flex-end;
-  min-height: 330px;
-  overflow: hidden;
-  isolation: isolate;
-  border-radius: var(--home-radius);
-  background-color: #87939e;
-  background-size: cover;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 340px;
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  color: #fff;
+  text-decoration: none;
+  background-color: #1c2430;
+  background-image:
+    linear-gradient(
+      to top,
+      rgba(8, 12, 18, 0.85) 0%,
+      rgba(8, 12, 18, 0.15) 60%
+    ),
+    var(--photo, none),
+    linear-gradient(135deg, var(--from, #3b4a5e), var(--to, #161d27));
+  background-size:
+    100% 100%,
+    cover,
+    cover;
   background-position: center;
-  transition: transform var(--home-transition);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out);
 }
 
 .destination-card:hover {
   transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
 }
 
-/* Replace these gradients with destination photographs
-   whenever the corresponding image assets are available. */
-
+/* One class per city: photo path and fallback gradient */
 .destination-paris {
-  background-image:
-    linear-gradient(180deg, transparent 20%, rgba(10, 15, 22, 0.85) 100%),
-    linear-gradient(135deg, #9cabb6, #515e6b);
+  --photo: url("../images/destinations/paris.webp");
+  --from: #4b5a70;
+  --to: #1c2430;
 }
-
 .destination-dubai {
-  background-image:
-    linear-gradient(180deg, transparent 20%, rgba(10, 15, 22, 0.85) 100%),
-    linear-gradient(135deg, #d4b28a, #625244);
+  --photo: url("../images/destinations/dubai.webp");
+  --from: #9a7b4f;
+  --to: #2a2116;
 }
-
 .destination-istanbul {
-  background-image:
-    linear-gradient(180deg, transparent 20%, rgba(10, 15, 22, 0.85) 100%),
-    linear-gradient(135deg, #9da9a6, #4b5c59);
+  --photo: url("../images/destinations/istanbul.webp");
+  --from: #3d5a6c;
+  --to: #142028;
 }
-
 .destination-tokyo {
-  background-image:
-    linear-gradient(180deg, transparent 20%, rgba(10, 15, 22, 0.85) 100%),
-    linear-gradient(135deg, #b2a1a7, #66545e);
-}
-
-.destination-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(
-    180deg,
-    transparent 25%,
-    rgba(10, 15, 22, 0.78) 100%
-  );
-}
-
-.destination-content {
-  width: 100%;
-  padding: 24px;
-  color: var(--home-white);
+  --photo: url("../images/destinations/tokyo.webp");
+  --from: #6b3b4d;
+  --to: #1d1419;
 }
 
 .destination-country {
-  font-size: 10px;
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 2px;
-  opacity: 0.8;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.85;
 }
 
-.destination-content h3 {
-  margin: 8px 0 4px;
-  color: var(--home-white);
-  font-size: 27px;
-  font-weight: 700;
+.destination-card h3 {
+  margin: 4px 0;
+  font-size: 2rem;
 }
 
-.destination-description {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 12px;
+.destination-desc {
+  font-size: 1rem;
+  color: #d6dde5;
 }
 
 .destination-bottom {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-top: 25px;
-  padding-top: 17px;
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-.destination-bottom div {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .destination-bottom span {
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 11px;
+  display: block;
+  font-size: 0.85rem;
+  color: #c9d2db;
 }
 
 .destination-bottom strong {
-  color: var(--home-white);
-  font-size: 21px;
+  font-size: 1.4rem;
 }
 
-.destination-bottom a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 37px;
-  height: 37px;
-  color: var(--home-onyx);
-  background: var(--home-white);
+.destination-cta {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  text-decoration: none;
-  transition: var(--home-transition);
+  background: #fff;
+  color: #000;
+  transition: transform 0.35s var(--ease-spring);
 }
 
-.destination-bottom a:hover {
-  transform: rotate(45deg);
-  background: var(--home-accent);
+.destination-card:hover .destination-cta {
+  transform: rotate(-45deg) scale(1.08);
 }
 
-/* =========================================================
-   5. SPECIAL OFFERS
-   ========================================================= */
-
-.offers-section {
-  padding: 65px 40px;
-  background: var(--home-light-gray);
-  border-radius: 26px;
-}
-
+/* Offers */
 .offers-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -286,670 +256,362 @@
 }
 
 .offer-card {
+  display: grid;
+  grid-template-columns: 42% 1fr;
   overflow: hidden;
-  background: var(--home-white);
-  border: 1px solid var(--home-border);
-  border-radius: var(--home-radius);
-  transition: var(--home-transition);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
 }
 
 .offer-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(20, 30, 40, 0.07);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
 }
 
 .offer-image {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 190px;
-  overflow: hidden;
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  color: #fff;
+  background-image:
+    var(--photo, none),
+    linear-gradient(135deg, var(--from, #3b4a5e), var(--to, #161d27));
+  background-size: cover, cover;
+  background-position: center;
 }
 
 .offer-image-one {
-  background: linear-gradient(120deg, #c6d2dc, #8799a8);
+  --photo: url("../images/offers/international.webp");
+  --from: #2c3b52;
+  --to: #0f1722;
 }
 
 .offer-image-two {
-  background: linear-gradient(120deg, #d6d9dc, #a5b0b9);
+  --photo: url("../images/offers/weekend.webp");
+  --from: #4d5f4f;
+  --to: #1d2620;
 }
 
 .offer-discount {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 1;
-  padding: 9px 13px;
-  color: var(--home-onyx);
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 7px;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
+  top: 16px;
+  left: 16px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .offer-plane {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 85px;
-  transform: rotate(-15deg);
-  transition: transform 0.5s ease;
-}
-
-.offer-card:hover .offer-plane {
-  transform: rotate(-25deg) translate(10px, -5px);
+  font-size: 3.5rem;
+  opacity: 0.9;
+  animation: float 4s ease-in-out infinite;
 }
 
 .offer-body {
-  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 28px;
 }
 
 .offer-category {
-  color: #89929c;
-  font-size: 10px;
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4b5563;
 }
 
 .offer-body h3 {
-  margin: 12px 0 9px;
-  color: var(--home-onyx);
-  font-size: 21px;
-  font-weight: 700;
+  font-size: 1.7rem;
+  letter-spacing: -0.02em;
 }
 
 .offer-body p {
-  margin: 0;
-  color: var(--home-gray);
-  font-size: 13px;
-  line-height: 1.8;
+  color: var(--color-muted);
 }
 
-.offer-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
-  color: var(--home-onyx);
-  font-size: 12px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: var(--home-transition);
+.offer-body .text-link {
+  margin-top: auto;
+  padding-top: 8px;
 }
 
-.offer-link:hover {
-  gap: 15px;
-}
-
-/* =========================================================
-   6. WHY CHOOSE BLEET
-   ========================================================= */
-
-.benefits-section {
+/* Benefits */
+.benefits-layout {
   display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
   align-items: center;
-  gap: 65px;
-  padding: 30px 0;
+  gap: 48px;
 }
 
-.benefits-intro h2 {
-  font-size: clamp(32px, 4vw, 46px);
-  line-height: 1.2;
+.benefits-intro p:not(.kicker) {
+  max-width: 480px;
+  margin-bottom: 24px;
+  font-size: 1.15rem;
+  color: var(--color-muted);
 }
 
-.benefits-intro > p {
-  max-width: 420px;
-  margin: 20px 0 25px;
-  color: var(--home-gray);
-  font-size: 14px;
-  line-height: 1.9;
-}
-
-.benefits-grid {
+.benefits-cards {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  gap: 16px;
 }
 
 .benefit-card {
-  padding: 25px;
-  background: var(--home-white);
-  border: 1px solid var(--home-border);
-  border-radius: var(--home-radius);
-  transition: var(--home-transition);
+  padding: 24px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.3s var(--ease-out),
+    box-shadow 0.3s var(--ease-out);
 }
 
 .benefit-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(20, 30, 40, 0.05);
+  box-shadow: var(--shadow-md);
 }
 
 .benefit-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 46px;
-  height: 46px;
-  margin-bottom: 20px;
-  color: var(--home-onyx);
-  background: var(--home-light-gray);
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 16px;
   border-radius: 14px;
-  font-size: 18px;
+  background: var(--color-ink);
+  color: #fff;
+  font-size: 1.25rem;
 }
 
 .benefit-card h3 {
-  margin: 0 0 10px;
-  color: var(--home-onyx);
-  font-size: 16px;
-  font-weight: 700;
+  margin-bottom: 6px;
+  font-size: 1.35rem;
 }
 
 .benefit-card p {
-  margin: 0;
-  color: var(--home-gray);
-  font-size: 12px;
-  line-height: 1.8;
+  font-size: 1rem;
+  color: var(--color-muted);
 }
 
-/* =========================================================
-   7. HOW IT WORKS
-   ========================================================= */
-
-.steps-section {
-  padding: 65px 40px;
-  background: var(--home-light-gray);
-  border-radius: 26px;
-}
-
-.centered-heading {
-  justify-content: center;
-  text-align: center;
-}
-
+/* Steps */
 .steps-grid {
   display: grid;
   grid-template-columns: 1fr auto 1fr auto 1fr;
-  align-items: center;
-  gap: 25px;
+  align-items: stretch;
+  gap: 16px;
 }
 
 .step-card {
   position: relative;
-  min-height: 230px;
-  padding: 30px 25px;
-  text-align: center;
-  background: var(--home-white);
-  border: 1px solid var(--home-border);
-  border-radius: var(--home-radius);
-  transition: var(--home-transition);
-}
-
-.step-card:hover {
-  transform: translateY(-5px);
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
 }
 
 .step-number {
   position: absolute;
-  top: 18px;
-  right: 20px;
-  color: #d5dbe1;
-  font-size: 13px;
-  font-weight: 800;
+  top: 20px;
+  right: 24px;
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #e1e6ec;
 }
 
 .step-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-  margin: 15px auto 20px;
-  color: var(--home-onyx);
-  background: var(--home-light-gray);
-  border-radius: 18px;
-  font-size: 22px;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  background: #edf1f5;
+  font-size: 1.4rem;
 }
 
 .step-card h3 {
-  margin: 0 0 10px;
-  color: var(--home-onyx);
-  font-size: 16px;
+  margin-bottom: 8px;
+  font-size: 1.5rem;
 }
 
 .step-card p {
-  margin: 0;
-  color: var(--home-gray);
-  font-size: 12px;
-  line-height: 1.8;
+  color: var(--color-muted);
 }
 
 .step-connector {
-  color: #adb7c0;
-  font-size: 19px;
+  display: grid;
+  place-items: center;
+  color: #687381;
+  font-size: 1.2rem;
 }
 
-/* =========================================================
-   8. NEWSLETTER
-   ========================================================= */
-
-.home-newsletter {
+/* Newsletter */
+.newsletter {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
   align-items: center;
-  justify-content: space-between;
-  min-height: 310px;
-  padding: 55px 65px;
+  gap: 32px;
   overflow: hidden;
-  isolation: isolate;
-  background: var(--home-onyx);
-  border-radius: 26px;
+  padding: 56px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(110deg, #18212b 0%, #29343f 55%, #56616c 100%);
+  color: #f6f8fa;
 }
 
-.newsletter-content {
-  position: relative;
-  z-index: 2;
-  max-width: 570px;
+.newsletter .kicker {
+  color: #c6d0d9;
 }
 
-.newsletter-content .home-eyebrow {
-  color: #a9b5c0;
+.newsletter p:not(.kicker) {
+  max-width: 520px;
+  color: #d2d9df;
 }
 
-.newsletter-content h2 {
-  margin: 0;
-  color: var(--home-white);
-  font-size: clamp(29px, 4vw, 42px);
-  line-height: 1.25;
-}
-
-.newsletter-content > p {
-  max-width: 450px;
-  margin: 15px 0 25px;
-  color: #b5bdc5;
-  font-size: 13px;
-  line-height: 1.8;
+.newsletter p:not(.kicker):not(.newsletter-note) {
+  margin-bottom: 24px;
 }
 
 .newsletter-form {
   display: flex;
-  width: min(100%, 490px);
-  padding: 5px;
-  background: var(--home-white);
-  border-radius: 10px;
+  gap: 10px;
+  max-width: 520px;
 }
 
 .newsletter-form input {
-  width: 100%;
+  flex: 1;
   min-width: 0;
-  padding: 13px;
-  color: var(--home-onyx);
-  background: transparent;
-  border: none;
+  height: 54px;
+  padding: 0 18px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 1.1rem;
   outline: none;
-  font-family: inherit;
-  font-size: 12px;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 }
 
-.newsletter-form button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  flex-shrink: 0;
-  padding: 12px 19px;
-  color: var(--home-white);
-  background: var(--home-onyx);
-  border: none;
-  border-radius: 7px;
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--home-transition);
+.newsletter-form input::placeholder {
+  color: #aab4bf;
 }
 
-.newsletter-form button:hover {
-  background: #41474e;
+.newsletter-form input:focus {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.newsletter-form .btn {
+  height: 54px;
+  background: #fff;
+  color: #000;
+}
+
+.newsletter-form .btn:hover {
+  background: #e9eef3;
 }
 
 .newsletter-note {
-  display: inline-block;
-  margin-top: 13px;
-  color: #a8b1bb;
-  font-size: 10px;
-}
-
-.newsletter-note i {
-  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-size: 0.95rem;
+  color: #aab4bf;
 }
 
 .newsletter-decoration {
-  position: absolute;
-  top: 50%;
-  right: 12%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 220px;
+  position: relative;
+  display: grid;
+  place-items: center;
   height: 220px;
-  transform: translateY(-50%);
 }
 
 .newsletter-decoration > i {
-  z-index: 1;
+  font-size: 6rem;
   color: rgba(255, 255, 255, 0.9);
-  font-size: 85px;
-  transform: rotate(-20deg);
+  animation: float 5s ease-in-out infinite;
 }
 
 .newsletter-orbit {
   position: absolute;
-  inset: 0;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  width: 260px;
+  height: 260px;
+  border: 1px dashed rgba(255, 255, 255, 0.25);
   border-radius: 50%;
+  animation: spin 24s linear infinite;
 }
 
-.newsletter-orbit::before {
-  position: absolute;
-  top: 15px;
-  left: 35px;
-  width: 13px;
-  height: 13px;
-  background: #b8c7d3;
-  border-radius: 50%;
-  content: "";
-}
-
-/* =========================================================
-   9. FOOTER
-   ========================================================= */
-
-.home-footer {
-  width: 100%;
-  margin-top: 100px;
-  padding: 60px 0 0;
-  border-top: 1px solid var(--home-border);
-}
-
-.footer-main {
-  display: grid;
-  grid-template-columns: 1.6fr repeat(3, 1fr);
-  gap: 50px;
-  padding-bottom: 55px;
-}
-
-.footer-logo img {
-  display: block;
-  width: auto;
-  height: 34px;
-  object-fit: contain;
-}
-
-.footer-brand > p {
-  max-width: 250px;
-  margin: 18px 0;
-  color: var(--home-gray);
-  font-size: 12px;
-  line-height: 1.9;
-}
-
-.footer-socials {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.footer-socials a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 35px;
-  height: 35px;
-  color: var(--home-onyx);
-  background: var(--home-light-gray);
-  border-radius: 10px;
-  font-size: 13px;
-  text-decoration: none;
-  transition: var(--home-transition);
-}
-
-.footer-socials a:hover {
-  color: var(--home-white);
-  background: var(--home-onyx);
-}
-
-.footer-column {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 15px;
-}
-
-.footer-column h4 {
-  margin: 0 0 5px;
-  color: var(--home-onyx);
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.footer-column a {
-  color: var(--home-gray);
-  font-size: 12px;
-  text-decoration: none;
-  transition: color var(--home-transition);
-}
-
-.footer-column a:hover {
-  color: var(--home-onyx);
-}
-
-.footer-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 22px 0;
-  border-top: 1px solid var(--home-border);
-  color: var(--home-gray);
-  font-size: 11px;
-}
-
-.footer-bottom i {
-  margin-left: 5px;
-  color: var(--home-onyx);
-}
-
-/* =========================================================
-   10. ACCESSIBILITY
-   ========================================================= */
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* =========================================================
-   11. RESPONSIVE DESIGN - TABLETS
-   ========================================================= */
-
-@media (max-width: 1100px) {
-  .home-trust {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
+/* Responsive */
+@media (max-width: 1200px) {
   .destination-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  .destination-card {
-    min-height: 300px;
-  }
-
-  .benefits-section {
-    grid-template-columns: 1fr;
-    gap: 35px;
-  }
-
-  .steps-grid {
-    gap: 12px;
-  }
-
-  .footer-main {
-    gap: 30px;
-  }
 }
 
-/* =========================================================
-   12. RESPONSIVE DESIGN - MOBILE
-   ========================================================= */
-
-@media (max-width: 768px) {
-  .home-section {
-    margin: 65px 0;
-  }
-
-  .home-section-heading {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .home-trust {
-    padding: 22px;
-    gap: 22px;
-  }
-
-  .home-trust-item {
-    gap: 10px;
-  }
-
-  .home-trust-item > i {
-    width: 38px;
-    height: 38px;
-    font-size: 15px;
-  }
-
-  .destination-grid {
-    gap: 14px;
-  }
-
-  .destination-card {
-    min-height: 270px;
-  }
-
-  .destination-content {
-    padding: 17px;
-  }
-
-  .destination-content h3 {
-    font-size: 22px;
-  }
-
-  .offers-section,
-  .steps-section {
-    padding: 35px 22px;
+@media (max-width: 992px) {
+  .trust-bar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .offers-grid {
     grid-template-columns: 1fr;
   }
 
-  .steps-grid {
+  .benefits-layout {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 32px;
   }
 
-  .step-card {
-    min-height: auto;
+  .steps-grid {
+    grid-template-columns: 1fr;
   }
 
   .step-connector {
-    display: none;
+    height: 40px;
+    transform: rotate(90deg);
   }
 
-  .home-newsletter {
-    min-height: 340px;
-    padding: 40px 28px;
+  .newsletter {
+    grid-template-columns: 1fr;
+    padding: 36px 28px;
   }
 
   .newsletter-decoration {
-    right: -100px;
-    opacity: 0.15;
-  }
-
-  .newsletter-content {
-    width: 100%;
-  }
-
-  .footer-main {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 40px 25px;
-  }
-
-  .footer-brand {
-    grid-column: 1 / -1;
-  }
-
-  .home-footer {
-    margin-top: 65px;
+    display: none;
   }
 }
 
-/* =========================================================
-   13. RESPONSIVE DESIGN - SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 480px) {
-  .home-trust {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-
-  .destination-grid {
+@media (max-width: 576px) {
+  .trust-bar,
+  .destination-grid,
+  .benefits-cards {
     grid-template-columns: 1fr;
   }
 
-  .destination-card {
-    min-height: 300px;
+  .offer-card {
+    grid-template-columns: 1fr;
   }
 
-  .benefits-grid {
-    grid-template-columns: 1fr;
+  .offer-image {
+    min-height: 180px;
   }
 
   .newsletter-form {
     flex-direction: column;
-    gap: 5px;
-    background: transparent;
-    padding: 0;
-  }
-
-  .newsletter-form input {
-    min-height: 45px;
-    padding: 12px;
-    background: var(--home-white);
-    border-radius: 7px;
-  }
-
-  .newsletter-form button {
-    min-height: 45px;
-  }
-
-  .newsletter-content h2 {
-    font-size: 30px;
-  }
-
-  .footer-bottom {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 10px;
   }
 }

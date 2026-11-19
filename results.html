@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Search results · Bleet</title>
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/style/global.css">
+    <link rel="stylesheet" href="assets/style/heading.css">
+    <link rel="stylesheet" href="assets/style/page.css">
+    <link rel="stylesheet" href="assets/style/results.css">
+    <link rel="stylesheet" href="assets/style/footer.css">
+</head>
+
+<body>
+
+    <!-- HEADER: copy from index.html (remove is-active / aria-current from the Flights link) -->
+
+    <main id="main">
+        <section class="page-hero">
+            <div class="container">
+                <p class="kicker" id="resultsKicker">Search results</p>
+                <h1 id="resultsRoute">Search for a route</h1>
+                <p class="page-lead" id="resultsMeta"></p>
+            </div>
+        </section>
+
+        <section class="page-body">
+            <div class="container">
+                <div class="results-toolbar">
+                    <p class="muted" id="resultsCount" aria-live="polite"></p>
+                    <label class="sort-label">
+                        Sort by
+                        <select class="sort-select" id="sortBy">
+                            <option value="price">Lowest price</option>
+                            <option value="duration">Shortest duration</option>
+                            <option value="departure">Earliest departure</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="flight-list" id="flightList"></div>
+
+                <p class="muted results-note">
+                    These are sample results for layout only. Live fares will come from the Spring Boot API.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER: copy from index.html -->
+
+    <script src="assets/logic/common.js" defer></script>
+    <script src="assets/logic/results.js" defer></script>
+</body>
+
+</html>

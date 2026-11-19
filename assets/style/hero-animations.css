@@ -1,137 +1,72 @@
-/* ==========================================
-   SEARCH PANEL ANIMATIONS ONLY
-   ========================================== */
+/* =========================================
+   BLEET — HERO MOTION
+   Entrance sequence + micro-interactions
+   ========================================= */
 
-/* 1. Search Panel Bouncy Slide Up on Load */
+@keyframes image-in {
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+  to {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    translate: 0 40px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.hero-image {
+  animation: image-in 1.4s var(--ease-out) both;
+}
+
+.hero-content > * {
+  animation: rise 0.8s var(--ease-out) both;
+}
+
+.hero-content > :nth-child(2) {
+  animation-delay: 0.12s;
+}
+.hero-content > :nth-child(3) {
+  animation-delay: 0.22s;
+}
+.hero-content > :nth-child(4) {
+  animation-delay: 0.32s;
+}
+
 .search-panel {
-  animation: panelSlideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
-  opacity: 0;
-  transform: translate(-50%, 40px); /* Preserves the -50% X centering */
+  animation: panel-in 0.8s var(--ease-spring) 0.3s both;
 }
 
-@keyframes panelSlideUp {
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
+/* "backwards" so hover transforms on these elements still work after the entrance */
+.search-form > * {
+  animation: rise 0.6s var(--ease-out) backwards;
 }
 
-/* 2. Staggered Input Fade-in */
-.search-field {
-  animation: inputFadeIn 0.5s ease-out forwards;
-  opacity: 0;
+.search-form > :nth-child(1) {
+  animation-delay: 0.45s;
 }
-
-.search-field:nth-child(1) { animation-delay: 0.5s; } /* From */
-.search-field:nth-child(3) { animation-delay: 0.6s; } /* To */
-.search-field:nth-child(4) { animation-delay: 0.7s; } /* Date */
-.search-field:nth-child(5) { animation-delay: 0.8s; } /* Passengers */
-
-.search-btn { 
-  animation: inputFadeIn 0.5s ease-out 0.9s forwards; 
-  opacity: 0; 
+.search-form > :nth-child(2) {
+  animation-delay: 0.5s;
 }
-
-.swap-btn {
-  animation: inputFadeIn 0.5s ease-out 0.55s forwards; 
-  opacity: 0; 
+.search-form > :nth-child(3) {
+  animation-delay: 0.55s;
 }
-
-@keyframes inputFadeIn {
-  to {
-    opacity: 1;
-  }
+.search-form > :nth-child(4) {
+  animation-delay: 0.62s;
 }
-
-/* 3. Input Focus Glow & Lift Animation */
-.input-wrapper {
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+.search-form > :nth-child(5) {
+  animation-delay: 0.69s;
 }
-
-.input-wrapper:focus-within {
-  border-color: #000000;
-  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.08), 0 6px 16px rgba(0, 0, 0, 0.05);
-  transform: translateY(-2px);
-}
-
-/* 4. Icon Pulse on Input Focus */
-.input-wrapper i {
-  transition: color 0.2s ease;
-}
-
-.input-wrapper:focus-within i {
-  color: #000000;
-  animation: iconPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes iconPop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
-}
-
-/* 5. Swap Button Spin & Hover */
-.swap-btn {
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.swap-btn:hover {
-  transform: rotate(180deg) scale(1.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.swap-btn:active {
-  transform: rotate(360deg) scale(0.95);
-}
-
-/* 6. Search Button Hover & Press */
-.search-btn {
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.search-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-}
-
-.search-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-/* 7. Trip Options Hover Animation */
-.flight-options button {
-  transition: all 0.2s ease;
-}
-
-.flight-options button:hover:not(.active) {
-  color: #000000;
-  transform: translateY(-1px);
-}
-
-.flight-options button i {
-  transition: transform 0.3s ease;
-}
-
-.flight-options button:hover i {
-  transform: scale(1.15) rotate(-5deg);
-}
-
-
-/* ==========================================
-   MOBILE RESPONSIVENESS FIX FOR ANIMATIONS
-   ========================================== */
-@media (max-width: 992px) {
-  .search-panel {
-    /* Reset the transform for mobile so it doesn't offset horizontally */
-    animation: panelSlideUpMobile 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
-    transform: translateY(40px); 
-  }
-  
-  @keyframes panelSlideUpMobile {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+.search-form > :nth-child(6) {
+  animation-delay: 0.76s;
 }

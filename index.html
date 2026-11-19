@@ -3,653 +3,456 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bleet Header - Hero Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bleet · Book Flights &amp; Compare Prices</title>
+    <meta name="description"
+        content="Book flights easily, compare prices and explore the best destinations with Bleet.">
+    <link rel="icon" href="assets/images/logo.webp" type="image/webp">
 
-    <!-- Google Fonts: Barlow Condensed -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Font Awesome Icons -->
+    <link rel="preload" href="assets/images/hero-banner.webp" as="image" fetchpriority="high">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="/assets/style/global.css">
-    <link rel="stylesheet" href="/assets/style/heading.css">
-    <link rel="stylesheet" href="/assets/style/hero-search.css">
-    <link rel="stylesheet" href="/assets/style/header-animations.css">
-    <link rel="stylesheet" href="/assets/style/hero-animations.css">
-    <link rel="stylesheet" href="/assets/style/home-sections.css">
+    <link rel="stylesheet" href="assets/style/global.css">
+    <link rel="stylesheet" href="assets/style/heading.css">
+    <link rel="stylesheet" href="assets/style/hero-search.css">
+    <link rel="stylesheet" href="assets/style/hero-animations.css">
+    <link rel="stylesheet" href="assets/style/home-sections.css">
+    <link rel="stylesheet" href="assets/style/footer.css">
 </head>
 
 <body>
 
-    <!-- ==========================================
-         TOP NAVIGATION BAR
-         ========================================== -->
-    <header class="top-header">
-        <div class="container-fluid px-4 d-flex align-items-center justify-content-between"
-            style="height: 72px; max-width: 1400px; margin: 0 auto;">
+    <a class="sr-only" href="#main">Skip to content</a>
 
-            <!-- Logo -->
-            <a href="#" class="brand-logo d-flex align-items-center text-decoration-none">
-                <img src="/assets/images/black-logo.webp" alt="Bleet Logo" style="height: 36px; width: auto;">
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="brand" aria-label="Bleet home">
+                <img src="assets/images/black-logo.webp" alt="Bleet" height="36">
             </a>
 
-            <!-- Main Navigation Links (Desktop) -->
-            <nav class="d-none d-lg-flex align-items-center gap-2">
-                <a href="#" class="nav-link active">
-                    <span class="nav-icon"><i class="fa-solid fa-plane"></i></span> Flights
-                    <i class="fa-solid fa-chevron-down ms-1" style="font-size: 0.7rem; margin-left: 4px;"></i>
+            <nav class="main-nav" id="mainNav" aria-label="Primary">
+                <a href="index.html" class="nav-link is-active" aria-current="page">
+                    <i class="fa-solid fa-plane" aria-hidden="true"></i>Flights
                 </a>
-                <a href="#" class="nav-link">
-                    <span class="nav-icon"><i class="fa-solid fa-train"></i></span> Trains
+                <a href="page.html?p=trains" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>Trains
                 </a>
-                <a href="#" class="nav-link">
-                    <span class="nav-icon"><i class="fa-solid fa-bus"></i></span> Buses
+                <a href="page.html?p=buses" class="nav-link">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>Buses
                 </a>
-                <a href="#" class="nav-link">
-                    <span class="nav-icon"><i class="fa-solid fa-hotel"></i></span> Hotels
-                    <i class="fa-solid fa-chevron-down ms-1" style="font-size: 0.7rem; margin-left: 4px;"></i>
+                <a href="page.html?p=hotels" class="nav-link">
+                    <i class="fa-solid fa-hotel" aria-hidden="true"></i>Hotels
                 </a>
-                <a href="#" class="nav-link">
-                    <span class="nav-icon"><i class="fa-solid fa-map-location-dot"></i></span> Tours
+                <a href="page.html?p=tours" class="nav-link">
+                    <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>Tours
                 </a>
-                <a href="#" class="nav-link">
-                    <span class="nav-icon"><i class="fa-solid fa-passport"></i></span> Visa
+                <a href="page.html?p=visa" class="nav-link">
+                    <i class="fa-solid fa-passport" aria-hidden="true"></i>Visa
                 </a>
-                <a href="#" class="nav-link">
-                    <span class="nav-icon"><i class="fa-solid fa-briefcase"></i></span> Agency Panel
+                <a href="page.html?p=agency-panel" class="nav-link">
+                    <i class="fa-solid fa-briefcase" aria-hidden="true"></i>Agency Panel
                 </a>
-                <a href="#" class="nav-link">
-                    <span class="nav-icon"><i class="fa-solid fa-ellipsis"></i></span> More
-                    <i class="fa-solid fa-chevron-down ms-1" style="font-size: 0.7rem; margin-left: 4px;"></i>
+                <a href="page.html?p=more" class="nav-link">
+                    <i class="fa-solid fa-ellipsis" aria-hidden="true"></i>More
                 </a>
             </nav>
 
-            <!-- Right Side Actions (Login & Support) -->
-            <div class="d-flex align-items-center gap-4 ms-auto ms-lg-0">
-                <button class="btn-outline d-flex align-items-center gap-2">
-                    <i class="fa-solid fa-user"></i> Login / Sign Up
+            <div class="header-actions">
+                <a href="page.html?p=login" class="btn btn-ghost">
+                    <i class="fa-solid fa-user" aria-hidden="true"></i><span>Login / Sign Up</span>
+                </a>
+                <a href="page.html?p=support" class="icon-link">
+                    <i class="fa-solid fa-headset" aria-hidden="true"></i><span>Support</span>
+                </a>
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mainNav"
+                    aria-label="Open menu">
+                    <span></span><span></span><span></span>
                 </button>
-                <div class="d-none d-sm-flex align-items-center">
-                    <a href="#" class="icon-link" title="Support">
-                        <i class="fa-solid fa-headset"></i> Support
-                    </a>
-                </div>
             </div>
-
         </div>
     </header>
 
-    <!-- ==========================================
-         MAIN CONTENT AREA
-         ========================================== -->
-    <main class="container-fluid px-4 py-4" style="max-width: 1400px; margin: 0 auto;">
+    <main id="main">
 
-        <!-- Hero Section -->
+        <!-- HERO -->
         <section class="hero" aria-labelledby="hero-title">
+            <img class="hero-image" src="assets/images/hero-banner.webp" alt="" fetchpriority="high" decoding="async">
 
-            <!-- Background Image & Overlay -->
-            <img class="hero-image" src="/assets/images/hero-banner.webp" alt="Airplane wing above the clouds"
-                fetchpriority="high" loading="eager" decoding="async">
-
-            <!-- Hero Text Content -->
             <div class="hero-content">
-                <div class="eyebrow">
-                    <span aria-hidden="true">✦</span>
-                    <span data-i18n="badge">Your Next Journey Awaits</span>
-                </div>
+                <p class="eyebrow"><span aria-hidden="true">✦</span> Your next journey awaits</p>
                 <h1 id="hero-title">
-                    <span data-i18n="hero_title_1">Discover the World</span>
-                    <span data-i18n="hero_title_2">Fly with Bleet</span>
+                    <span>Discover the World</span>
+                    <span>Fly with Bleet</span>
                 </h1>
-                <p data-i18n="hero_subtitle">Book flights easily, compare prices, and explore the best destinations
-                    around the globe.</p>
+                <p class="hero-subtitle">Book flights easily, compare prices, and explore the best destinations around
+                    the globe.</p>
             </div>
 
-            <!-- ==========================================
-                 SEARCH PANEL (Overlapping Hero)
-                 ========================================== -->
-            <div class="search-panel" aria-label="Flight search">
+            <!-- SEARCH PANEL -->
+            <form class="search-panel" id="flightSearchForm" novalidate aria-label="Flight search">
 
-                <!-- Trip Type Options -->
-                <div class="flight-options" role="group" aria-label="Trip type">
-                    <button class="active" type="button">
-                        <i class="fa-solid fa-plane-departure"></i>
-                        <span data-i18n="one_way">One Way</span>
+                <div class="trip-types" role="group" aria-label="Trip type">
+                    <button class="trip-type" type="button" data-trip="oneway" aria-pressed="true">
+                        <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>One Way
                     </button>
-                    <button type="button">
-                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
-                        <span data-i18n="round_trip">Round Trip</span>
+                    <button class="trip-type" type="button" data-trip="roundtrip" aria-pressed="false">
+                        <i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i>Round Trip
                     </button>
-                    <button type="button">
-                        <i class="fa-solid fa-map-location-dot"></i>
-                        <span data-i18n="multi_city">Multi-City</span>
+                    <button class="trip-type" type="button" data-trip="multicity" aria-pressed="false"
+                        aria-disabled="true" title="Coming soon">
+                        <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>Multi-City
                     </button>
                 </div>
 
-                <!-- Flight Search Form -->
-                <form class="search-row" id="flightSearchForm">
-
-                    <!-- From Field -->
-                    <div class="search-field">
-                        <div class="input-wrapper">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <input id="fromCity" type="text" placeholder="From where?"
-                                data-i18n-placeholder="from_placeholder" autocomplete="off" required>
+                <div class="search-form">
+                    <div class="field field-from">
+                        <label class="sr-only" for="fromCity">From</label>
+                        <div class="input-wrap">
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            <input id="fromCity" name="from" type="text" placeholder="From where?" autocomplete="off"
+                                list="cityList" required>
                         </div>
+                        <span class="field-error" aria-live="polite"></span>
                     </div>
 
-                    <!-- Swap Button -->
                     <button class="swap-btn" id="swapCities" type="button" aria-label="Swap departure and destination">
-                        <i class="fa-solid fa-right-left"></i>
+                        <i class="fa-solid fa-right-left" aria-hidden="true"></i>
                     </button>
 
-                    <!-- To Field -->
-                    <div class="search-field">
-                        <div class="input-wrapper">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <input id="toCity" type="text" placeholder="Where to?"
-                                data-i18n-placeholder="to_placeholder" autocomplete="off" required>
+                    <div class="field field-to">
+                        <label class="sr-only" for="toCity">To</label>
+                        <div class="input-wrap">
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            <input id="toCity" name="to" type="text" placeholder="Where to?" autocomplete="off"
+                                list="cityList" required>
                         </div>
+                        <span class="field-error" aria-live="polite"></span>
                     </div>
 
-                    <!-- Departure Date Field -->
-                    <div class="search-field">
-                        <div class="input-wrapper date-control">
-                            <i class="fa-regular fa-calendar"></i>
-                            <input id="departureDate" type="date" value="2026-12-10" required
-                                aria-label="Departure date">
+                    <div class="field field-date">
+                        <label class="sr-only" for="departureDate">Departure date</label>
+                        <div class="input-wrap">
+                            <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                            <input id="departureDate" name="date" type="date" required>
                         </div>
+                        <span class="field-error" aria-live="polite"></span>
                     </div>
 
-                    <!-- Passengers Field -->
-                    <div class="search-field">
-                        <div class="input-wrapper">
-                            <i class="fa-solid fa-user-group"></i>
-                            <select id="passengerCount">
-                                <option value="1" data-i18n="passenger_1">1 Adult</option>
-                                <option value="2" data-i18n="passenger_2">2 Adults</option>
-                                <option value="3" data-i18n="passenger_3">3 Adults</option>
+                    <div class="field field-pax">
+                        <label class="sr-only" for="passengerCount">Passengers</label>
+                        <div class="input-wrap">
+                            <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+                            <select id="passengerCount" name="passengers">
+                                <option value="1">1 Adult</option>
+                                <option value="2">2 Adults</option>
+                                <option value="3">3 Adults</option>
                             </select>
                         </div>
                     </div>
 
-                    <!-- Submit Button -->
-                    <button class="search-btn" type="submit">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <span data-i18n="search_flights">Search</span>
+                    <button class="btn btn-primary btn-lg field-search" type="submit">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Search
                     </button>
+                </div>
 
-                </form>
-            </div>
+                <datalist id="cityList">
+                    <option value="Paris"></option>
+                    <option value="Dubai"></option>
+                    <option value="Istanbul"></option>
+                    <option value="Tokyo"></option>
+                    <option value="London"></option>
+                    <option value="New York"></option>
+                    <option value="Rome"></option>
+                    <option value="Barcelona"></option>
+                </datalist>
+            </form>
         </section>
-
-
-
-        <!-- ==========================================
-     HOME PAGE CONTENT
-     Sections below the hero search panel
-     ========================================== -->
 
         <!-- TRUST BAR -->
-        <section class="home-trust">
-            <div class="home-trust-item">
-                <i class="fa-solid fa-shield-halved"></i>
-                <div>
-                    <strong>Secure Booking</strong>
-                    <span>Your information is protected</span>
-                </div>
+        <section class="trust-bar container reveal" aria-label="Why book with Bleet">
+            <div class="trust-item">
+                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                <div><strong>Secure Booking</strong><span>Your information is protected</span></div>
             </div>
-
-            <div class="home-trust-item">
-                <i class="fa-solid fa-tags"></i>
-                <div>
-                    <strong>Best Flight Deals</strong>
-                    <span>Competitive prices, always</span>
-                </div>
+            <div class="trust-item">
+                <i class="fa-solid fa-tags" aria-hidden="true"></i>
+                <div><strong>Best Flight Deals</strong><span>Competitive prices, always</span></div>
             </div>
-
-            <div class="home-trust-item">
-                <i class="fa-solid fa-headset"></i>
-                <div>
-                    <strong>24/7 Support</strong>
-                    <span>We're here whenever you need us</span>
-                </div>
+            <div class="trust-item">
+                <i class="fa-solid fa-headset" aria-hidden="true"></i>
+                <div><strong>24/7 Support</strong><span>We're here whenever you need us</span></div>
             </div>
-
-            <div class="home-trust-item">
-                <i class="fa-solid fa-bolt"></i>
-                <div>
-                    <strong>Easy Booking</strong>
-                    <span>Book your trip in minutes</span>
-                </div>
+            <div class="trust-item">
+                <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                <div><strong>Easy Booking</strong><span>Book your trip in minutes</span></div>
             </div>
         </section>
 
-
-        <!-- ==========================================
-     POPULAR DESTINATIONS
-     ========================================== -->
-
-        <section class="home-section destinations-section">
-
-            <div class="home-section-heading">
+        <!-- POPULAR DESTINATIONS -->
+        <section class="section container" id="destinations" aria-labelledby="destinations-title">
+            <div class="section-heading">
                 <div>
-                    <span class="home-eyebrow">EXPLORE THE WORLD</span>
-                    <h2>Popular Destinations</h2>
+                    <p class="kicker">Explore the world</p>
+                    <h2 id="destinations-title">Popular Destinations</h2>
                     <p>Discover amazing places and find your next adventure.</p>
                 </div>
-
-                <a href="#" class="home-text-link">
-                    Explore all destinations
-                    <i class="fa-solid fa-arrow-right"></i>
+                <a class="text-link" href="page.html?p=guides">
+                    Explore all destinations <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </a>
             </div>
 
-            <div class="destination-grid">
-
-                <article class="destination-card destination-paris">
-                    <div class="destination-overlay"></div>
-
-                    <div class="destination-content">
-                        <span class="destination-country">FRANCE</span>
-                        <h3>Paris</h3>
-                        <span class="destination-description">The city of lights</span>
-
-                        <div class="destination-bottom">
-                            <div>
-                                <span>Flights from</span>
-                                <strong>$189</strong>
-                            </div>
-
-                            <a href="#" aria-label="Explore flights to Paris">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                            </a>
-                        </div>
+            <div class="destination-grid reveal">
+                <a class="destination-card destination-paris" href="results.html?to=Paris">
+                    <span class="destination-country">France</span>
+                    <h3>Paris</h3>
+                    <p class="destination-desc">The city of lights</p>
+                    <div class="destination-bottom">
+                        <div><span>Flights from</span><strong>$189</strong></div>
+                        <span class="destination-cta" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
                     </div>
-                </article>
+                </a>
 
-                <article class="destination-card destination-dubai">
-                    <div class="destination-overlay"></div>
-
-                    <div class="destination-content">
-                        <span class="destination-country">UAE</span>
-                        <h3>Dubai</h3>
-                        <span class="destination-description">Luxury meets adventure</span>
-
-                        <div class="destination-bottom">
-                            <div>
-                                <span>Flights from</span>
-                                <strong>$145</strong>
-                            </div>
-
-                            <a href="#" aria-label="Explore flights to Dubai">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                            </a>
-                        </div>
+                <a class="destination-card destination-dubai" href="results.html?to=Dubai">
+                    <span class="destination-country">UAE</span>
+                    <h3>Dubai</h3>
+                    <p class="destination-desc">Luxury meets adventure</p>
+                    <div class="destination-bottom">
+                        <div><span>Flights from</span><strong>$145</strong></div>
+                        <span class="destination-cta" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
                     </div>
-                </article>
+                </a>
 
-                <article class="destination-card destination-istanbul">
-                    <div class="destination-overlay"></div>
-
-                    <div class="destination-content">
-                        <span class="destination-country">TURKEY</span>
-                        <h3>Istanbul</h3>
-                        <span class="destination-description">Where two worlds meet</span>
-
-                        <div class="destination-bottom">
-                            <div>
-                                <span>Flights from</span>
-                                <strong>$99</strong>
-                            </div>
-
-                            <a href="#" aria-label="Explore flights to Istanbul">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                            </a>
-                        </div>
+                <a class="destination-card destination-istanbul" href="results.html?to=Istanbul">
+                    <span class="destination-country">Turkey</span>
+                    <h3>Istanbul</h3>
+                    <p class="destination-desc">Where two worlds meet</p>
+                    <div class="destination-bottom">
+                        <div><span>Flights from</span><strong>$99</strong></div>
+                        <span class="destination-cta" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
                     </div>
-                </article>
+                </a>
 
-                <article class="destination-card destination-tokyo">
-                    <div class="destination-overlay"></div>
-
-                    <div class="destination-content">
-                        <span class="destination-country">JAPAN</span>
-                        <h3>Tokyo</h3>
-                        <span class="destination-description">Experience something new</span>
-
-                        <div class="destination-bottom">
-                            <div>
-                                <span>Flights from</span>
-                                <strong>$420</strong>
-                            </div>
-
-                            <a href="#" aria-label="Explore flights to Tokyo">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                            </a>
-                        </div>
+                <a class="destination-card destination-tokyo" href="results.html?to=Tokyo">
+                    <span class="destination-country">Japan</span>
+                    <h3>Tokyo</h3>
+                    <p class="destination-desc">Experience something new</p>
+                    <div class="destination-bottom">
+                        <div><span>Flights from</span><strong>$420</strong></div>
+                        <span class="destination-cta" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
                     </div>
-                </article>
-
+                </a>
             </div>
         </section>
 
-
-        <!-- ==========================================
-     SPECIAL OFFERS
-     ========================================== -->
-
-        <section class="home-section offers-section">
-
-            <div class="home-section-heading">
+        <!-- SPECIAL OFFERS -->
+        <section class="section container" id="offers" aria-labelledby="offers-title">
+            <div class="section-heading">
                 <div>
-                    <span class="home-eyebrow">DON'T MISS OUT</span>
-                    <h2>Special Flight Offers</h2>
+                    <p class="kicker">Don't miss out</p>
+                    <h2 id="offers-title">Special Flight Offers</h2>
                     <p>Make your next journey more affordable.</p>
                 </div>
-
-                <a href="#" class="home-text-link">
-                    View all offers
-                    <i class="fa-solid fa-arrow-right"></i>
+                <a class="text-link" href="page.html?p=guides">
+                    View all offers <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </a>
             </div>
 
-            <div class="offers-grid">
-
+            <div class="offers-grid reveal">
                 <article class="offer-card">
                     <div class="offer-image offer-image-one">
-                        <span class="offer-discount">UP TO 25% OFF</span>
-                        <i class="fa-solid fa-plane offer-plane"></i>
+                        <span class="offer-discount">Up to 25% off</span>
+                        <i class="fa-solid fa-plane offer-plane" aria-hidden="true"></i>
                     </div>
-
                     <div class="offer-body">
-                        <span class="offer-category">INTERNATIONAL FLIGHTS</span>
+                        <span class="offer-category">International flights</span>
                         <h3>Your next adventure starts here.</h3>
                         <p>Discover international destinations with attractive fares.</p>
-
-                        <a href="#" class="offer-link">
-                            Discover offers
-                            <i class="fa-solid fa-arrow-right"></i>
+                        <a class="text-link" href="results.html?deal=international">
+                            Discover offers <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>
                 </article>
 
                 <article class="offer-card">
                     <div class="offer-image offer-image-two">
-                        <span class="offer-discount">LIMITED OFFER</span>
-                        <i class="fa-solid fa-earth-americas offer-plane"></i>
+                        <span class="offer-discount">Limited offer</span>
+                        <i class="fa-solid fa-earth-americas offer-plane" aria-hidden="true"></i>
                     </div>
-
                     <div class="offer-body">
-                        <span class="offer-category">WEEKEND GETAWAYS</span>
+                        <span class="offer-category">Weekend getaways</span>
                         <h3>Take a break from everyday life.</h3>
                         <p>Find your perfect weekend escape without breaking the bank.</p>
-
-                        <a href="#" class="offer-link">
-                            Explore destinations
-                            <i class="fa-solid fa-arrow-right"></i>
+                        <a class="text-link" href="results.html?deal=weekend">
+                            Explore destinations <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>
                 </article>
-
             </div>
         </section>
 
+        <!-- BENEFITS -->
+        <section class="section container" aria-labelledby="benefits-title">
+            <div class="benefits-layout reveal">
+                <div class="benefits-intro">
+                    <p class="kicker">The Bleet experience</p>
+                    <h2 id="benefits-title">Travel smarter.<br>Travel better.</h2>
+                    <p>Your journey deserves more than just a ticket. Bleet makes discovering, comparing and booking
+                        flights easier from beginning to end.</p>
+                    <a class="btn btn-primary" href="page.html?p=about">
+                        Discover Bleet <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
 
-        <!-- ==========================================
-     WHY CHOOSE BLEET
-     ========================================== -->
-
-        <section class="home-section benefits-section">
-
-            <div class="benefits-intro">
-                <span class="home-eyebrow">THE BLEET EXPERIENCE</span>
-
-                <h2>Travel smarter.<br>Travel better.</h2>
-
-                <p>
-                    Your journey deserves more than just a ticket.
-                    Bleet makes discovering, comparing and booking
-                    flights easier from beginning to end.
-                </p>
-
-                <a href="#" class="home-primary-link">
-                    Discover Bleet
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
-
-            <div class="benefits-grid">
-
-                <article class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fa-solid fa-magnifying-glass-dollar"></i>
-                    </div>
-
-                    <h3>Compare Prices</h3>
-                    <p>Explore available flight options and compare fares in one place.</p>
-                </article>
-
-                <article class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fa-solid fa-clock"></i>
-                    </div>
-
-                    <h3>Save Your Time</h3>
-                    <p>A streamlined booking experience that keeps things simple.</p>
-                </article>
-
-                <article class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fa-solid fa-lock"></i>
-                    </div>
-
-                    <h3>Secure Payments</h3>
-                    <p>Enjoy a secure booking experience with protected transactions.</p>
-                </article>
-
-                <article class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fa-solid fa-headset"></i>
-                    </div>
-
-                    <h3>Travel Support</h3>
-                    <p>Get assistance whenever you need help with your journey.</p>
-                </article>
-
-            </div>
-        </section>
-
-
-        <!-- ==========================================
-     HOW IT WORKS
-     ========================================== -->
-
-        <section class="home-section steps-section">
-
-            <div class="home-section-heading centered-heading">
-                <div>
-                    <span class="home-eyebrow">SIMPLE BY DESIGN</span>
-                    <h2>Your journey in three steps</h2>
-                    <p>Getting ready for your next trip has never been easier.</p>
+                <div class="benefits-cards">
+                    <article class="benefit-card">
+                        <div class="benefit-icon"><i class="fa-solid fa-magnifying-glass-dollar" aria-hidden="true"></i>
+                        </div>
+                        <h3>Compare Prices</h3>
+                        <p>Explore available flight options and compare fares in one place.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <div class="benefit-icon"><i class="fa-solid fa-clock" aria-hidden="true"></i></div>
+                        <h3>Save Your Time</h3>
+                        <p>A streamlined booking experience that keeps things simple.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <div class="benefit-icon"><i class="fa-solid fa-lock" aria-hidden="true"></i></div>
+                        <h3>Secure Payments</h3>
+                        <p>Enjoy a secure booking experience with protected transactions.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <div class="benefit-icon"><i class="fa-solid fa-headset" aria-hidden="true"></i></div>
+                        <h3>Travel Support</h3>
+                        <p>Get assistance whenever you need help with your journey.</p>
+                    </article>
                 </div>
             </div>
+        </section>
 
-            <div class="steps-grid">
+        <!-- HOW IT WORKS -->
+        <section class="section container" aria-labelledby="steps-title">
+            <div class="section-heading is-centered">
+                <p class="kicker">Simple by design</p>
+                <h2 id="steps-title">Your journey in three steps</h2>
+                <p>Getting ready for your next trip has never been easier.</p>
+            </div>
 
+            <div class="steps-grid reveal">
                 <article class="step-card">
-                    <span class="step-number">01</span>
-
-                    <div class="step-icon">
-                        <i class="fa-solid fa-plane-departure"></i>
-                    </div>
-
+                    <span class="step-number" aria-hidden="true">01</span>
+                    <div class="step-icon"><i class="fa-solid fa-plane-departure" aria-hidden="true"></i></div>
                     <h3>Find Your Flight</h3>
                     <p>Choose your destination, departure date and passengers.</p>
                 </article>
 
-                <div class="step-connector">
-                    <i class="fa-solid fa-arrow-right"></i>
-                </div>
+                <div class="step-connector" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
 
                 <article class="step-card">
-                    <span class="step-number">02</span>
-
-                    <div class="step-icon">
-                        <i class="fa-solid fa-list-check"></i>
-                    </div>
-
-                    <h3>Compare & Choose</h3>
+                    <span class="step-number" aria-hidden="true">02</span>
+                    <div class="step-icon"><i class="fa-solid fa-list-check" aria-hidden="true"></i></div>
+                    <h3>Compare &amp; Choose</h3>
                     <p>Explore available options and select the flight that suits you.</p>
                 </article>
 
-                <div class="step-connector">
-                    <i class="fa-solid fa-arrow-right"></i>
-                </div>
+                <div class="step-connector" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
 
                 <article class="step-card">
-                    <span class="step-number">03</span>
-
-                    <div class="step-icon">
-                        <i class="fa-solid fa-ticket"></i>
-                    </div>
-
-                    <h3>Book & Fly</h3>
+                    <span class="step-number" aria-hidden="true">03</span>
+                    <div class="step-icon"><i class="fa-solid fa-ticket" aria-hidden="true"></i></div>
+                    <h3>Book &amp; Fly</h3>
                     <p>Complete your booking and get ready for your next adventure.</p>
                 </article>
-
             </div>
         </section>
 
+        <!-- NEWSLETTER -->
+        <section class="section container" aria-labelledby="newsletter-title">
+            <div class="newsletter reveal">
+                <div class="newsletter-content">
+                    <p class="kicker">The world is waiting</p>
+                    <h2 id="newsletter-title">Good trips start with<br>great deals.</h2>
+                    <p>Subscribe to our newsletter and stay updated with travel inspiration and exclusive offers.</p>
 
-        <!-- ==========================================
-     NEWSLETTER
-     ========================================== -->
+                    <form class="newsletter-form" id="newsletterForm" novalidate>
+                        <label for="newsletterEmail" class="sr-only">Your email address</label>
+                        <input type="email" id="newsletterEmail" name="email" placeholder="Enter your email address"
+                            autocomplete="email" required>
+                        <button class="btn" type="submit">Subscribe <i class="fa-solid fa-arrow-right"
+                                aria-hidden="true"></i></button>
+                    </form>
 
-        <section class="home-newsletter">
-
-            <div class="newsletter-content">
-                <span class="home-eyebrow">THE WORLD IS WAITING</span>
-
-                <h2>Good trips start with<br>great deals.</h2>
-
-                <p>
-                    Subscribe to our newsletter and stay updated
-                    with travel inspiration and exclusive offers.
-                </p>
-
-                <form class="newsletter-form" id="newsletterForm">
-                    <label for="newsletterEmail" class="sr-only">
-                        Your email address
-                    </label>
-
-                    <input type="email" id="newsletterEmail" placeholder="Enter your email address" autocomplete="email"
-                        required>
-
-                    <button type="submit">
-                        Subscribe
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </form>
-
-                <span class="newsletter-note">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    We respect your privacy. Unsubscribe anytime.
-                </span>
-            </div>
-
-            <div class="newsletter-decoration" aria-hidden="true">
-                <i class="fa-solid fa-paper-plane"></i>
-                <div class="newsletter-orbit"></div>
-            </div>
-
-        </section>
-
-
-        <!-- ==========================================
-     FOOTER
-     ========================================== -->
-
-        <footer class="home-footer">
-
-            <div class="footer-main">
-
-                <div class="footer-brand">
-                    <a href="#" class="footer-logo">
-                        <img src="/assets/images/black-logo.webp" alt="Bleet" loading="lazy">
-                    </a>
-
-                    <p>
-                        Making every journey simpler.
-                        Discover the world with Bleet.
+                    <p class="newsletter-note">
+                        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                        We respect your privacy. Unsubscribe anytime.
                     </p>
+                </div>
 
+                <div class="newsletter-decoration" aria-hidden="true">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span class="newsletter-orbit"></span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" aria-label="Bleet home">
+                        <img src="assets/images/black-logo.webp" alt="Bleet" height="36">
+                    </a>
+                    <p>Making every journey simpler. Discover the world with Bleet.</p>
                     <div class="footer-socials">
-                        <a href="#" aria-label="Instagram">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-
-                        <a href="#" aria-label="Facebook">
-                            <i class="fa-brands fa-facebook-f"></i>
-                        </a>
-
-                        <a href="#" aria-label="X">
-                            <i class="fa-brands fa-x-twitter"></i>
-                        </a>
-
-                        <a href="#" aria-label="LinkedIn">
-                            <i class="fa-brands fa-linkedin-in"></i>
-                        </a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"
+                                aria-hidden="true"></i></a>
                     </div>
                 </div>
 
-                <div class="footer-column">
+                <nav class="footer-col" aria-label="Explore">
                     <h4>Explore</h4>
-                    <a href="#">Flights</a>
-                    <a href="#">Popular Destinations</a>
-                    <a href="#">Special Offers</a>
-                    <a href="#">Travel Guides</a>
-                </div>
+                    <a href="index.html">Flights</a>
+                    <a href="index.html#destinations">Popular Destinations</a>
+                    <a href="index.html#offers">Special Offers</a>
+                    <a href="page.html?p=guides">Travel Guides</a>
+                </nav>
 
-                <div class="footer-column">
+                <nav class="footer-col" aria-label="Company">
                     <h4>Company</h4>
-                    <a href="#">About Us</a>
-                    <a href="#">Careers</a>
-                    <a href="#">Contact Us</a>
-                    <a href="#">Become a Partner</a>
-                </div>
+                    <a href="page.html?p=about">About Us</a>
+                    <a href="page.html?p=careers">Careers</a>
+                    <a href="page.html?p=contact">Contact Us</a>
+                    <a href="page.html?p=partner">Become a Partner</a>
+                </nav>
 
-                <div class="footer-column">
+                <nav class="footer-col" aria-label="Support">
                     <h4>Support</h4>
-                    <a href="#">Help Center</a>
-                    <a href="#">Booking Information</a>
-                    <a href="#">Cancellation Policy</a>
-                    <a href="#">Privacy Policy</a>
-                </div>
-
+                    <a href="page.html?p=help">Help Center</a>
+                    <a href="page.html?p=booking-info">Booking Information</a>
+                    <a href="page.html?p=cancellation">Cancellation Policy</a>
+                    <a href="page.html?p=privacy">Privacy Policy</a>
+                </nav>
             </div>
 
             <div class="footer-bottom">
                 <span>&copy; 2026 Bleet. All rights reserved.</span>
-
-                <span>
-                    Made for travelers, everywhere.
-                    <i class="fa-solid fa-plane"></i>
-                </span>
+                <span>Made for travelers, everywhere. <i class="fa-solid fa-plane" aria-hidden="true"></i></span>
             </div>
+        </div>
+    </footer>
 
-        </footer>
-
-
-    </main>
-
-    <!-- JavaScript -->
-    <script src="/assets/logic/index.js"></script>
+    <script src="assets/logic/common.js" defer></script>
+    <script src="assets/logic/index.js" defer></script>
 </body>
 
 </html>
