@@ -5,11 +5,9 @@
 @keyframes image-in {
   from {
     opacity: 0;
-    transform: scale(1.06);
   }
   to {
     opacity: 0.85;
-    transform: scale(1);
   }
 }
 

@@ -71,7 +71,6 @@
   background: rgba(255, 255, 255, 0.1);
   color: #e6ebef;
   font-size: 0.82rem;
-  backdrop-filter: blur(12px);
 }
 
 .hero h1 {
@@ -104,7 +103,6 @@
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.98);
   box-shadow: 0 24px 48px rgba(24, 32, 40, 0.18);
-  backdrop-filter: blur(18px);
 }
 
 .search-top {
