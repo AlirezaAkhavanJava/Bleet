@@ -1,0 +1,384 @@
+/* --- HERO SECTION --- */
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 540px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  overflow: visible;
+  border-radius: 32px;
+
+  /* Background visible around the contained image */
+  background: #cbd1d9;
+
+  box-shadow: 0 20px 45px rgba(21, 27, 33, 0.17);
+  margin-bottom: 60px;
+}
+
+/* We need a separate wrapper for the image to keep the rounded corners */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(110deg, #18212b 0%, #29343f 55%, #56616c 100%);
+  border-radius: 32px; /* Keep corners rounded */
+}
+
+.hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: -1;
+    opacity: 0.85;
+    border-radius: 32px;
+    pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background: linear-gradient(
+    90deg,
+    rgba(12, 17, 22, 0.65) 0%,
+    rgba(12, 17, 22, 0.35) 50%,
+    rgba(12, 17, 22, 0.05) 100%
+  );
+
+  border-radius: 32px;
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 680px;
+  padding: 64px;
+  padding-bottom: 140px; /* EXTRA padding at bottom so the search panel doesn't cover the text */
+  color: #f6f8fa;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #e6ebef;
+  font-size: 0.82rem;
+  backdrop-filter: blur(12px);
+}
+
+.hero h1 {
+  margin: 0 0 18px;
+  font-size: clamp(2.5rem, 5vw, 4.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+}
+
+.hero h1 span {
+  display: block;
+  color: #c6d0d9;
+}
+
+.hero p {
+  max-width: 520px;
+  margin: 0;
+  color: #d2d9df;
+  font-size: 1.05rem;
+}
+
+/* --- SEARCH PANEL --- */
+.search-panel {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 56px);
+  max-width: 1200px;
+  z-index: 10;
+  padding: 24px 24px 24px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 24px 48px rgba(24, 32, 40, 0.18);
+  backdrop-filter: blur(18px);
+}
+
+.flight-options {
+  display: flex;
+  gap: 22px;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.flight-options button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 2px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: #6b7280;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.05rem;
+  transition: all 0.2s ease;
+}
+
+.flight-options button.active {
+  color: #000000;
+  border-bottom-color: #000000;
+}
+
+.flight-options svg {
+  width: 18px;
+  height: 18px;
+}
+
+.search-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) 42px minmax(150px, 1fr) minmax(
+      150px,
+      0.9fr
+    ) minmax(140px, 0.8fr) auto;
+  align-items: end;
+  gap: 12px;
+}
+
+.search-field {
+  min-width: 0;
+}
+
+.search-field label {
+  display: none;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0 16px; /* Slightly wider padding */
+  height: 54px; /* Increased height for a cleaner look without labels */
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.input-wrapper:focus-within {
+  border-color: #000000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.input-wrapper input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+.input-wrapper svg {
+  width: 18px;
+  height: 18px;
+  color: #9ca3af;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.input-wrapper input,
+.input-wrapper select {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #000000;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Swap Button */
+.swap-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  color: #000000;
+  transition: all 0.2s ease;
+  align-self: flex-end;
+}
+
+.swap-btn:hover {
+  background: #f3f4f6;
+  transform: rotate(180deg);
+}
+
+.swap-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Search Button */
+.search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  height: 54px;
+  padding: 0 24px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.search-btn:hover {
+  background: #333333;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.search-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+
+/* Tablets (Landscape) */
+@media (max-width: 1200px) {
+  .search-row {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      "from swap to"
+      "date passengers search";
+  }
+  .search-field:nth-child(1) {
+    grid-area: from;
+  }
+  .swap-btn {
+    grid-area: swap;
+    margin: 0 auto 3px;
+  }
+  .search-field:nth-child(3) {
+    grid-area: to;
+  }
+  .search-field:nth-child(4) {
+    grid-area: date;
+  }
+  .search-field:nth-child(5) {
+    grid-area: passengers;
+  }
+  .search-btn {
+    grid-area: search;
+  }
+}
+
+/* Tablets (Portrait) and Small Laptops */
+@media (max-width: 992px) {
+  .hero {
+    margin-bottom: 20px; /* Reset bottom margin */
+    min-height: auto;
+  }
+  .search-panel {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    width: calc(100% - 56px);
+    margin: 0 auto 40px; /* Bring it back inside the normal flow */
+    margin-top: -60px; /* Pull it up slightly to overlap the hero a bit */
+  }
+  .hero-content {
+    padding-bottom: 40px; /* Reduce bottom padding */
+  }
+  .search-row {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "from to"
+      "date passengers"
+      "search search";
+  }
+  .swap-btn {
+    display: none; /* Hide swap button on smaller screens */
+  }
+}
+
+/* Mobile Phones */
+@media (max-width: 576px) {
+  .hero {
+    border-radius: 24px;
+  }
+  .hero::before,
+  .hero-image,
+  .hero::after {
+    border-radius: 24px;
+  }
+  .search-panel {
+    margin: 0 16px 24px;
+    width: calc(100% - 32px);
+    padding: 16px;
+    margin-top: -40px;
+    border-radius: 16px;
+  }
+  .hero-content {
+    padding: 32px 24px;
+  }
+  .search-row {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "from"
+      "to"
+      "date"
+      "passengers"
+      "search";
+  }
+}
+
+/* Font Awesome Icon Adjustments */
+.input-wrapper i {
+  width: 18px;
+  height: 18px;
+  color: #9ca3af;
+  margin-right: 8px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.flight-options i {
+  font-size: 1rem;
+  margin-right: 4px;
+}
+
+.swap-btn i {
+  font-size: 1rem;
+}
