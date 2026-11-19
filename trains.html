@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trains · Bleet</title>
+    <meta name="description" content="Compare train routes, classes and fares with Bleet.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/style/global.css">
+    <link rel="stylesheet" href="assets/style/heading.css">
+    <link rel="stylesheet" href="assets/style/service-search.css">
+    <link rel="stylesheet" href="assets/style/footer.css">
+</head>
+
+<body class="theme-trains">
+
+    <!-- HEADER: copy from index.html (make the Trains link active) -->
+
+    <main id="main">
+        <section class="svc-hero">
+            <div class="container">
+                <p class="kicker">Trains</p>
+                <h1>Find your train</h1>
+                <p class="lead">Compare routes, classes and fares across partner rail networks.</p>
+            </div>
+        </section>
+
+        <section class="container">
+            <form class="svc-panel" data-service-form="trains" novalidate aria-label="Train search">
+                <div class="svc-top">
+                    <div class="segmented" role="radiogroup" aria-label="Trip type">
+                        <input type="radio" id="trainOneWay" name="trip" value="oneway" checked>
+                        <label for="trainOneWay">One way</label>
+                        <input type="radio" id="trainReturn" name="trip" value="return">
+                        <label for="trainReturn">Return</label>
+                    </div>
+                </div>
+
+                <div class="svc-fields">
+                    <div class="svc-field is-wide">
+                        <label class="svc-label" for="trainFrom">From</label>
+                        <div class="svc-control">
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            <input id="trainFrom" name="from" type="text" placeholder="Departure station"
+                                autocomplete="off" required data-msg="Enter a departure station.">
+                        </div>
+                        <span class="svc-error" aria-live="polite"></span>
+                    </div>
+
+                    <button class="svc-swap" type="button" aria-label="Swap stations">
+                        <i class="fa-solid fa-right-left" aria-hidden="true"></i>
+                    </button>
+
+                    <div class="svc-field is-wide">
+                        <label class="svc-label" for="trainTo">To</label>
+                        <div class="svc-control">
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            <input id="trainTo" name="to" type="text" placeholder="Arrival station" autocomplete="off"
+                                required data-msg="Enter a destination station.">
+                        </div>
+                        <span class="svc-error" aria-live="polite"></span>
+                    </div>
+
+                    <div class="svc-field">
+                        <label class="svc-label" for="trainDate">Departure</label>
+                        <div class="svc-control">
+                            <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                            <input id="trainDate" name="date" type="date" data-offset="7" required
+                                data-msg="Choose a departure date." data-msg-range="Date can't be in the past.">
+                        </div>
+                        <span class="svc-error" aria-live="polite"></span>
+                    </div>
+
+                    <div class="svc-field is-return-only">
+                        <label class="svc-label" for="trainReturnDate">Return</label>
+                        <div class="svc-control">
+                            <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                            <input id="trainReturnDate" name="return" type="date" data-after="trainDate"
+                                data-offset="14" data-return disabled required data-msg="Choose a return date."
+                                data-msg-range="Return must be on or after departure.">
+                        </div>
+                        <span class="svc-error" aria-live="polite"></span>
+                    </div>
+
+                    <div class="svc-field picker" data-total-max="10" data-infant-rule="true">
+                        <span class="svc-label" id="trainPaxLabel">Travellers</span>
+                        <button class="picker-trigger" type="button" aria-haspopup="dialog" aria-expanded="false"
+                            aria-controls="trainPax" aria-labelledby="trainPaxLabel picker-trainSummary">
+                            <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+                            <span class="picker-summary" id="picker-trainSummary">1 Adult</span>
+                            <i class="fa-solid fa-chevron-down picker-chevron" aria-hidden="true"></i>
+                        </button>
+
+                        <div class="picker-panel" id="trainPax" role="dialog" aria-label="Travellers">
+                            <div class="counter-row" data-key="adults" data-min="1" data-max="10" data-start="1"
+                                data-one="Adult" data-many="Adults">
+                                <div><strong>Adults</strong><small>13 years and over</small></div>
+                                <div class="counter">
+                                    <button class="counter-btn" type="button" data-action="dec"
+                                        aria-label="Remove an adult">&minus;</button>
+                                    <output>1</output>
+                                    <button class="counter-btn" type="button" data-action="inc"
+                                        aria-label="Add an adult">+</button>
+                                </div>
+                            </div>
+                            <div class="counter-row" data-key="children" data-min="0" data-max="10" data-start="0"
+                                data-one="Child" data-many="Children">
+                                <div><strong>Children</strong><small>2 to 12 years</small></div>
+                                <div class="counter">
+                                    <button class="counter-btn" type="button" data-action="dec"
+                                        aria-label="Remove a child">&minus;</button>
+                                    <output>0</output>
+                                    <button class="counter-btn" type="button" data-action="inc"
+                                        aria-label="Add a child">+</button>
+                                </div>
+                            </div>
+                            <div class="counter-row" data-key="infants" data-min="0" data-max="10" data-start="0"
+                                data-one="Infant" data-many="Infants">
+                                <div><strong>Infants</strong><small>Under 2 · sits on an adult's lap</small></div>
+                                <div class="counter">
+                                    <button class="counter-btn" type="button" data-action="dec"
+                                        aria-label="Remove an infant">&minus;</button>
+                                    <output>0</output>
+                                    <button class="counter-btn" type="button" data-action="inc"
+                                        aria-label="Add an infant">+</button>
+                                </div>
+                            </div>
+                            <div class="picker-foot">
+                                <p class="picker-hint" aria-live="polite"></p>
+                                <button class="btn picker-done svc-submit" type="button">Done</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="svc-field is-small">
+                        <label class="svc-label" for="trainClass">Class</label>
+                        <div class="svc-control">
+                            <i class="fa-solid fa-couch" aria-hidden="true"></i>
+                            <select id="trainClass" name="class">
+                                <option value="standard">Standard</option>
+                                <option value="business">Business</option>
+                                <option value="first">First class</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-lg svc-submit svc-search" type="submit">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Search trains
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section class="svc-results container" id="results" aria-label="Search results">
+            <div class="svc-results-head" id="resultsHead">
+                <div>
+                    <h2>Search trains</h2>
+                    <p>Choose a route to see available trains.</p>
+                </div>
+            </div>
+            <div class="svc-list" id="resultsList"></div>
+            <p class="svc-note">Sample results for layout only. Live schedules will come from the Spring Boot API.</p>
+        </section>
+    </main>
+
+    <!-- FOOTER: copy from index.html -->
+
+    <script src="assets/logic/common.js" defer></script>
+    <script src="assets/logic/service-search.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+<title>Hotels · Bleet</title>
+<!-- body: <body class="theme-hotels"> -->
+
+<main id="main">
+    <section class="svc-hero">
+        <div class="container">
+            <p class="kicker">Hotels</p>
+            <h1>Find your stay</h1>
+            <p class="lead">Hotels, apartments and hostels with transparent totals.</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <form class="svc-panel" data-service-form="hotels" novalidate aria-label="Hotel search">
+            <div class="svc-top">
+                <div class="segmented" role="radiogroup" aria-label="Stay type">
+                    <input type="radio" id="stayHotel" name="type" value="hotel" checked>
+                    <label for="stayHotel">Hotel</label>
+                    <input type="radio" id="stayApt" name="type" value="apartment">
+                    <label for="stayApt">Apartment</label>
+                    <input type="radio" id="stayHostel" name="type" value="hostel">
+                    <label for="stayHostel">Hostel</label>
+                </div>
+            </div>
+
+            <div class="svc-fields">
+                <div class="svc-field is-wide">
+                    <label class="svc-label" for="hotelDest">Destination</label>
+                    <div class="svc-control">
+                        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                        <input id="hotelDest" name="destination" type="text" placeholder="City, area or hotel name"
+                            autocomplete="off" required data-msg="Enter a destination.">
+                    </div>
+                    <span class="svc-error" aria-live="polite"></span>
+                </div>
+
+                <div class="svc-field">
+                    <label class="svc-label" for="hotelCheckin">Check-in</label>
+                    <div class="svc-control">
+                        <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                        <input id="hotelCheckin" name="checkin" type="date" data-offset="7" required
+                            data-msg="Choose a check-in date." data-msg-range="Date can't be in the past.">
+                    </div>
+                    <span class="svc-error" aria-live="polite"></span>
+                </div>
+
+                <div class="svc-field">
+                    <label class="svc-label" for="hotelCheckout">Check-out</label>
+                    <div class="svc-control">
+                        <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                        <input id="hotelCheckout" name="checkout" type="date" data-after="hotelCheckin" data-gap="1"
+                            data-offset="8" required data-msg="Choose a check-out date."
+                            data-msg-range="Check-out must be after check-in.">
+                    </div>
+                    <span class="svc-error" aria-live="polite"></span>
+                </div>
+
+                <div class="svc-field picker" data-total-max="8">
+                    <span class="svc-label" id="hotelGuestsLabel">Guests</span>
+                    <button class="picker-trigger" type="button" aria-haspopup="dialog" aria-expanded="false"
+                        aria-controls="hotelGuests" aria-labelledby="hotelGuestsLabel picker-hotelSummary">
+                        <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+                        <span class="picker-summary" id="picker-hotelSummary">2 Adults</span>
+                        <i class="fa-solid fa-chevron-down picker-chevron" aria-hidden="true"></i>
+                    </button>
+
+                    <div class="picker-panel" id="hotelGuests" role="dialog" aria-label="Guests">
+                        <div class="counter-row" data-key="adults" data-min="1" data-max="8" data-start="2"
+                            data-one="Adult" data-many="Adults">
+                            <div><strong>Adults</strong><small>13 years and over</small></div>
+                            <div class="counter">
+                                <button class="counter-btn" type="button" data-action="dec"
+                                    aria-label="Remove an adult">&minus;</button>
+                                <output>2</output>
+                                <button class="counter-btn" type="button" data-action="inc"
+                                    aria-label="Add an adult">+</button>
+                            </div>
+                        </div>
+                        <div class="counter-row" data-key="children" data-min="0" data-max="6" data-start="0"
+                            data-one="Child" data-many="Children">
+                            <div><strong>Children</strong><small>Under 13</small></div>
+                            <div class="counter">
+                                <button class="counter-btn" type="button" data-action="dec"
+                                    aria-label="Remove a child">&minus;</button>
+                                <output>0</output>
+                                <button class="counter-btn" type="button" data-action="inc"
+                                    aria-label="Add a child">+</button>
+                            </div>
+                        </div>
+                        <div class="picker-foot">
+                            <p class="picker-hint" aria-live="polite"></p>
+                            <button class="btn picker-done svc-submit" type="button">Done</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="svc-field is-small">
+                    <label class="svc-label" for="hotelRooms">Rooms</label>
+                    <div class="svc-control">
+                        <i class="fa-solid fa-bed" aria-hidden="true"></i>
+                        <select id="hotelRooms" name="rooms">
+                            <option value="1">1 room</option>
+                            <option value="2">2 rooms</option>
+                            <option value="3">3 rooms</option>
+                            <option value="4">4 rooms</option>
+                            <option value="5">5 rooms</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="svc-field is-small">
+                    <label class="svc-label" for="hotelStars">Stars</label>
+                    <div class="svc-control">
+                        <i class="fa-solid fa-star" aria-hidden="true"></i>
+                        <select id="hotelStars" name="stars">
+                            <option value="0">Any</option>
+                            <option value="3">3+</option>
+                            <option value="4">4+</option>
+                            <option value="5">5 only</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn btn-lg svc-submit svc-search" type="submit">
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Search stays
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="svc-results container" id="results" aria-label="Search results">
+        <div class="svc-results-head" id="resultsHead">
+            <div>
+                <h2>Search stays</h2>
+                <p>Enter a destination and dates to see places to stay.</p>
+            </div>
+        </div>
+        <div class="svc-list" id="resultsList"></div>
+        <p class="svc-note">Sample results for layout only. Live availability will come from the Spring Boot API.</p>
+    </section>
+</main>

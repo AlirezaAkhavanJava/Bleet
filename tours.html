@@ -1,0 +1,123 @@
+<title>Tours · Bleet</title>
+<!-- body: <body class="theme-tours"> -->
+
+<main id="main">
+    <section class="svc-hero">
+        <div class="container">
+            <p class="kicker">Tours</p>
+            <h1>Explore with a guide</h1>
+            <p class="lead">City walks, day trips, food tastings and outdoor adventures.</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <form class="svc-panel" data-service-form="tours" novalidate aria-label="Tour search">
+            <div class="svc-fields">
+                <div class="svc-field is-wide">
+                    <label class="svc-label" for="tourDest">Destination</label>
+                    <div class="svc-control">
+                        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                        <input id="tourDest" name="destination" type="text" placeholder="City or region"
+                            autocomplete="off" required data-msg="Enter a destination.">
+                    </div>
+                    <span class="svc-error" aria-live="polite"></span>
+                </div>
+
+                <div class="svc-field">
+                    <label class="svc-label" for="tourDate">Date</label>
+                    <div class="svc-control">
+                        <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                        <input id="tourDate" name="date" type="date" data-offset="7" required data-msg="Choose a date."
+                            data-msg-range="Date can't be in the past.">
+                    </div>
+                    <span class="svc-error" aria-live="polite"></span>
+                </div>
+
+                <div class="svc-field is-small">
+                    <label class="svc-label" for="tourDuration">Duration</label>
+                    <div class="svc-control">
+                        <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                        <select id="tourDuration" name="duration">
+                            <option value="half">Half day</option>
+                            <option value="full" selected>Full day</option>
+                            <option value="multi">2–3 days</option>
+                            <option value="long">4+ days</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="svc-field picker" data-total-max="10">
+                    <span class="svc-label" id="tourGuestsLabel">Travellers</span>
+                    <button class="picker-trigger" type="button" aria-haspopup="dialog" aria-expanded="false"
+                        aria-controls="tourGuests" aria-labelledby="tourGuestsLabel picker-tourSummary">
+                        <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+                        <span class="picker-summary" id="picker-tourSummary">1 Adult</span>
+                        <i class="fa-solid fa-chevron-down picker-chevron" aria-hidden="true"></i>
+                    </button>
+
+                    <div class="picker-panel" id="tourGuests" role="dialog" aria-label="Travellers">
+                        <div class="counter-row" data-key="adults" data-min="1" data-max="10" data-start="1"
+                            data-one="Adult" data-many="Adults">
+                            <div><strong>Adults</strong><small>13 years and over</small></div>
+                            <div class="counter">
+                                <button class="counter-btn" type="button" data-action="dec"
+                                    aria-label="Remove an adult">&minus;</button>
+                                <output>1</output>
+                                <button class="counter-btn" type="button" data-action="inc"
+                                    aria-label="Add an adult">+</button>
+                            </div>
+                        </div>
+                        <div class="counter-row" data-key="children" data-min="0" data-max="10" data-start="0"
+                            data-one="Child" data-many="Children">
+                            <div><strong>Children</strong><small>2 to 12 years</small></div>
+                            <div class="counter">
+                                <button class="counter-btn" type="button" data-action="dec"
+                                    aria-label="Remove a child">&minus;</button>
+                                <output>0</output>
+                                <button class="counter-btn" type="button" data-action="inc"
+                                    aria-label="Add a child">+</button>
+                            </div>
+                        </div>
+                        <div class="picker-foot">
+                            <p class="picker-hint" aria-live="polite"></p>
+                            <button class="btn picker-done svc-submit" type="button">Done</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="svc-field is-full">
+                    <span class="svc-label" id="tourStyleLabel">Tour style</span>
+                    <div class="chips" role="radiogroup" aria-labelledby="tourStyleLabel">
+                        <input type="radio" id="styleCity" name="style" value="city" checked>
+                        <label for="styleCity"><i class="fa-solid fa-city" aria-hidden="true"></i>City</label>
+                        <input type="radio" id="styleAdventure" name="style" value="adventure">
+                        <label for="styleAdventure"><i class="fa-solid fa-person-hiking"
+                                aria-hidden="true"></i>Adventure</label>
+                        <input type="radio" id="styleCulture" name="style" value="culture">
+                        <label for="styleCulture"><i class="fa-solid fa-landmark" aria-hidden="true"></i>Culture</label>
+                        <input type="radio" id="styleFood" name="style" value="food">
+                        <label for="styleFood"><i class="fa-solid fa-utensils" aria-hidden="true"></i>Food</label>
+                        <input type="radio" id="styleDaytrip" name="style" value="daytrip">
+                        <label for="styleDaytrip"><i class="fa-solid fa-route" aria-hidden="true"></i>Day trip</label>
+                    </div>
+                </div>
+
+                <button class="btn btn-lg svc-submit svc-search" type="submit">
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Search tours
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="svc-results container" id="results" aria-label="Search results">
+        <div class="svc-results-head" id="resultsHead">
+            <div>
+                <h2>Search tours</h2>
+                <p>Pick a destination and style to see guided options.</p>
+            </div>
+        </div>
+        <div class="svc-list" id="resultsList"></div>
+        <p class="svc-note">Sample results for layout only. Live tour availability will come from the Spring Boot API.
+        </p>
+    </section>
+</main>
