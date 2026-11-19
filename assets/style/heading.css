@@ -1,207 +1,321 @@
-/* Top Header Container */
+/* =========================================
+   BLEET — HEADER STYLES
+   Compact Ice Gray / Onyx Design
+   ========================================= */
+
+:root {
+  --header-bg: #f8fafc;
+  --header-text: #171b22;
+  --header-muted: #687381;
+  --header-border: #e5e9ee;
+  --header-hover: #edf1f5;
+  --header-primary: #171b22;
+}
+
+/* =========================================
+   MAIN HEADER
+   ========================================= */
+
 .top-header {
-  width: 100%;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
   position: sticky;
   top: 0;
   z-index: 1000;
+
+  width: 100%;
+  background: rgba(248, 250, 252, 0.97);
+
+  border-bottom: 1px solid var(--header-border);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
-/* Centered Max-Width Container */
+/* Header Layout */
 .header-container {
-  max-width: 1400px;
+  max-width: 1440px;
+  height: 48px;
+
   margin: 0 auto;
-  padding: 0 1.5rem;
-  height: 72px;
+  padding: 0 32px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/* --- Logo Section --- */
+/* =========================================
+   BRAND / LOGO
+   ========================================= */
+
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 7px;
+
+  flex-shrink: 0;
+
+  color: var(--header-text);
   text-decoration: none;
-  color: #000000;
 }
 
 .logo-icon {
-  background-color: #111111;
-  color: #ffffff;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  font-weight: 700;
+
+  background: var(--header-primary);
+  color: #ffffff;
+
   border-radius: 6px;
+
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .logo-text {
-  font-size: 1.6rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-size: 1.25rem;
+  font-weight: 800;
+
+  letter-spacing: -0.055em;
+  line-height: 1;
 }
 
-/* --- Main Navigation --- */
+/* =========================================
+   MAIN NAVIGATION
+   ========================================= */
+
 .main-nav {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
   height: 100%;
-}
 
-.nav-link {
-  text-decoration: none;
-  color: #000000;
-  font-size: 1.15rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  height: 100%;
-  position: relative;
-  transition: color 0.2s ease;
-  cursor: pointer;
-}
-
-.nav-link:hover {
-  color: #555555;
-}
-
-.nav-caret {
-  font-size: 0.75rem;
-  margin-top: 2px;
-}
-
-/* Active State (Minimal Pill Highlight) */
-.nav-link.active {
-  font-weight: 700;
-}
-
-.nav-link.active::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: -12px;
-  right: -12px;
-  height: 3px;
-  background-color: #000000;
-  border-radius: 3px 3px 0 0;
-}
-
-/* --- Right Side Actions --- */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.btn-outline {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem; /* Space between icon and text */
-  background: transparent;
-  border: 1px solid #d1d5db;
-  color: #000000;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1.1rem;
+
+  gap: 4px;
+}
+
+.nav-link {
+  position: relative;
+
+  height: 30px;
+  padding: 0 10px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  color: var(--header-muted);
+  text-decoration: none;
+
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 0.95rem;
   font-weight: 500;
-  padding: 0.4rem 1.2rem;
+
+  white-space: nowrap;
+
   border-radius: 6px;
   cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--header-text);
+  background: var(--header-hover);
+}
+
+/* Active Navigation */
+.nav-link.active {
+  color: var(--header-text);
+  background: #e9eef3;
+  font-weight: 700;
+}
+
+/* Remove Previous Underline */
+.nav-link.active::before {
+  display: none;
+}
+
+/* Dropdown Caret */
+.nav-caret {
+  font-size: 0.65rem;
+  margin-top: 1px;
+  opacity: 0.7;
+}
+
+/* =========================================
+   HEADER ACTIONS
+   ========================================= */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  flex-shrink: 0;
+}
+
+/* Login / Sign Up */
+.btn-outline {
+  height: 30px;
+  padding: 0 10px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  background: #edf1f5;
+  border: 1px solid #e1e6ec;
+  border-radius: 7px;
+
+  color: var(--header-text);
+
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  white-space: nowrap;
+  cursor: pointer;
+
   transition: all 0.2s ease;
 }
 
 .btn-outline i {
-  font-size: 1rem; /* Slightly adjust icon size if needed */
+  font-size: 12px;
 }
 
 .btn-outline:hover {
-  border-color: #000000;
+  background: #e2e8ef;
+  border-color: #d3dbe4;
 }
 
+/* Right Side Actions */
 .action-icons {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 10px;
 }
 
+/* Support Link */
 .icon-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  justify-content: center;
+  gap: 6px;
+
+  color: var(--header-muted);
   text-decoration: none;
-  color: #000000;
-  font-size: 1.1rem;
-  font-weight: 500;
+
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  white-space: nowrap;
+
   transition: color 0.2s ease;
 }
 
 .icon-link i {
-  font-size: 1.1rem;
+  font-size: 13px;
 }
 
 .icon-link:hover {
-  color: #555555;
+  color: var(--header-text);
 }
 
-/* --- Responsive Adjustments --- */
+/* =========================================
+   RESPONSIVE — SMALL DESKTOP
+   ========================================= */
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
+  .header-container {
+    padding: 0 20px;
+  }
+
   .main-nav {
-    gap: 1.25rem;
+    gap: 2px;
   }
+
   .nav-link {
-    font-size: 1.05rem;
+    padding: 0 8px;
+    font-size: 0.9rem;
+  }
+
+  .header-actions {
+    gap: 8px;
   }
 }
 
-/* Hide some links on smaller screens to prevent overflow */
-@media (max-width: 900px) {
-  .main-nav .nav-link:nth-child(n+5) {
-    display: none; /* Hide Tours, Visa, Agency, More */
+/* =========================================
+   RESPONSIVE — TABLETS
+   ========================================= */
+
+@media (max-width: 992px) {
+  .header-container {
+    padding: 0 18px;
+  }
+
+  /* Hide less important navigation links */
+  .main-nav .nav-link:nth-child(n + 6) {
+    display: none;
   }
 }
+
+/* =========================================
+   RESPONSIVE — MOBILE
+   ========================================= */
 
 @media (max-width: 768px) {
   .header-container {
-    height: auto;
-    flex-wrap: wrap;
-    padding: 1rem;
-    gap: 1rem;
+    height: 46px;
+    padding: 0 14px;
   }
-  
+
   .main-nav {
-    order: 3;
-    width: 100%;
-    justify-content: space-between;
-    height: auto;
-    padding-top: 1rem;
-    border-top: 1px solid #f0f0f0;
+    display: none;
   }
-  
-  .nav-link {
-    height: auto;
-    padding-bottom: 0.5rem;
-  }
-  
-  .nav-link.active::before {
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-  
+
   .header-actions {
     margin-left: auto;
   }
-  
+
+  .btn-outline {
+    height: 29px;
+    padding: 0 9px;
+    font-size: 0.85rem;
+  }
+
+  /* Keep icon, hide Support text */
   .icon-link span {
-    display: none; /* Hide 'Support' text, keep icon */
+    display: none;
+  }
+
+  .action-icons {
+    gap: 12px;
+  }
+}
+
+/* =========================================
+   RESPONSIVE — SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 400px) {
+  .logo-text {
+    font-size: 1.15rem;
+  }
+
+  .btn-outline {
+    font-size: 0.82rem;
+  }
+
+  .header-container {
+    padding: 0 12px;
   }
 }

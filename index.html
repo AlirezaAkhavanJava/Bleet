@@ -9,7 +9,8 @@
     <!-- Google Fonts: Barlow Condensed -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -28,7 +29,8 @@
          TOP NAVIGATION BAR
          ========================================== -->
     <header class="top-header">
-        <div class="container-fluid px-4 d-flex align-items-center justify-content-between" style="height: 72px; max-width: 1400px; margin: 0 auto;">
+        <div class="container-fluid px-4 d-flex align-items-center justify-content-between"
+            style="height: 72px; max-width: 1400px; margin: 0 auto;">
 
             <!-- Logo -->
             <a href="#" class="brand-logo d-flex align-items-center text-decoration-none">
@@ -85,13 +87,14 @@
          MAIN CONTENT AREA
          ========================================== -->
     <main class="container-fluid px-4 py-4" style="max-width: 1400px; margin: 0 auto;">
-        
+
         <!-- Hero Section -->
         <section class="hero" aria-labelledby="hero-title">
-            
+
             <!-- Background Image & Overlay -->
-            <img class="hero-image" src="/assets/images/hero-banner.webp" alt="Airplane wing above the clouds" fetchpriority="high" loading="eager" decoding="async">
-            
+            <img class="hero-image" src="/assets/images/hero-banner.webp" alt="Airplane wing above the clouds"
+                fetchpriority="high" loading="eager" decoding="async">
+
             <!-- Hero Text Content -->
             <div class="hero-content">
                 <div class="eyebrow">
@@ -102,14 +105,15 @@
                     <span data-i18n="hero_title_1">Discover the World</span>
                     <span data-i18n="hero_title_2">Fly with Bleet</span>
                 </h1>
-                <p data-i18n="hero_subtitle">Book flights easily, compare prices, and explore the best destinations around the globe.</p>
+                <p data-i18n="hero_subtitle">Book flights easily, compare prices, and explore the best destinations
+                    around the globe.</p>
             </div>
 
             <!-- ==========================================
                  SEARCH PANEL (Overlapping Hero)
                  ========================================== -->
             <div class="search-panel" aria-label="Flight search">
-                
+
                 <!-- Trip Type Options -->
                 <div class="flight-options" role="group" aria-label="Trip type">
                     <button class="active" type="button">
@@ -128,36 +132,39 @@
 
                 <!-- Flight Search Form -->
                 <form class="search-row" id="flightSearchForm">
-                    
+
                     <!-- From Field -->
                     <div class="search-field">
                         <div class="input-wrapper">
                             <i class="fa-solid fa-location-dot"></i>
-                            <input id="fromCity" type="text" placeholder="From where?" data-i18n-placeholder="from_placeholder" autocomplete="off" required>
+                            <input id="fromCity" type="text" placeholder="From where?"
+                                data-i18n-placeholder="from_placeholder" autocomplete="off" required>
                         </div>
                     </div>
-                    
+
                     <!-- Swap Button -->
                     <button class="swap-btn" id="swapCities" type="button" aria-label="Swap departure and destination">
                         <i class="fa-solid fa-right-left"></i>
                     </button>
-                    
+
                     <!-- To Field -->
                     <div class="search-field">
                         <div class="input-wrapper">
                             <i class="fa-solid fa-location-dot"></i>
-                            <input id="toCity" type="text" placeholder="Where to?" data-i18n-placeholder="to_placeholder" autocomplete="off" required>
+                            <input id="toCity" type="text" placeholder="Where to?"
+                                data-i18n-placeholder="to_placeholder" autocomplete="off" required>
                         </div>
                     </div>
-                    
+
                     <!-- Departure Date Field -->
                     <div class="search-field">
                         <div class="input-wrapper date-control">
                             <i class="fa-regular fa-calendar"></i>
-                            <input id="departureDate" type="date" value="2026-12-10" required aria-label="Departure date">
+                            <input id="departureDate" type="date" value="2026-12-10" required
+                                aria-label="Departure date">
                         </div>
                     </div>
-                    
+
                     <!-- Passengers Field -->
                     <div class="search-field">
                         <div class="input-wrapper">
@@ -169,7 +176,7 @@
                             </select>
                         </div>
                     </div>
-                    
+
                     <!-- Submit Button -->
                     <button class="search-btn" type="submit">
                         <i class="fa-solid fa-magnifying-glass"></i>
