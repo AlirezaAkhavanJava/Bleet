@@ -276,3 +276,15 @@ h4 {
     transform: none;
   }
 }
+
+/* Thin, neutral scrollbar that matches the design (keeps it usable) */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #9aa5b1 transparent;
+}
+
+/* Prevent accidental sideways scrolling from animated elements */
+html,
+body {
+  overflow-x: clip;
+}

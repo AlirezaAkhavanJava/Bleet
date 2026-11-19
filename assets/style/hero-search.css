@@ -10,13 +10,12 @@
   justify-content: center;
   width: min(100% - 48px, var(--container));
   min-height: 540px;
-  margin: 24px auto 96px; /* bottom room for the overlapping search panel */
+  margin: 24px auto 96px;
   border-radius: 32px;
   background: #18212b;
   box-shadow: 0 20px 45px rgba(21, 27, 33, 0.17);
 }
 
-/* Gradient base and dark overlay, both clipped to the rounded hero */
 .hero::before,
 .hero::after {
   content: "";
@@ -57,7 +56,7 @@
 .hero-content {
   position: relative;
   max-width: 680px;
-  padding: 64px 64px 150px; /* extra bottom room so the panel never covers text */
+  padding: 64px 64px 150px;
   color: #f6f8fa;
 }
 
@@ -92,7 +91,7 @@
   color: #d2d9df;
 }
 
-/* Search panel: floats over the bottom edge of the hero */
+/* ---------- Search panel ---------- */
 .search-panel {
   position: absolute;
   left: 50%;
@@ -108,13 +107,20 @@
   backdrop-filter: blur(18px);
 }
 
-/* Trip type tabs */
-.trip-types {
+.search-top {
   display: flex;
-  gap: 22px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   margin-bottom: 20px;
   padding-bottom: 16px;
   border-bottom: 1px solid var(--color-border);
+}
+
+.trip-types {
+  display: flex;
+  gap: 22px;
 }
 
 .trip-type {
@@ -155,15 +161,78 @@
   cursor: not-allowed;
 }
 
-/* Fields grid */
+/* Direct-flights switch */
+.toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4b5563;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.toggle-track {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  border-radius: 999px;
+  background: #d1d5db;
+  transition: background-color 0.25s ease;
+}
+
+.toggle-track::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s var(--ease-spring);
+}
+
+.toggle input:checked + .toggle-track {
+  background: #000;
+}
+
+.toggle input:checked + .toggle-track::after {
+  transform: translateX(18px);
+}
+
+.toggle input:focus-visible + .toggle-track {
+  outline: 3px solid #000;
+  outline-offset: 2px;
+}
+
+/* ---------- Fields grid ---------- */
+/* One way: 6 columns. Round trip adds the return field (switched by .is-round). */
 .search-form {
   display: grid;
-  grid-template-columns:
-    minmax(160px, 1.2fr) 44px minmax(160px, 1.2fr)
-    minmax(160px, 1fr) minmax(150px, 0.9fr) auto;
-  grid-template-areas: "from swap to date pax search";
   align-items: end;
   gap: 12px;
+  grid-template-columns:
+    minmax(150px, 1.2fr) 44px minmax(150px, 1.2fr)
+    minmax(150px, 1fr) minmax(190px, 1fr) auto;
+  grid-template-areas: "from swap to depart travellers search";
+}
+
+.search-form.is-round {
+  grid-template-columns:
+    minmax(140px, 1.1fr) 44px minmax(140px, 1.1fr)
+    minmax(140px, 1fr) minmax(140px, 1fr) minmax(190px, 1fr) auto;
+  grid-template-areas: "from swap to depart return travellers search";
 }
 
 .field-from {
@@ -175,11 +244,14 @@
 .field-to {
   grid-area: to;
 }
-.field-date {
-  grid-area: date;
+.field-depart {
+  grid-area: depart;
 }
-.field-pax {
-  grid-area: pax;
+.field-return {
+  grid-area: return;
+}
+.field-travellers {
+  grid-area: travellers;
 }
 .field-search {
   grid-area: search;
@@ -188,6 +260,25 @@
 .field {
   position: relative;
   min-width: 0;
+}
+
+.field-label {
+  display: block;
+  margin: 0 0 6px 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.field-return {
+  display: none;
+}
+
+.search-form.is-round .field-return {
+  display: block;
+  animation: rise 0.45s var(--ease-out) backwards;
 }
 
 .input-wrap {
@@ -229,8 +320,7 @@
   transform: scale(1.15);
 }
 
-.input-wrap input,
-.input-wrap select {
+.input-wrap input {
   width: 100%;
   min-width: 0;
   height: 100%;
@@ -240,6 +330,11 @@
   font-size: 1.15rem;
   font-weight: 500;
   color: #000;
+}
+
+.input-wrap input:disabled {
+  color: #9ca3af;
+  cursor: not-allowed;
 }
 
 .input-wrap input::placeholder {
@@ -264,7 +359,6 @@
   display: none;
 }
 
-/* Swap button */
 .swap-btn {
   align-self: end;
   justify-self: center;
@@ -293,13 +387,231 @@
   transform: rotate(180deg) scale(0.92);
 }
 
-/* Responsive */
+/* ---------- Travellers trigger ---------- */
+.travellers-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 54px;
+  padding: 0 16px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #f9fafb;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: left;
+  white-space: nowrap;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.25s ease,
+    background-color 0.2s ease,
+    transform 0.25s var(--ease-out);
+}
+
+.travellers-trigger:hover {
+  border-color: #9ca3af;
+}
+
+.travellers-trigger[aria-expanded="true"] {
+  border-color: #000;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+
+.travellers-trigger > .fa-user-group {
+  flex-shrink: 0;
+  color: #9ca3af;
+  transition: color 0.2s ease;
+}
+
+.travellers-trigger[aria-expanded="true"] > .fa-user-group {
+  color: #000;
+}
+
+.travellers-summary {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chevron {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  color: #9ca3af;
+  transition: transform 0.35s var(--ease-spring);
+}
+
+.travellers-trigger[aria-expanded="true"] .chevron {
+  transform: rotate(180deg);
+}
+
+/* ---------- Travellers dropdown ---------- */
+.travellers-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 30;
+  width: min(380px, calc(100vw - 48px));
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  box-shadow: 0 24px 48px rgba(24, 32, 40, 0.22);
+  transform: translateY(-8px) scale(0.98);
+  transform-origin: top right;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.25s ease,
+    transform 0.35s var(--ease-out),
+    visibility 0s linear 0.35s;
+}
+
+.travellers-panel.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 0.25s ease,
+    transform 0.35s var(--ease-out),
+    visibility 0s;
+}
+
+.travellers-panel.is-open .traveller-row:nth-child(1) {
+  animation: rise 0.45s var(--ease-out) 0.05s backwards;
+}
+.travellers-panel.is-open .traveller-row:nth-child(2) {
+  animation: rise 0.45s var(--ease-out) 0.1s backwards;
+}
+.travellers-panel.is-open .traveller-row:nth-child(3) {
+  animation: rise 0.45s var(--ease-out) 0.15s backwards;
+}
+
+.traveller-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.traveller-row + .traveller-row {
+  border-top: 1px solid #f1f3f5;
+}
+
+.traveller-info strong {
+  display: block;
+  font-size: 1.1rem;
+}
+
+.traveller-info span {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.counter-btn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: #fff;
+  font-size: 1.2rem;
+  line-height: 1;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s var(--ease-spring),
+    opacity 0.2s ease;
+}
+
+.counter-btn:hover:not(:disabled) {
+  background: #f3f4f6;
+  transform: scale(1.08);
+}
+
+.counter-btn:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
+.counter-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.counter-value {
+  display: inline-block;
+  min-width: 24px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.counter-value.bump {
+  animation: bump 0.3s var(--ease-spring);
+}
+
+.panel-divider {
+  height: 1px;
+  margin: 8px 0 14px;
+  background: var(--color-border);
+}
+
+.cabin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.cabin-field select {
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: #f9fafb;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.panel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.panel-hint {
+  min-height: 1.2em;
+  font-size: 0.9rem;
+  color: #b45309;
+}
+
+/* ---------- Responsive ---------- */
 @media (max-width: 1200px) {
   .search-form {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-areas:
       "from swap to"
-      "date pax search";
+      "depart travellers search";
+  }
+
+  .search-form.is-round {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+      "from swap to"
+      "depart return travellers"
+      "search search search";
   }
 }
 
@@ -323,16 +635,25 @@
     transform: none;
   }
 
+  .swap-btn {
+    display: none;
+  }
+
   .search-form {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-areas:
       "from to"
-      "date pax"
+      "depart travellers"
       "search search";
   }
 
-  .swap-btn {
-    display: none;
+  .search-form.is-round {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "from to"
+      "depart return"
+      "travellers travellers"
+      "search search";
   }
 }
 
@@ -348,6 +669,7 @@
   }
 
   .trip-types {
+    width: 100%;
     gap: 16px;
     overflow-x: auto;
     scrollbar-width: none;
@@ -357,14 +679,34 @@
     white-space: nowrap;
   }
 
-  .search-form {
+  .search-form,
+  .search-form.is-round {
     grid-template-columns: 1fr;
+    row-gap: 14px;
+  }
+
+  .search-form {
     grid-template-areas:
       "from"
       "to"
-      "date"
-      "pax"
+      "depart"
+      "travellers"
       "search";
-    row-gap: 14px;
+  }
+
+  .search-form.is-round {
+    grid-template-areas:
+      "from"
+      "to"
+      "depart"
+      "return"
+      "travellers"
+      "search";
+  }
+
+  .travellers-panel {
+    left: 0;
+    right: 0;
+    width: auto;
   }
 }

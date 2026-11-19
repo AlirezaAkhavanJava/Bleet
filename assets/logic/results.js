@@ -1,7 +1,7 @@
 /* =========================================
    BLEET — RESULTS PAGE
    Reads the search from the URL and renders sample flights.
-   Later: replace generateSampleFlights() with a fetch() to the Spring Boot API.
+   Later: replace generateOutbound() with a fetch() to the Spring Boot API.
    ========================================= */
 (() => {
   "use strict";
@@ -12,17 +12,33 @@
   const $ = (id) => document.getElementById(id);
   const pad = (n) => String(n).padStart(2, "0");
 
-  /* Read and clamp the query string (the server must validate again later) */
+  /* Read the query string. The server must validate these again. */
   const params = new URLSearchParams(location.search);
   const from = (params.get("from") || "").trim();
   const to = (params.get("to") || "").trim();
   const date = params.get("date") || "";
+  const returnDate = params.get("return") || "";
+  const isRound = params.get("trip") === "roundtrip";
   const deal = params.get("deal");
-  const trip = params.get("trip") === "roundtrip" ? "Round trip" : "One way";
-  const passengers = Math.min(
-    3,
-    Math.max(1, Number(params.get("passengers")) || 1),
-  );
+  const cabinKey = params.get("cabin") || "economy";
+  const directOnly = params.get("direct") === "1";
+
+  const clamp = (value, min, max) =>
+    Math.min(max, Math.max(min, Number(value) || 0));
+  const adults = clamp(params.get("adults"), 1, 10);
+  const children = clamp(params.get("children"), 0, 10);
+  const infants = clamp(params.get("infants"), 0, adults);
+
+  const CABIN = {
+    economy: { label: "Economy", factor: 1 },
+    premium: { label: "Premium Economy", factor: 1.5 },
+    business: { label: "Business", factor: 3 },
+    first: { label: "First", factor: 5 },
+  };
+  const cabin = CABIN[cabinKey] ?? CABIN.economy;
+
+  // Infants usually pay about 10% of an adult fare
+  const paxWeight = adults + children + infants * 0.1;
 
   const DEALS = {
     international: "International flights",
@@ -38,7 +54,6 @@
     "Blue Meridian",
   ];
 
-  /* Small helper: builds elements with textContent, so user input is never parsed as HTML */
   const el = (tag, className, text) => {
     const node = document.createElement(tag);
     if (className) node.className = className;
@@ -52,10 +67,10 @@
     `${Math.floor(minutes / 60)}h ${pad(minutes % 60)}m`;
 
   const formatDate = (value) => {
-    const date = new Date(`${value}T00:00:00`);
-    return Number.isNaN(date.getTime())
+    const parsed = new Date(`${value}T00:00:00`);
+    return Number.isNaN(parsed.getTime())
       ? "Any date"
-      : date.toLocaleDateString(undefined, {
+      : parsed.toLocaleDateString(undefined, {
           weekday: "short",
           day: "numeric",
           month: "short",
@@ -63,8 +78,15 @@
         });
   };
 
+  const travellersText = () => {
+    const parts = [`${adults} adult${adults > 1 ? "s" : ""}`];
+    if (children) parts.push(`${children} child${children > 1 ? "ren" : ""}`);
+    if (infants) parts.push(`${infants} infant${infants > 1 ? "s" : ""}`);
+    return parts.join(", ");
+  };
+
   /* Deterministic sample data: the same search always shows the same flights */
-  function generateSampleFlights(seedText) {
+  function generateOutbound(seedText) {
     let seed = [...seedText].reduce(
       (hash, char) => (Math.imul(hash, 31) + char.charCodeAt(0)) >>> 0,
       7,
@@ -75,13 +97,16 @@
       return seed / 4294967296;
     };
 
-    return AIRLINES.map((airline) => ({
-      airline,
-      departure: 6 * 60 + Math.floor(random() * 14 * 60), // minutes after midnight, 06:00–20:00
-      duration: 95 + Math.floor(random() * 600),
-      stops: random() > 0.6 ? 1 : 0,
-      price: Math.round((89 + random() * 520) * passengers),
-    }));
+    return AIRLINES.map((airline) => {
+      const baseFare = 89 + random() * 520;
+      return {
+        airline,
+        departure: 6 * 60 + Math.floor(random() * 14 * 60), // 06:00 to 20:00
+        duration: 95 + Math.floor(random() * 600),
+        stops: random() > 0.6 ? 1 : 0,
+        price: Math.round(baseFare * cabin.factor * paxWeight),
+      };
+    }).filter((flight) => !directOnly || flight.stops === 0);
   }
 
   function renderFlight(flight) {
@@ -93,7 +118,7 @@
       el(
         "div",
         "flight-meta",
-        `${flight.stops ? "1 stop" : "Non-stop"} · ${formatDuration(flight.duration)}`,
+        `${flight.stops ? "1 stop" : "Non-stop"} · ${formatDuration(flight.duration)} · ${cabin.label}`,
       ),
     );
 
@@ -109,10 +134,9 @@
 
     const buy = el("div", "flight-buy");
     const price = el("p", "flight-price");
-    const paxLabel = passengers === 1 ? "1 adult" : `${passengers} adults`;
     price.append(
       el("strong", "", `$${flight.price}`),
-      el("span", "", `Total · ${paxLabel}`),
+      el("span", "", `Total · ${travellersText()}`),
     );
 
     const select = el("button", "btn btn-primary", "Select");
@@ -136,6 +160,18 @@
   const count = $("resultsCount");
 
   function render(flights) {
+    if (!flights.length) {
+      list.replaceChildren(
+        el(
+          "p",
+          "empty-state",
+          "No flights match these filters. Try turning off “Direct flights only”.",
+        ),
+      );
+      count.textContent = "0 flights found";
+      return;
+    }
+
     const sorted = [...flights].sort(SORTERS[sortSelect.value]);
 
     list.replaceChildren(
@@ -149,10 +185,7 @@
     count.textContent = `${sorted.length} flights found`;
   }
 
-  /* Header text */
-  const origin = from || "Anywhere";
-  const destination = to || "Anywhere";
-
+  /* Header */
   if (!from && !to && !deal) {
     $("resultsKicker").textContent = "No search yet";
     $("resultsRoute").textContent = "Search for a route";
@@ -164,19 +197,22 @@
     return;
   }
 
+  const origin = from || "Anywhere";
+  const destination = to || "Anywhere";
+  const tripText =
+    isRound && returnDate
+      ? `Round trip, return ${formatDate(returnDate)}`
+      : "One way";
+
   $("resultsKicker").textContent = deal
     ? (DEALS[deal] ?? "Special offer")
     : "Search results";
   $("resultsRoute").textContent = `${origin} → ${destination}`;
   $("resultsMeta").textContent =
-    `${formatDate(date)} · ${paxLabel()} · ${trip}`;
+    `${formatDate(date)} · ${travellersText()} · ${cabin.label} · ${tripText}`;
 
-  function paxLabel() {
-    return passengers === 1 ? "1 adult" : `${passengers} adults`;
-  }
-
-  const flights = generateSampleFlights(
-    `${origin}|${destination}|${date}|${deal ?? ""}`,
+  const flights = generateOutbound(
+    `${origin}|${destination}|${date}|${deal ?? ""}|${cabinKey}`,
   );
 
   sortSelect.addEventListener("change", () => render(flights));

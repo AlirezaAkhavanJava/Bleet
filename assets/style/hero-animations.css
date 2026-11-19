@@ -1,6 +1,5 @@
 /* =========================================
    BLEET — HERO MOTION
-   Entrance sequence + micro-interactions
    ========================================= */
 
 @keyframes image-in {
@@ -22,6 +21,18 @@
   to {
     opacity: 1;
     translate: 0 0;
+  }
+}
+
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
@@ -47,7 +58,7 @@
   animation: panel-in 0.8s var(--ease-spring) 0.3s both;
 }
 
-/* "backwards" so hover transforms on these elements still work after the entrance */
+/* "backwards" keeps hover transforms working after the entrance ends */
 .search-form > * {
   animation: rise 0.6s var(--ease-out) backwards;
 }
@@ -62,11 +73,14 @@
   animation-delay: 0.55s;
 }
 .search-form > :nth-child(4) {
-  animation-delay: 0.62s;
+  animation-delay: 0.6s;
 }
 .search-form > :nth-child(5) {
-  animation-delay: 0.69s;
+  animation-delay: 0.65s;
 }
 .search-form > :nth-child(6) {
-  animation-delay: 0.76s;
+  animation-delay: 0.7s;
+}
+.search-form > :nth-child(7) {
+  animation-delay: 0.75s;
 }

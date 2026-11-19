@@ -118,3 +118,11 @@
     text-align: left;
   }
 }
+
+.empty-state {
+  padding: 32px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-muted);
+  text-align: center;
+}

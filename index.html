@@ -96,26 +96,35 @@
             <!-- SEARCH PANEL -->
             <form class="search-panel" id="flightSearchForm" novalidate aria-label="Flight search">
 
-                <div class="trip-types" role="group" aria-label="Trip type">
-                    <button class="trip-type" type="button" data-trip="oneway" aria-pressed="true">
-                        <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>One Way
-                    </button>
-                    <button class="trip-type" type="button" data-trip="roundtrip" aria-pressed="false">
-                        <i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i>Round Trip
-                    </button>
-                    <button class="trip-type" type="button" data-trip="multicity" aria-pressed="false"
-                        aria-disabled="true" title="Coming soon">
-                        <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>Multi-City
-                    </button>
+                <div class="search-top">
+                    <div class="trip-types" role="group" aria-label="Trip type">
+                        <button class="trip-type" type="button" data-trip="oneway" aria-pressed="true">
+                            <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>One Way
+                        </button>
+                        <button class="trip-type" type="button" data-trip="roundtrip" aria-pressed="false">
+                            <i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i>Round Trip
+                        </button>
+                        <button class="trip-type" type="button" data-trip="multicity" aria-disabled="true"
+                            title="Coming soon">
+                            <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>Multi-City
+                        </button>
+                    </div>
+
+                    <label class="toggle">
+                        <input type="checkbox" id="directOnly">
+                        <span class="toggle-track" aria-hidden="true"></span>
+                        <span>Direct flights only</span>
+                    </label>
                 </div>
 
-                <div class="search-form">
+                <div class="search-form" id="searchGrid">
+
                     <div class="field field-from">
-                        <label class="sr-only" for="fromCity">From</label>
+                        <label class="field-label" for="fromCity">From</label>
                         <div class="input-wrap">
                             <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                            <input id="fromCity" name="from" type="text" placeholder="From where?" autocomplete="off"
-                                list="cityList" required>
+                            <input id="fromCity" name="from" type="text" placeholder="City or airport"
+                                autocomplete="off" list="cityList">
                         </div>
                         <span class="field-error" aria-live="polite"></span>
                     </div>
@@ -125,33 +134,103 @@
                     </button>
 
                     <div class="field field-to">
-                        <label class="sr-only" for="toCity">To</label>
+                        <label class="field-label" for="toCity">To</label>
                         <div class="input-wrap">
                             <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                            <input id="toCity" name="to" type="text" placeholder="Where to?" autocomplete="off"
-                                list="cityList" required>
+                            <input id="toCity" name="to" type="text" placeholder="City or airport" autocomplete="off"
+                                list="cityList">
                         </div>
                         <span class="field-error" aria-live="polite"></span>
                     </div>
 
-                    <div class="field field-date">
-                        <label class="sr-only" for="departureDate">Departure date</label>
+                    <div class="field field-depart">
+                        <label class="field-label" for="departureDate">Departure</label>
                         <div class="input-wrap">
                             <i class="fa-regular fa-calendar" aria-hidden="true"></i>
-                            <input id="departureDate" name="date" type="date" required>
+                            <input id="departureDate" name="date" type="date">
                         </div>
                         <span class="field-error" aria-live="polite"></span>
                     </div>
 
-                    <div class="field field-pax">
-                        <label class="sr-only" for="passengerCount">Passengers</label>
+                    <div class="field field-return">
+                        <label class="field-label" for="returnDate">Return</label>
                         <div class="input-wrap">
+                            <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                            <input id="returnDate" name="return" type="date" disabled>
+                        </div>
+                        <span class="field-error" aria-live="polite"></span>
+                    </div>
+
+                    <div class="field field-travellers">
+                        <span class="field-label" id="travellersLabel">Travellers &amp; class</span>
+                        <button class="travellers-trigger" id="travellersBtn" type="button" aria-haspopup="dialog"
+                            aria-expanded="false" aria-controls="travellersPanel"
+                            aria-labelledby="travellersLabel travellersSummary">
                             <i class="fa-solid fa-user-group" aria-hidden="true"></i>
-                            <select id="passengerCount" name="passengers">
-                                <option value="1">1 Adult</option>
-                                <option value="2">2 Adults</option>
-                                <option value="3">3 Adults</option>
-                            </select>
+                            <span class="travellers-summary" id="travellersSummary">1 Adult, Economy</span>
+                            <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+                        </button>
+
+                        <div class="travellers-panel" id="travellersPanel" role="dialog"
+                            aria-label="Travellers and cabin class">
+                            <div class="traveller-row" data-type="adults">
+                                <div class="traveller-info">
+                                    <strong>Adults</strong>
+                                    <span>13 years and over</span>
+                                </div>
+                                <div class="counter">
+                                    <button class="counter-btn" type="button" data-action="dec"
+                                        aria-label="Remove an adult">&minus;</button>
+                                    <output class="counter-value">1</output>
+                                    <button class="counter-btn" type="button" data-action="inc"
+                                        aria-label="Add an adult">+</button>
+                                </div>
+                            </div>
+
+                            <div class="traveller-row" data-type="children">
+                                <div class="traveller-info">
+                                    <strong>Children</strong>
+                                    <span>2 to 12 years</span>
+                                </div>
+                                <div class="counter">
+                                    <button class="counter-btn" type="button" data-action="dec"
+                                        aria-label="Remove a child">&minus;</button>
+                                    <output class="counter-value">0</output>
+                                    <button class="counter-btn" type="button" data-action="inc"
+                                        aria-label="Add a child">+</button>
+                                </div>
+                            </div>
+
+                            <div class="traveller-row" data-type="infants">
+                                <div class="traveller-info">
+                                    <strong>Infants</strong>
+                                    <span>Under 2 · sits on an adult's lap</span>
+                                </div>
+                                <div class="counter">
+                                    <button class="counter-btn" type="button" data-action="dec"
+                                        aria-label="Remove an infant">&minus;</button>
+                                    <output class="counter-value">0</output>
+                                    <button class="counter-btn" type="button" data-action="inc"
+                                        aria-label="Add an infant">+</button>
+                                </div>
+                            </div>
+
+                            <div class="panel-divider"></div>
+
+                            <label class="cabin-field">
+                                <span>Cabin class</span>
+                                <select id="cabinClass">
+                                    <option value="economy">Economy</option>
+                                    <option value="premium">Premium Economy</option>
+                                    <option value="business">Business</option>
+                                    <option value="first">First</option>
+                                </select>
+                            </label>
+
+                            <div class="panel-footer">
+                                <p class="panel-hint" id="travellersHint" aria-live="polite"></p>
+                                <button class="btn btn-primary" id="travellersDone" type="button">Done</button>
+                            </div>
                         </div>
                     </div>
 
