@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="assets/style/global.css">
     <link rel="stylesheet" href="assets/style/heading.css">
     <link rel="stylesheet" href="assets/style/service-search.css">
+    <link rel="stylesheet" href="assets/style/service-extras.css">
+    <link rel="stylesheet" href="assets/style/buses.css">
     <link rel="stylesheet" href="assets/style/footer.css">
 </head>
 
@@ -74,6 +76,12 @@
     </header>
 
     <main id="main">
+        <nav class="back-bar container" aria-label="Back navigation">
+            <a class="back-btn" href="index.html">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>Back to home
+            </a>
+        </nav>
+        <br>
         <section class="svc-hero">
             <div class="container">
                 <p class="kicker">Buses</p>
@@ -206,6 +214,52 @@
             </div>
             <div class="svc-list" id="resultsList"></div>
             <p class="svc-note">Sample results for layout only. Live schedules will come from the Spring Boot API.</p>
+        </section>
+
+        <section class="trip-info container" aria-labelledby="busInfoTitle">
+            <div class="trip-info-head">
+                <h2 id="busInfoTitle">About your bus trip</h2>
+                <p>Coaches are often the most affordable way to travel between cities. A few preparations make the
+                    journey more comfortable.</p>
+            </div>
+
+            <div class="info-stats">
+                <div class="stat"><strong>15 min</strong><span>Arrive before boarding</span></div>
+                <div class="stat"><strong>1 + 1</strong><span>Checked bag plus carry-on, varies by operator</span></div>
+                <div class="stat"><strong>Stop</strong><span>Confirm your exact pick-up point</span></div>
+            </div>
+
+            <div class="info-grid">
+                <article class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
+                    <h3>Pick-up point</h3>
+                    <ul>
+                        <li>Coaches can leave from different stations or street stops in the same city.</li>
+                        <li>Check the exact address in your confirmation email.</li>
+                        <li>Arrive early so you don't miss the coach.</li>
+                    </ul>
+                </article>
+
+                <article class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-suitcase-rolling" aria-hidden="true"></i></div>
+                    <h3>Luggage</h3>
+                    <ul>
+                        <li>Check your operator's weight and size limit before you pack.</li>
+                        <li>Keep passport, medication and chargers in your carry-on bag.</li>
+                        <li>Ask for a luggage tag and keep the receipt.</li>
+                    </ul>
+                </article>
+
+                <article class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-couch" aria-hidden="true"></i></div>
+                    <h3>Comfort on board</h3>
+                    <ul>
+                        <li>Bring a neck pillow, water and a light layer, because coaches can be cold.</li>
+                        <li>Charge your phone before you leave, since sockets and Wi-Fi are not always available.</li>
+                        <li>Long routes often include rest stops. Note the times in advance.</li>
+                    </ul>
+                </article>
+            </div>
         </section>
     </main>
 
