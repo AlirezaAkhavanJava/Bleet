@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Trains · Bleet</title>
     <meta name="description" content="Compare train routes, classes and fares with Bleet.">
+    <link rel="icon" href="assets/images/logo.webp" type="image/webp">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +22,56 @@
 
 <body class="theme-trains">
 
-    <!-- HEADER: copy from index.html (make the Trains link active) -->
+    <a class="sr-only" href="#main">Skip to content</a>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="brand" aria-label="Bleet home">
+                <img src="assets/images/black-logo.webp" alt="Bleet" height="36">
+            </a>
+
+            <nav class="main-nav" id="mainNav" aria-label="Primary">
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-plane" aria-hidden="true"></i>Flights
+                </a>
+                <a href="trains.html" class="nav-link is-active" aria-current="page">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>Trains
+                </a>
+                <a href="buses.html" class="nav-link">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>Buses
+                </a>
+                <a href="hotels.html" class="nav-link">
+                    <i class="fa-solid fa-hotel" aria-hidden="true"></i>Hotels
+                </a>
+                <a href="tours.html" class="nav-link">
+                    <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>Tours
+                </a>
+                <a href="visa.html" class="nav-link">
+                    <i class="fa-solid fa-passport" aria-hidden="true"></i>Visa
+                </a>
+                <a href="page.html?p=agency-panel" class="nav-link">
+                    <i class="fa-solid fa-briefcase" aria-hidden="true"></i>Agency Panel
+                </a>
+                <a href="page.html?p=more" class="nav-link">
+                    <i class="fa-solid fa-ellipsis" aria-hidden="true"></i>More
+                </a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="page.html?p=login" class="btn btn-ghost">
+                    <i class="fa-solid fa-user" aria-hidden="true"></i><span>Login / Sign Up</span>
+                </a>
+                <a href="page.html?p=support" class="icon-link">
+                    <i class="fa-solid fa-headset" aria-hidden="true"></i><span>Support</span>
+                </a>
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mainNav"
+                    aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
 
     <main id="main">
         <section class="svc-hero">
@@ -170,7 +220,55 @@
         </section>
     </main>
 
-    <!-- FOOTER: copy from index.html -->
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" aria-label="Bleet home">
+                        <img src="assets/images/black-logo.webp" alt="Bleet" height="36">
+                    </a>
+                    <p>Making every journey simpler. Discover the world with Bleet.</p>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"
+                                aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <nav class="footer-col" aria-label="Explore">
+                    <h4>Explore</h4>
+                    <a href="index.html">Flights</a>
+                    <a href="index.html#destinations">Popular Destinations</a>
+                    <a href="index.html#offers">Special Offers</a>
+                    <a href="page.html?p=guides">Travel Guides</a>
+                </nav>
+
+                <nav class="footer-col" aria-label="Company">
+                    <h4>Company</h4>
+                    <a href="page.html?p=about">About Us</a>
+                    <a href="page.html?p=careers">Careers</a>
+                    <a href="page.html?p=contact">Contact Us</a>
+                    <a href="page.html?p=partner">Become a Partner</a>
+                </nav>
+
+                <nav class="footer-col" aria-label="Support">
+                    <h4>Support</h4>
+                    <a href="page.html?p=help">Help Center</a>
+                    <a href="page.html?p=booking-info">Booking Information</a>
+                    <a href="page.html?p=cancellation">Cancellation Policy</a>
+                    <a href="page.html?p=privacy">Privacy Policy</a>
+                </nav>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2026 Bleet. All rights reserved.</span>
+                <span>Made for travelers, everywhere. <i class="fa-solid fa-plane" aria-hidden="true"></i></span>
+            </div>
+        </div>
+    </footer>
 
     <script src="assets/logic/common.js" defer></script>
     <script src="assets/logic/service-search.js" defer></script>

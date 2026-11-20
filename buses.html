@@ -1,138 +1,266 @@
-<title>Buses · Bleet</title>
-<!-- body: <body class="theme-buses"> -->
+<!DOCTYPE html>
+<html lang="en">
 
-<main id="main">
-    <section class="svc-hero">
-        <div class="container">
-            <p class="kicker">Buses</p>
-            <h1>Travel by coach</h1>
-            <p class="lead">Compare intercity coaches, seat types and departure times.</p>
-        </div>
-    </section>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Buses · Bleet</title>
+    <meta name="description" content="Compare intercity coaches, seat types and departure times with Bleet.">
+    <link rel="icon" href="assets/images/logo.webp" type="image/webp">
 
-    <section class="container">
-        <form class="svc-panel" data-service-form="buses" novalidate aria-label="Bus search">
-            <div class="svc-top">
-                <div class="segmented" role="radiogroup" aria-label="Trip type">
-                    <input type="radio" id="busOneWay" name="trip" value="oneway" checked>
-                    <label for="busOneWay">One way</label>
-                    <input type="radio" id="busReturn" name="trip" value="return">
-                    <label for="busReturn">Return</label>
-                </div>
-            </div>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-            <div class="svc-fields">
-                <div class="svc-field is-wide">
-                    <label class="svc-label" for="busFrom">From</label>
-                    <div class="svc-control">
-                        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                        <input id="busFrom" name="from" type="text" placeholder="Departure city or stop"
-                            autocomplete="off" required data-msg="Enter a departure city.">
-                    </div>
-                    <span class="svc-error" aria-live="polite"></span>
-                </div>
+    <link rel="stylesheet" href="assets/style/global.css">
+    <link rel="stylesheet" href="assets/style/heading.css">
+    <link rel="stylesheet" href="assets/style/service-search.css">
+    <link rel="stylesheet" href="assets/style/footer.css">
+</head>
 
-                <button class="svc-swap" type="button" aria-label="Swap cities">
-                    <i class="fa-solid fa-right-left" aria-hidden="true"></i>
+<body class="theme-buses">
+
+    <a class="sr-only" href="#main">Skip to content</a>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="brand" aria-label="Bleet home">
+                <img src="assets/images/black-logo.webp" alt="Bleet" height="36">
+            </a>
+
+            <nav class="main-nav" id="mainNav" aria-label="Primary">
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-plane" aria-hidden="true"></i>Flights
+                </a>
+                <a href="trains.html" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>Trains
+                </a>
+                <a href="buses.html" class="nav-link is-active" aria-current="page">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>Buses
+                </a>
+                <a href="hotels.html" class="nav-link">
+                    <i class="fa-solid fa-hotel" aria-hidden="true"></i>Hotels
+                </a>
+                <a href="tours.html" class="nav-link">
+                    <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>Tours
+                </a>
+                <a href="visa.html" class="nav-link">
+                    <i class="fa-solid fa-passport" aria-hidden="true"></i>Visa
+                </a>
+                <a href="page.html?p=agency-panel" class="nav-link">
+                    <i class="fa-solid fa-briefcase" aria-hidden="true"></i>Agency Panel
+                </a>
+                <a href="page.html?p=more" class="nav-link">
+                    <i class="fa-solid fa-ellipsis" aria-hidden="true"></i>More
+                </a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="page.html?p=login" class="btn btn-ghost">
+                    <i class="fa-solid fa-user" aria-hidden="true"></i><span>Login / Sign Up</span>
+                </a>
+                <a href="page.html?p=support" class="icon-link">
+                    <i class="fa-solid fa-headset" aria-hidden="true"></i><span>Support</span>
+                </a>
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mainNav"
+                    aria-label="Open menu">
+                    <span></span><span></span><span></span>
                 </button>
+            </div>
+        </div>
+    </header>
 
-                <div class="svc-field is-wide">
-                    <label class="svc-label" for="busTo">To</label>
-                    <div class="svc-control">
-                        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                        <input id="busTo" name="to" type="text" placeholder="Arrival city or stop" autocomplete="off"
-                            required data-msg="Enter a destination city.">
+    <main id="main">
+        <section class="svc-hero">
+            <div class="container">
+                <p class="kicker">Buses</p>
+                <h1>Travel by coach</h1>
+                <p class="lead">Compare intercity coaches, seat types and departure times.</p>
+            </div>
+        </section>
+
+        <section class="container">
+            <form class="svc-panel" data-service-form="buses" novalidate aria-label="Bus search">
+                <div class="svc-top">
+                    <div class="segmented" role="radiogroup" aria-label="Trip type">
+                        <input type="radio" id="busOneWay" name="trip" value="oneway" checked>
+                        <label for="busOneWay">One way</label>
+                        <input type="radio" id="busReturn" name="trip" value="return">
+                        <label for="busReturn">Return</label>
                     </div>
-                    <span class="svc-error" aria-live="polite"></span>
                 </div>
 
-                <div class="svc-field">
-                    <label class="svc-label" for="busDate">Departure</label>
-                    <div class="svc-control">
-                        <i class="fa-regular fa-calendar" aria-hidden="true"></i>
-                        <input id="busDate" name="date" type="date" data-offset="7" required
-                            data-msg="Choose a departure date." data-msg-range="Date can't be in the past.">
+                <div class="svc-fields">
+                    <div class="svc-field is-wide">
+                        <label class="svc-label" for="busFrom">From</label>
+                        <div class="svc-control">
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            <input id="busFrom" name="from" type="text" placeholder="Departure city or stop"
+                                autocomplete="off" required data-msg="Enter a departure city.">
+                        </div>
+                        <span class="svc-error" aria-live="polite"></span>
                     </div>
-                    <span class="svc-error" aria-live="polite"></span>
-                </div>
 
-                <div class="svc-field is-return-only">
-                    <label class="svc-label" for="busReturnDate">Return</label>
-                    <div class="svc-control">
-                        <i class="fa-regular fa-calendar" aria-hidden="true"></i>
-                        <input id="busReturnDate" name="return" type="date" data-after="busDate" data-offset="14"
-                            data-return disabled required data-msg="Choose a return date."
-                            data-msg-range="Return must be on or after departure.">
-                    </div>
-                    <span class="svc-error" aria-live="polite"></span>
-                </div>
-
-                <div class="svc-field picker" data-total-max="10">
-                    <span class="svc-label" id="busPaxLabel">Passengers</span>
-                    <button class="picker-trigger" type="button" aria-haspopup="dialog" aria-expanded="false"
-                        aria-controls="busPax" aria-labelledby="busPaxLabel picker-busSummary">
-                        <i class="fa-solid fa-user-group" aria-hidden="true"></i>
-                        <span class="picker-summary" id="picker-busSummary">1 Adult</span>
-                        <i class="fa-solid fa-chevron-down picker-chevron" aria-hidden="true"></i>
+                    <button class="svc-swap" type="button" aria-label="Swap cities">
+                        <i class="fa-solid fa-right-left" aria-hidden="true"></i>
                     </button>
 
-                    <div class="picker-panel" id="busPax" role="dialog" aria-label="Passengers">
-                        <div class="counter-row" data-key="adults" data-min="1" data-max="10" data-start="1"
-                            data-one="Adult" data-many="Adults">
-                            <div><strong>Adults</strong><small>13 years and over</small></div>
-                            <div class="counter">
-                                <button class="counter-btn" type="button" data-action="dec"
-                                    aria-label="Remove an adult">&minus;</button>
-                                <output>1</output>
-                                <button class="counter-btn" type="button" data-action="inc"
-                                    aria-label="Add an adult">+</button>
+                    <div class="svc-field is-wide">
+                        <label class="svc-label" for="busTo">To</label>
+                        <div class="svc-control">
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            <input id="busTo" name="to" type="text" placeholder="Arrival city or stop"
+                                autocomplete="off" required data-msg="Enter a destination city.">
+                        </div>
+                        <span class="svc-error" aria-live="polite"></span>
+                    </div>
+
+                    <div class="svc-field">
+                        <label class="svc-label" for="busDate">Departure</label>
+                        <div class="svc-control">
+                            <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                            <input id="busDate" name="date" type="date" data-offset="7" required
+                                data-msg="Choose a departure date." data-msg-range="Date can't be in the past.">
+                        </div>
+                        <span class="svc-error" aria-live="polite"></span>
+                    </div>
+
+                    <div class="svc-field is-return-only">
+                        <label class="svc-label" for="busReturnDate">Return</label>
+                        <div class="svc-control">
+                            <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                            <input id="busReturnDate" name="return" type="date" data-after="busDate" data-offset="14"
+                                data-return disabled required data-msg="Choose a return date."
+                                data-msg-range="Return must be on or after departure.">
+                        </div>
+                        <span class="svc-error" aria-live="polite"></span>
+                    </div>
+
+                    <div class="svc-field picker" data-total-max="10">
+                        <span class="svc-label" id="busPaxLabel">Passengers</span>
+                        <button class="picker-trigger" type="button" aria-haspopup="dialog" aria-expanded="false"
+                            aria-controls="busPax" aria-labelledby="busPaxLabel picker-busSummary">
+                            <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+                            <span class="picker-summary" id="picker-busSummary">1 Adult</span>
+                            <i class="fa-solid fa-chevron-down picker-chevron" aria-hidden="true"></i>
+                        </button>
+
+                        <div class="picker-panel" id="busPax" role="dialog" aria-label="Passengers">
+                            <div class="counter-row" data-key="adults" data-min="1" data-max="10" data-start="1"
+                                data-one="Adult" data-many="Adults">
+                                <div><strong>Adults</strong><small>13 years and over</small></div>
+                                <div class="counter">
+                                    <button class="counter-btn" type="button" data-action="dec"
+                                        aria-label="Remove an adult">&minus;</button>
+                                    <output>1</output>
+                                    <button class="counter-btn" type="button" data-action="inc"
+                                        aria-label="Add an adult">+</button>
+                                </div>
+                            </div>
+                            <div class="counter-row" data-key="children" data-min="0" data-max="10" data-start="0"
+                                data-one="Child" data-many="Children">
+                                <div><strong>Children</strong><small>2 to 12 years</small></div>
+                                <div class="counter">
+                                    <button class="counter-btn" type="button" data-action="dec"
+                                        aria-label="Remove a child">&minus;</button>
+                                    <output>0</output>
+                                    <button class="counter-btn" type="button" data-action="inc"
+                                        aria-label="Add a child">+</button>
+                                </div>
+                            </div>
+                            <div class="picker-foot">
+                                <p class="picker-hint" aria-live="polite"></p>
+                                <button class="btn picker-done svc-submit" type="button">Done</button>
                             </div>
                         </div>
-                        <div class="counter-row" data-key="children" data-min="0" data-max="10" data-start="0"
-                            data-one="Child" data-many="Children">
-                            <div><strong>Children</strong><small>2 to 12 years</small></div>
-                            <div class="counter">
-                                <button class="counter-btn" type="button" data-action="dec"
-                                    aria-label="Remove a child">&minus;</button>
-                                <output>0</output>
-                                <button class="counter-btn" type="button" data-action="inc"
-                                    aria-label="Add a child">+</button>
-                            </div>
-                        </div>
-                        <div class="picker-foot">
-                            <p class="picker-hint" aria-live="polite"></p>
-                            <button class="btn picker-done svc-submit" type="button">Done</button>
+                    </div>
+
+                    <div class="svc-field is-small">
+                        <label class="svc-label" for="busSeat">Seat</label>
+                        <div class="svc-control">
+                            <i class="fa-solid fa-chair" aria-hidden="true"></i>
+                            <select id="busSeat" name="seat">
+                                <option value="standard">Standard</option>
+                                <option value="premium">Premium</option>
+                                <option value="sleeper">Sleeper</option>
+                            </select>
                         </div>
                     </div>
-                </div>
 
-                <div class="svc-field is-small">
-                    <label class="svc-label" for="busSeat">Seat</label>
-                    <div class="svc-control">
-                        <i class="fa-solid fa-chair" aria-hidden="true"></i>
-                        <select id="busSeat" name="seat">
-                            <option value="standard">Standard</option>
-                            <option value="premium">Premium</option>
-                            <option value="sleeper">Sleeper</option>
-                        </select>
-                    </div>
+                    <button class="btn btn-lg svc-submit svc-search" type="submit">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Search buses
+                    </button>
                 </div>
+            </form>
+        </section>
 
-                <button class="btn btn-lg svc-submit svc-search" type="submit">
-                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Search buses
-                </button>
+        <section class="svc-results container" id="results" aria-label="Search results">
+            <div class="svc-results-head" id="resultsHead">
+                <div>
+                    <h2>Search buses</h2>
+                    <p>Choose a route to see available coaches.</p>
+                </div>
             </div>
-        </form>
-    </section>
+            <div class="svc-list" id="resultsList"></div>
+            <p class="svc-note">Sample results for layout only. Live schedules will come from the Spring Boot API.</p>
+        </section>
+    </main>
 
-    <section class="svc-results container" id="results" aria-label="Search results">
-        <div class="svc-results-head" id="resultsHead">
-            <div>
-                <h2>Search buses</h2>
-                <p>Choose a route to see available coaches.</p>
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" aria-label="Bleet home">
+                        <img src="assets/images/black-logo.webp" alt="Bleet" height="36">
+                    </a>
+                    <p>Making every journey simpler. Discover the world with Bleet.</p>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"
+                                aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <nav class="footer-col" aria-label="Explore">
+                    <h4>Explore</h4>
+                    <a href="index.html">Flights</a>
+                    <a href="index.html#destinations">Popular Destinations</a>
+                    <a href="index.html#offers">Special Offers</a>
+                    <a href="page.html?p=guides">Travel Guides</a>
+                </nav>
+
+                <nav class="footer-col" aria-label="Company">
+                    <h4>Company</h4>
+                    <a href="page.html?p=about">About Us</a>
+                    <a href="page.html?p=careers">Careers</a>
+                    <a href="page.html?p=contact">Contact Us</a>
+                    <a href="page.html?p=partner">Become a Partner</a>
+                </nav>
+
+                <nav class="footer-col" aria-label="Support">
+                    <h4>Support</h4>
+                    <a href="page.html?p=help">Help Center</a>
+                    <a href="page.html?p=booking-info">Booking Information</a>
+                    <a href="page.html?p=cancellation">Cancellation Policy</a>
+                    <a href="page.html?p=privacy">Privacy Policy</a>
+                </nav>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2026 Bleet. All rights reserved.</span>
+                <span>Made for travelers, everywhere. <i class="fa-solid fa-plane" aria-hidden="true"></i></span>
             </div>
         </div>
-        <div class="svc-list" id="resultsList"></div>
-        <p class="svc-note">Sample results for layout only. Live schedules will come from the Spring Boot API.</p>
-    </section>
-</main>
+    </footer>
+
+    <script src="assets/logic/common.js" defer></script>
+    <script src="assets/logic/service-search.js" defer></script>
+</body>
+
+</html>
