@@ -1,0 +1,42 @@
+/* =========================================
+   BLEET — SERVICE SEARCH FIXES
+   Loaded after service-search.css. Reserves a line for
+   error messages so they never sit under the buttons.
+   ========================================= */
+
+/* Align every field to the top, so the reserved error line
+   doesn't push the inputs out of line with the buttons */
+.svc-fields {
+  align-items: flex-start;
+}
+
+/* Fixed label height, so every field lines up exactly */
+.svc-label {
+  height: 16px;
+  margin: 0 0 6px 4px;
+  line-height: 16px;
+}
+
+/* Error message is part of the layout now, not floating over it */
+.svc-error {
+  position: static;
+  display: block;
+  min-height: 1.2em;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: var(--color-danger);
+}
+
+.svc-error:empty {
+  display: block;
+}
+
+/* Buttons line up with the 54px inputs, below the 22px label */
+.svc-search {
+  margin-top: 22px;
+}
+
+.svc-swap {
+  margin-top: 27px;
+  margin-bottom: 0;
+}
