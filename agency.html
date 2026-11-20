@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Agency panel · Bleet</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/style/global.css">
+    <link rel="stylesheet" href="assets/style/heading.css">
+    <link rel="stylesheet" href="assets/style/dashboard.css">
+</head>
+
+<body>
+
+    <!-- HEADER: copy from index.html -->
+
+    <main id="main" class="dash" data-dashboard="agency" data-page="agency.html">
+        <div class="container">
+
+            <section class="dash-head">
+                <div>
+                    <p class="kicker">Agency panel</p>
+                    <h1 id="greeting">Loading your agency…</h1>
+                    <p class="muted" id="accountMeta"></p>
+                </div>
+                <div class="dash-actions">
+                    <a class="btn btn-primary" href="index.html">Create a booking</a>
+                    <button class="btn btn-ghost" type="button" id="logoutBtn">Log out</button>
+                </div>
+            </section>
+
+            <section class="dash-denied" id="agencyDenied" hidden>
+                <h2>Agency access required</h2>
+                <p>This area is for approved travel agencies. If your company is a partner, sign in with your agency
+                    account. If not, you can apply below.</p>
+                <a class="btn btn-primary" href="page.html?p=partner">Apply to become a partner</a>
+            </section>
+
+            <div id="dashContent">
+
+                <div class="dash-tabs" role="tablist" aria-label="Agency sections">
+                    <button type="button" role="tab" id="tab-overview" data-panel="overview"
+                        aria-controls="panel-overview" aria-selected="false" tabindex="-1">Overview</button>
+                    <button type="button" role="tab" id="tab-bookings" data-panel="bookings"
+                        aria-controls="panel-bookings" aria-selected="false" tabindex="-1">Bookings</button>
+                    <button type="button" role="tab" id="tab-clients" data-panel="clients" aria-controls="panel-clients"
+                        aria-selected="false" tabindex="-1">Clients</button>
+                    <button type="button" role="tab" id="tab-payouts" data-panel="payouts" aria-controls="panel-payouts"
+                        aria-selected="false" tabindex="-1">Payouts</button>
+                    <button type="button" role="tab" id="tab-team" data-panel="team" aria-controls="panel-team"
+                        aria-selected="false" tabindex="-1">Team</button>
+                    <button type="button" role="tab" id="tab-company" data-panel="company" aria-controls="panel-company"
+                        aria-selected="false" tabindex="-1">Company</button>
+                </div>
+
+                <!-- OVERVIEW -->
+                <section class="dash-panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" hidden>
+                    <div class="stat-grid" id="overviewStats" aria-live="polite"></div>
+                    <article class="dash-card">
+                        <h2>Quick start</h2>
+                        <p class="muted">Search any service on Bleet, then use the booking button to add it to a
+                            client's trip. Commission is calculated on confirmed bookings.</p>
+                    </article>
+                </section>
+
+                <!-- BOOKINGS -->
+                <section class="dash-panel" id="panel-bookings" role="tabpanel" aria-labelledby="tab-bookings" hidden>
+                    <div class="panel-bar">
+                        <label class="select-label" for="agencyBookingFilter">
+                            Status
+                            <select id="agencyBookingFilter">
+                                <option value="all">All</option>
+                                <option value="confirmed">Confirmed</option>
+                                <option value="pending">Pending</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div id="bookingsList"></div>
+                </section>
+
+                <!-- CLIENTS -->
+                <section class="dash-panel" id="panel-clients" role="tabpanel" aria-labelledby="tab-clients" hidden>
+                    <div id="clientsList"></div>
+                </section>
+
+                <!-- PAYOUTS -->
+                <section class="dash-panel" id="panel-payouts" role="tabpanel" aria-labelledby="tab-payouts" hidden>
+                    <div id="payoutsList"></div>
+                    <p class="form-note" style="margin-top:14px">Payouts are made monthly to the bank account on file.
+                    </p>
+                </section>
+
+                <!-- TEAM -->
+                <section class="dash-panel" id="panel-team" role="tabpanel" aria-labelledby="tab-team" hidden>
+                    <div class="dash-two">
+                        <article class="dash-card">
+                            <h2>Team members</h2>
+                            <div id="teamList"></div>
+                        </article>
+
+                        <article class="dash-card">
+                            <h2>Invite a member</h2>
+                            <form class="dash-form" id="inviteForm" novalidate autocomplete="off">
+                                <div class="dash-field">
+                                    <label for="invEmail">Email</label>
+                                    <input id="invEmail" name="email" type="email" required maxlength="254"
+                                        spellcheck="false">
+                                </div>
+                                <div class="dash-field">
+                                    <label for="invRole">Role</label>
+                                    <select id="invRole" name="role" required>
+                                        <option value="admin">Admin: manage team, bookings and payouts</option>
+                                        <option value="agent">Agent: create and manage bookings</option>
+                                        <option value="viewer">Viewer: read-only</option>
+                                    </select>
+                                </div>
+                                <p class="form-note">The invitation expires after 7 days.</p>
+                                <button class="btn btn-primary" type="submit">Send invitation</button>
+                            </form>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- COMPANY -->
+                <section class="dash-panel" id="panel-company" role="tabpanel" aria-labelledby="tab-company" hidden>
+                    <article class="dash-card">
+                        <h2>Company details</h2>
+                        <form class="dash-form" id="companyForm" novalidate>
+                            <div class="two-col">
+                                <div class="dash-field">
+                                    <label for="cName">Company name</label>
+                                    <input id="cName" name="name" required maxlength="120" autocomplete="organization">
+                                </div>
+                                <div class="dash-field">
+                                    <label for="cBilling">Billing email</label>
+                                    <input id="cBilling" name="billingEmail" type="email" required maxlength="254"
+                                        autocomplete="email">
+                                </div>
+                            </div>
+                            <div class="dash-field">
+                                <label for="cPhone">Phone</label>
+                                <input id="cPhone" name="phone" type="tel" maxlength="20" autocomplete="tel">
+                            </div>
+                            <p class="form-note">Commission rate: <strong id="commissionRate">—</strong>. To change it,
+                                contact your account manager.</p>
+                            <button class="btn btn-primary" type="submit">Save company details</button>
+                        </form>
+                    </article>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/logic/common.js" defer></script>
+    <script src="assets/logic/api.js" defer></script>
+    <script src="assets/logic/dashboard.js" defer></script>
+</body>
+
+</html>

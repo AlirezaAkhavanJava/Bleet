@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <meta name="robots" content="noindex, nofollow">
+    <title>My account · Bleet</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/style/global.css">
+    <link rel="stylesheet" href="assets/style/heading.css">
+    <link rel="stylesheet" href="assets/style/dashboard.css">
+</head>
+
+<body>
+
+    <!-- HEADER: copy from index.html -->
+
+    <main id="main" class="dash" data-dashboard="account" data-page="account.html">
+        <div class="container">
+
+            <section class="dash-head">
+                <div>
+                    <p class="kicker">My account</p>
+                    <h1 id="greeting">Loading your account…</h1>
+                    <p class="muted" id="accountMeta"></p>
+                </div>
+                <div class="dash-actions">
+                    <a class="btn btn-primary" href="index.html">Book a trip</a>
+                    <button class="btn btn-ghost" type="button" id="logoutBtn">Log out</button>
+                </div>
+            </section>
+
+            <div id="dashContent">
+
+                <div class="dash-tabs" role="tablist" aria-label="Account sections">
+                    <button type="button" role="tab" id="tab-overview" data-panel="overview"
+                        aria-controls="panel-overview" aria-selected="false" tabindex="-1">Overview</button>
+                    <button type="button" role="tab" id="tab-trips" data-panel="trips" aria-controls="panel-trips"
+                        aria-selected="false" tabindex="-1">My trips</button>
+                    <button type="button" role="tab" id="tab-travellers" data-panel="travellers"
+                        aria-controls="panel-travellers" aria-selected="false" tabindex="-1">Travellers</button>
+                    <button type="button" role="tab" id="tab-profile" data-panel="profile" aria-controls="panel-profile"
+                        aria-selected="false" tabindex="-1">Profile</button>
+                    <button type="button" role="tab" id="tab-security" data-panel="security"
+                        aria-controls="panel-security" aria-selected="false" tabindex="-1">Security</button>
+                    <button type="button" role="tab" id="tab-notifications" data-panel="notifications"
+                        aria-controls="panel-notifications" aria-selected="false" tabindex="-1">Notifications</button>
+                </div>
+
+                <!-- OVERVIEW -->
+                <section class="dash-panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" hidden>
+                    <div class="stat-grid" id="overviewStats" aria-live="polite"></div>
+                    <div class="dash-two">
+                        <article class="dash-card">
+                            <h2>Next trip</h2>
+                            <div id="nextTrip"></div>
+                        </article>
+                        <article class="dash-card">
+                            <h2>Recent activity</h2>
+                            <ul class="activity" id="activity"></ul>
+                        </article>
+                    </div>
+                    <div class="quick-actions">
+                        <a class="quick" href="trains.html"><i class="fa-solid fa-train" aria-hidden="true"></i>Book a
+                            train</a>
+                        <a class="quick" href="buses.html"><i class="fa-solid fa-bus" aria-hidden="true"></i>Book a
+                            bus</a>
+                        <a class="quick" href="hotels.html"><i class="fa-solid fa-hotel" aria-hidden="true"></i>Find a
+                            stay</a>
+                        <a class="quick" href="tours.html"><i class="fa-solid fa-map-location-dot"
+                                aria-hidden="true"></i>Browse tours</a>
+                        <a class="quick" href="visa.html"><i class="fa-solid fa-passport" aria-hidden="true"></i>Check a
+                            visa</a>
+                    </div>
+                </section>
+
+                <!-- TRIPS -->
+                <section class="dash-panel" id="panel-trips" role="tabpanel" aria-labelledby="tab-trips" hidden>
+                    <div class="panel-bar">
+                        <label class="select-label" for="tripFilter">
+                            Show
+                            <select id="tripFilter">
+                                <option value="upcoming">Upcoming</option>
+                                <option value="past">Past</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div id="tripsList"></div>
+                </section>
+
+                <!-- TRAVELLERS -->
+                <section class="dash-panel" id="panel-travellers" role="tabpanel" aria-labelledby="tab-travellers"
+                    hidden>
+                    <div class="dash-two">
+                        <article class="dash-card">
+                            <h2>Saved travellers</h2>
+                            <div id="travellersList"></div>
+                        </article>
+
+                        <article class="dash-card">
+                            <h2>Add a traveller</h2>
+                            <form class="dash-form" id="travellerForm" novalidate autocomplete="off">
+                                <div class="two-col">
+                                    <div class="dash-field">
+                                        <label for="tFirst">First name</label>
+                                        <input id="tFirst" name="firstName" required maxlength="60" autocomplete="off">
+                                    </div>
+                                    <div class="dash-field">
+                                        <label for="tLast">Last name</label>
+                                        <input id="tLast" name="lastName" required maxlength="60" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="two-col">
+                                    <div class="dash-field">
+                                        <label for="tDob">Date of birth</label>
+                                        <input id="tDob" name="dateOfBirth" type="date" required>
+                                    </div>
+                                    <div class="dash-field">
+                                        <label for="tType">Type</label>
+                                        <select id="tType" name="type" required>
+                                            <option value="adult">Adult</option>
+                                            <option value="child">Child</option>
+                                            <option value="infant">Infant</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="dash-field">
+                                    <label for="tDoc">Passport or ID number (optional)</label>
+                                    <input id="tDoc" name="documentNumber" maxlength="30" autocomplete="off"
+                                        spellcheck="false">
+                                </div>
+                                <p class="form-note">Document numbers are encrypted on our servers. Only the last 4
+                                    digits are ever shown.</p>
+                                <button class="btn btn-primary" type="submit">Save traveller</button>
+                            </form>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- PROFILE -->
+                <section class="dash-panel" id="panel-profile" role="tabpanel" aria-labelledby="tab-profile" hidden>
+                    <article class="dash-card">
+                        <h2>Personal details</h2>
+                        <form class="dash-form" id="profileForm" novalidate>
+                            <div class="two-col">
+                                <div class="dash-field">
+                                    <label for="pName">Full name</label>
+                                    <input id="pName" name="name" required maxlength="100" autocomplete="name">
+                                </div>
+                                <div class="dash-field">
+                                    <label for="profileEmail">Email</label>
+                                    <input id="profileEmail" type="email" disabled>
+                                </div>
+                            </div>
+                            <p class="form-note">To change your email, contact support. We verify every change.</p>
+                            <div class="two-col">
+                                <div class="dash-field">
+                                    <label for="pPhone">Phone</label>
+                                    <input id="pPhone" name="phone" type="tel" maxlength="20" autocomplete="tel">
+                                </div>
+                                <div class="dash-field">
+                                    <label for="pCountry">Country</label>
+                                    <select id="pCountry" name="country">
+                                        <option value="">Select a country</option>
+                                        <option>United States</option>
+                                        <option>United Kingdom</option>
+                                        <option>Germany</option>
+                                        <option>Turkey</option>
+                                        <option>United Arab Emirates</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="dash-field">
+                                <label for="pLang">Language</label>
+                                <select id="pLang" name="language">
+                                    <option value="en">English</option>
+                                    <option value="ar">العربية</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Save changes</button>
+                        </form>
+                    </article>
+                </section>
+
+                <!-- SECURITY -->
+                <section class="dash-panel" id="panel-security" role="tabpanel" aria-labelledby="tab-security" hidden>
+                    <div class="dash-two">
+                        <article class="dash-card">
+                            <h2>Change password</h2>
+                            <form class="dash-form" id="passwordForm" novalidate autocomplete="off">
+                                <div class="dash-field">
+                                    <label for="sCurrent">Current password</label>
+                                    <input id="sCurrent" name="currentPassword" type="password" required maxlength="128"
+                                        autocomplete="current-password">
+                                </div>
+                                <div class="dash-field">
+                                    <label for="sNew">New password</label>
+                                    <input id="sNew" name="newPassword" type="password" required minlength="12"
+                                        maxlength="128" autocomplete="new-password">
+                                </div>
+                                <div class="dash-field">
+                                    <label for="sConfirm">Confirm new password</label>
+                                    <input id="sConfirm" name="confirmPassword" type="password" required minlength="12"
+                                        maxlength="128" autocomplete="new-password">
+                                </div>
+                                <p class="form-note">At least 12 characters. Changing your password signs out your other
+                                    devices.</p>
+                                <button class="btn btn-primary" type="submit">Update password</button>
+                            </form>
+                        </article>
+
+                        <article class="dash-card">
+                            <h2>Active sessions</h2>
+                            <div id="sessionsList"></div>
+                            <button class="btn btn-ghost btn-sm" id="revokeOthers" type="button">Sign out other
+                                devices</button>
+                        </article>
+                    </div>
+
+                    <div class="dash-two">
+                        <article class="dash-card">
+                            <h2>Two-factor authentication</h2>
+                            <p class="muted">Coming soon. You'll be able to protect your account with an authenticator
+                                app.</p>
+                            <button class="btn btn-ghost" type="button" disabled>Set up 2FA</button>
+                        </article>
+
+                        <article class="dash-card danger-zone">
+                            <h2>Delete account</h2>
+                            <p class="muted">This removes your profile and saved travellers. Booking records are kept as
+                                the law requires.</p>
+                            <div class="dash-field">
+                                <label for="deleteConfirm">Type DELETE to confirm</label>
+                                <input id="deleteConfirm" autocomplete="off" spellcheck="false">
+                            </div>
+                            <button class="btn btn-danger" id="deleteAccount" type="button" disabled>Delete my
+                                account</button>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- NOTIFICATIONS -->
+                <section class="dash-panel" id="panel-notifications" role="tabpanel" aria-labelledby="tab-notifications"
+                    hidden>
+                    <article class="dash-card">
+                        <h2>Notifications</h2>
+                        <form id="notifyForm">
+                            <label class="check-row">
+                                <span><strong>Booking confirmations</strong><br><small>Always on, for your security and
+                                        records.</small></span>
+                                <input type="checkbox" checked disabled>
+                            </label>
+                            <label class="check-row">
+                                <span><strong>Offers and deals</strong><br><small>Occasional discounts on routes you
+                                        search.</small></span>
+                                <input type="checkbox" name="offers">
+                            </label>
+                            <label class="check-row">
+                                <span><strong>Price alerts</strong><br><small>When a fare you're watching
+                                        drops.</small></span>
+                                <input type="checkbox" name="priceAlerts">
+                            </label>
+                            <label class="check-row">
+                                <span><strong>SMS reminders</strong><br><small>Departure reminders by text
+                                        message.</small></span>
+                                <input type="checkbox" name="smsReminders">
+                            </label>
+                        </form>
+                    </article>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/logic/common.js" defer></script>
+    <script src="assets/logic/api.js" defer></script>
+    <script src="assets/logic/dashboard.js" defer></script>
+</body>
+
+</html>
