@@ -1,9 +1,10 @@
 /* =========================================
    BLEET — DESTINATIONS CATALOGUE
    Filters, sorting, counters, cards, private collection,
-   detail window and the VIP builder.
+   detail window (trip facts, flights, itinerary, links, reserve question),
+   and the VIP builder with add-on info.
    Every value is written with textContent.
-   Prices are sample values. The server calculates and confirms every price.
+   Prices and flight times are estimates. The server confirms everything.
    ========================================= */
 (() => {
   "use strict";
@@ -223,6 +224,85 @@
     },
   ];
 
+  /* Flight estimates for each destination, measured from London (LHR).
+     Other origins show the airline and stops, and point to the results page for times. */
+  const FLIGHTS = {
+    Paris: {
+      code: "CDG",
+      airline: "Air France",
+      hours: "1h 20m",
+      stops: "Non-stop",
+    },
+    Dubai: {
+      code: "DXB",
+      airline: "Emirates",
+      hours: "7h 10m",
+      stops: "Non-stop",
+    },
+    Istanbul: {
+      code: "IST",
+      airline: "Turkish Airlines",
+      hours: "3h 55m",
+      stops: "Non-stop",
+    },
+    Tokyo: {
+      code: "HND",
+      airline: "Japan Airlines",
+      hours: "12h 30m",
+      stops: "1 stop",
+    },
+    Santorini: {
+      code: "JTR",
+      airline: "Aegean Airlines",
+      hours: "4h 30m",
+      stops: "1 stop",
+    },
+    Maldives: {
+      code: "MLE",
+      airline: "Emirates",
+      hours: "9h 40m",
+      stops: "1 stop",
+    },
+    "Swiss Alps": {
+      code: "ZRH",
+      airline: "Swiss International Air Lines",
+      hours: "1h 40m",
+      stops: "Non-stop",
+    },
+    Kyoto: { code: "KIX", airline: "ANA", hours: "13h 00m", stops: "1 stop" },
+    Marrakech: {
+      code: "RAK",
+      airline: "Royal Air Maroc",
+      hours: "3h 40m",
+      stops: "Non-stop",
+    },
+    Bali: {
+      code: "DPS",
+      airline: "Singapore Airlines",
+      hours: "15h 00m",
+      stops: "1 stop",
+    },
+    "Amalfi Coast": {
+      code: "NAP",
+      airline: "ITA Airways",
+      hours: "2h 45m",
+      stops: "Non-stop",
+    },
+    "Cape Town": {
+      code: "CPT",
+      airline: "British Airways",
+      hours: "11h 30m",
+      stops: "Non-stop",
+    },
+  };
+
+  const ORIGINS = [
+    { city: "London", code: "LHR" },
+    { city: "New York", code: "JFK" },
+    { city: "Dubai", code: "DXB" },
+    { city: "Istanbul", code: "IST" },
+  ];
+
   const PRIVATE = [
     {
       name: "Private yacht charter",
@@ -284,6 +364,202 @@
       name: "Ultra",
       multiplier: 3.2,
       note: "Adds private driver and 24/7 concierge",
+    },
+  ];
+
+  /* Private amenities, priced per day. */
+  const DEFAULT_NOTE =
+    "Availability and final rates are confirmed by a concierge before booking.";
+
+  const ADDONS = [
+    {
+      id: "babysitter",
+      name: "Babysitter",
+      tagline: "Certified childcare in your residence",
+      perDay: 250,
+      languages: ["English", "Arabic", "French", "Spanish"],
+      includes: [
+        "Background-checked and first-aid certified",
+        "Up to 10 hours per day",
+        "Age-appropriate activities and meals",
+        "Backup sitter on standby",
+      ],
+      note: "Please book at least 24 hours ahead and share the children's ages when you enquire.",
+    },
+    {
+      id: "companion",
+      name: "Travel companion",
+      tagline: "Multilingual companion for dinners, events and trips",
+      perDay: 900,
+      languages: [
+        "English",
+        "Mandarin Chinese",
+        "Japanese",
+        "Arabic",
+        "French",
+        "Spanish",
+        "Russian",
+      ],
+      includes: [
+        "Fluent in your chosen language",
+        "Joins dinners, events and excursions",
+        "Discreet and professionally trained",
+        "Up to 12 hours per day",
+      ],
+    },
+    {
+      id: "driver",
+      name: "Personal driver",
+      tagline: "Chauffeur-driven luxury vehicle with a professional driver",
+      perDay: 450,
+      languages: ["English", "Arabic", "French", "Turkish"],
+      includes: [
+        "Luxury sedan or SUV of your choice",
+        "Up to 10 hours of driving",
+        "Fuel, tolls and parking included",
+        "Airport meet-and-greet",
+      ],
+    },
+    {
+      id: "chef",
+      name: "Private chef",
+      tagline: "Cooks in your residence, three meals a day",
+      perDay: 700,
+      languages: ["English", "French", "Italian", "Japanese"],
+      includes: [
+        "Menus planned around your preferences",
+        "Groceries sourced fresh each day",
+        "Kitchen and service staff included",
+        "Dietary requirements covered",
+      ],
+    },
+    {
+      id: "tennis",
+      name: "Tennis coach",
+      tagline: "Certified coach for private sessions on your court",
+      perDay: 180,
+      languages: ["English", "Spanish", "French", "German"],
+      includes: [
+        "Certified professional coach",
+        "Up to 2 hours of sessions per day",
+        "Racquets and balls supplied",
+        "Video analysis on request",
+      ],
+    },
+    {
+      id: "trainer",
+      name: "Personal trainer",
+      tagline: "Training plan built around your goals",
+      perDay: 220,
+      languages: ["English", "Arabic", "Mandarin Chinese", "Hindi"],
+      includes: [
+        "Assessment on day one",
+        "Gym sessions and recovery plans",
+        "Nutrition guidance",
+        "Equipment provided",
+      ],
+    },
+    {
+      id: "spa",
+      name: "Spa therapist",
+      tagline: "In-residence treatments and massage",
+      perDay: 320,
+      languages: ["English", "Japanese", "Korean", "French"],
+      includes: [
+        "Massage and facial treatments",
+        "Oils and equipment supplied",
+        "Treatments in your suite or spa room",
+        "Up to 3 treatments per day",
+      ],
+    },
+    {
+      id: "sommelier",
+      name: "Sommelier",
+      tagline: "Wine pairings and a curated cellar",
+      perDay: 400,
+      languages: ["English", "French", "Italian", "Spanish"],
+      includes: [
+        "Wine pairing for each meal",
+        "Cellar selection and tasting notes",
+        "Champagne and spirits advice",
+        "Service staff included",
+      ],
+    },
+    {
+      id: "photographer",
+      name: "Photographer",
+      tagline: "Private photography of your stay",
+      perDay: 500,
+      languages: ["English", "Mandarin Chinese", "French"],
+      includes: [
+        "Up to 8 hours of coverage",
+        "Edited gallery within 7 days",
+        "Drone shots where permitted",
+        "Print-ready files",
+      ],
+    },
+    {
+      id: "interpreter",
+      name: "Interpreter",
+      tagline: "Simultaneous interpretation for meetings and events",
+      perDay: 350,
+      languages: [
+        "Mandarin Chinese",
+        "Japanese",
+        "Korean",
+        "Arabic",
+        "Russian",
+        "Turkish",
+        "Hindi",
+        "German",
+      ],
+      includes: [
+        "Simultaneous or consecutive interpretation",
+        "Meetings, tours and dinners",
+        "Available any day of your stay",
+        "Professional equipment supplied",
+      ],
+    },
+    {
+      id: "security",
+      name: "Security detail",
+      tagline: "Discreet close protection, vetted team",
+      perDay: 1200,
+      languages: ["English", "Arabic", "French"],
+      includes: [
+        "Team of two for up to 12 hours",
+        "Threat assessment and route planning",
+        "Discreet close protection",
+        "Coordination with your residence",
+      ],
+    },
+    {
+      id: "yacht",
+      name: "Yacht charter",
+      tagline: "Crewed 40-metre yacht for half a day",
+      perDay: 3500,
+      languages: ["English", "Italian", "Spanish"],
+      includes: [
+        "Captain and deckhand",
+        "Refreshments and light lunch",
+        "Tender to hidden coves",
+        "Up to 8 guests",
+      ],
+      note: "Half-day use. Weather and marina schedules may change the route.",
+    },
+    {
+      id: "helicopter",
+      name: "Helicopter transfers",
+      tagline: "Private transfers between airport and residence",
+      perDay: 2200,
+      languages: ["English", "Arabic", "French"],
+      includes: [
+        "Pilot included",
+        "Airport to residence transfers",
+        "Up to 4 passengers",
+        "Luggage handling",
+      ],
+      note: "Flight times depend on weather and airspace approvals.",
     },
   ];
 
@@ -353,7 +629,6 @@
 
   /* ---------- Destination cards ---------- */
   function renderCard(item, index) {
-    // Wrapper handles the entrance animation; the card handles the hover lift
     const slot = el("div", "dest-item");
     slot.style.setProperty("--d", `${Math.min(index, 10) * 70}ms`);
 
@@ -445,25 +720,129 @@
   const dialog = $("detail");
   const isPrivate = (item) => Boolean(item.unit);
 
+  /* Day-by-day plan: arrival, one highlight per middle day, departure */
+  function buildItinerary(item) {
+    const days = [
+      {
+        title: "Arrival",
+        text: `Private transfer from the airport to your hotel in ${item.name}.`,
+      },
+    ];
+
+    for (let day = 1; day < item.nights; day += 1) {
+      days.push({
+        title: `Day ${day}`,
+        text: item.highlights[(day - 1) % item.highlights.length],
+      });
+    }
+
+    days.push({
+      title: "Departure",
+      text: "Check-out and private transfer to the airport.",
+    });
+    return days;
+  }
+
+  function renderItinerary(item) {
+    $("itinerary").replaceChildren(
+      ...buildItinerary(item).map((day, index) => {
+        const li = el("li", "itin-day");
+        li.style.setProperty("--d", `${index * 60}ms`);
+        li.append(el("span", "itin-tag", day.title), el("p", "", day.text));
+        return li;
+      }),
+    );
+  }
+
+  function selectedOrigin() {
+    return (
+      ORIGINS.find((o) => o.code === $("originSelect").value) ?? ORIGINS[0]
+    );
+  }
+
+  function flightHref(item) {
+    const origin = selectedOrigin();
+    return `results.html?${new URLSearchParams({ from: origin.city, to: item.name, trip: "oneway" })}`;
+  }
+
+  function renderLinks(item) {
+    const links = [
+      { label: "Search flights", icon: "fa-plane", href: flightHref(item) },
+      { label: "Find a stay", icon: "fa-hotel", href: "hotels.html" },
+      {
+        label: "Explore tours",
+        icon: "fa-map-location-dot",
+        href: "tours.html",
+      },
+      { label: "Check visa", icon: "fa-passport", href: "visa.html" },
+      { label: "Ask a question", icon: "fa-headset", href: "support.html" },
+    ];
+
+    $("tripLinks").replaceChildren(
+      ...links.map((link) => {
+        const anchor = el("a", "tlink");
+        anchor.href = link.href;
+        const icon = el("i", `fa-solid ${link.icon}`);
+        icon.setAttribute("aria-hidden", "true");
+        anchor.append(icon, el("span", "", link.label));
+        return anchor;
+      }),
+    );
+  }
+
+  function updateFlight() {
+    if (!current) return;
+    const flight = FLIGHTS[current.name];
+    if (!flight) return;
+
+    const origin = selectedOrigin();
+    const fromLondon = origin.code === "LHR";
+
+    $("flightLine").textContent =
+      `${flight.airline} to ${current.name} (${flight.code}) from ${origin.city}`;
+    $("flightMeta").replaceChildren(
+      ...[
+        flight.stops,
+        fromLondon
+          ? `About ${flight.hours} flying time`
+          : "Flying time varies by origin",
+        "Economy and business fares shown on results",
+        "Luggage rules depend on the airline",
+      ].map((text) => el("li", "", text)),
+    );
+
+    $("reserveFlight").hidden = false;
+    $("tripLinks")
+      .querySelector(".tlink")
+      ?.setAttribute("href", flightHref(current));
+    $("reserveFlight").dataset.href = flightHref(current);
+  }
+
   function updateTotal() {
     if (!current) return;
 
     if (isPrivate(current)) {
-      $("detailTotal").textContent =
-        `${money.format(current.price)} ${current.unit}`;
+      const text = `${money.format(current.price)} ${current.unit}`;
+      $("detailTotal").textContent = text;
+      $("reserveQ").textContent =
+        `Would you like us to arrange ${current.name} for ${text}?`;
       return;
     }
 
     const choice = dialog.querySelector('input[name="pkg"]:checked');
     const pkg = PACKAGES.find((p) => p.id === choice?.value) ?? PACKAGES[0];
     const total = Math.round(current.price * pkg.multiplier);
-    $("detailTotal").textContent =
-      `${money.format(total)} per person · ${current.nights} nights`;
+    const text = `${money.format(total)} per person · ${current.nights} nights`;
+
+    $("detailTotal").textContent = text;
+    $("reserveQ").textContent =
+      `Would you like to reserve the ${pkg.name} package for ${current.name}?`;
   }
 
   function openDetail(item) {
     current = item;
     const priv = isPrivate(item);
+    const flight = FLIGHTS[item.name];
 
     $("detailMedia").replaceChildren(photo(photoFile(item)));
     $("detailKicker").textContent = priv
@@ -474,8 +853,20 @@
     $("detailHighlights").replaceChildren(
       ...item.highlights.map((text) => el("li", "", text)),
     );
-    $("detailReserve").textContent = priv ? "Enquire" : "Reserve";
+
+    $("factNights").textContent = priv
+      ? "Bespoke, per booking"
+      : `${item.nights} nights`;
+    $("factFlight").textContent = flight
+      ? `About ${flight.hours}`
+      : "On request";
+    $("factAirport").textContent = flight ? `${flight.code}` : item.country;
+
+    $("flightSection").hidden = !flight;
+    $("itinerarySection").hidden = priv;
     $("packagesField").hidden = priv;
+    $("reserveFlight").hidden = !flight;
+    $("detailReserve").textContent = priv ? "Yes, arrange it" : "Yes, reserve";
 
     if (!priv) {
       $("packageOptions").replaceChildren(
@@ -505,28 +896,111 @@
           return wrap;
         }),
       );
+
+      renderItinerary(item);
     }
 
+    updateFlight();
+    renderLinks(item);
     updateTotal();
     dialog.showModal();
   }
 
   /* ---------- VIP builder ---------- */
   const builder = $("vipBuilder");
+  const infoDialog = $("infoDialog");
   const vip = { days: 7 };
+  let infoAddon = null;
+
+  const summarizeLanguages = (langs) => {
+    const shown = langs.slice(0, 3).join(", ");
+    return langs.length > 3 ? `${shown} +${langs.length - 3} more` : shown;
+  };
+
+  const addonBox = (id) =>
+    builder.querySelector(`input[name="addon"][value="${id}"]`);
+
+  function renderAddons() {
+    $("addonList").replaceChildren(
+      ...ADDONS.map((addon) => {
+        const row = el("div", "addon-row");
+
+        const label = el("label", "addon");
+        const input = el("input");
+        input.type = "checkbox";
+        input.name = "addon";
+        input.value = addon.id;
+
+        const main = el("span", "addon-main");
+        main.append(
+          el("span", "addon-name", addon.name),
+          el("small", "", addon.tagline),
+          el(
+            "small",
+            "addon-langs",
+            `Speaks: ${summarizeLanguages(addon.languages)}`,
+          ),
+        );
+
+        const price = el(
+          "span",
+          "addon-price",
+          `+${money.format(addon.perDay)} / day`,
+        );
+        label.append(input, main, price);
+
+        const info = el("button", "addon-info");
+        info.type = "button";
+        info.setAttribute("aria-label", `About ${addon.name}`);
+        const icon = el("i", "fa-solid fa-circle-info");
+        icon.setAttribute("aria-hidden", "true");
+        info.append(icon);
+        info.addEventListener("click", () => openInfo(addon));
+
+        row.append(label, info);
+        return row;
+      }),
+    );
+  }
+
+  function openInfo(addon) {
+    infoAddon = addon;
+    const selected = addonBox(addon.id)?.checked;
+
+    $("infoTitle").textContent = addon.name;
+    $("infoPrice").textContent = `${money.format(addon.perDay)} per day`;
+    $("infoDesc").textContent = addon.tagline;
+    $("infoLangs").replaceChildren(
+      ...addon.languages.map((lang) => el("li", "", lang)),
+    );
+    $("infoIncludes").replaceChildren(
+      ...addon.includes.map((text) => el("li", "", text)),
+    );
+    $("infoNote").textContent = addon.note ?? DEFAULT_NOTE;
+    $("infoAdd").textContent = selected
+      ? "Remove from my stay"
+      : "Add to my stay";
+
+    infoDialog.showModal();
+  }
 
   function updateVip() {
     const tier = builder.querySelector('input[name="tier"]:checked');
     if (!tier) return;
 
-    const addons = [...builder.querySelectorAll('input[name="addon"]:checked')];
+    const selected = [
+      ...builder.querySelectorAll('input[name="addon"]:checked'),
+    ]
+      .map((box) => ADDONS.find((addon) => addon.id === box.value))
+      .filter(Boolean);
+
     const perDay =
       Number(tier.dataset.perDay) +
-      addons.reduce((sum, addon) => sum + Number(addon.dataset.perDay), 0);
+      selected.reduce((sum, addon) => sum + addon.perDay, 0);
 
     $("sumTier").textContent = tier.dataset.name;
-    $("sumAddons").textContent = addons.length
-      ? addons.map((a) => a.dataset.name).join(", ")
+    $("sumAddons").textContent = selected.length
+      ? selected.map((a) => a.name).join(", ")
       : "None";
     $("sumPerDay").textContent = `${money.format(perDay)} per day`;
     $("sumTotal").textContent = money.format(perDay * vip.days);
@@ -547,6 +1021,23 @@
 
   $("vipEnquire").addEventListener("click", () => {
     window.Bleet?.toast("A concierge will contact you to confirm this stay.");
+  });
+
+  /* Info window actions */
+  $("infoClose").addEventListener("click", () => infoDialog.close());
+
+  infoDialog.addEventListener("click", (event) => {
+    if (event.target === infoDialog) infoDialog.close();
+  });
+
+  $("infoAdd").addEventListener("click", () => {
+    if (!infoAddon) return;
+    const box = addonBox(infoAddon.id);
+    if (box) {
+      box.checked = !box.checked;
+      box.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+    infoDialog.close();
   });
 
   /* ---------- Init ---------- */
@@ -580,24 +1071,49 @@
     render();
   });
 
+  /* Origin picker for the flight section */
+  $("originSelect").replaceChildren(
+    ...ORIGINS.map((origin) => {
+      const option = el("option", "", `${origin.city} (${origin.code})`);
+      option.value = origin.code;
+      return option;
+    }),
+  );
+  $("originSelect").addEventListener("change", () => {
+    updateFlight();
+    renderLinks(current);
+  });
+
   $("detailClose").addEventListener("click", () => dialog.close());
 
   dialog.addEventListener("click", (event) => {
     if (event.target === dialog) dialog.close();
   });
 
-  dialog.addEventListener("change", updateTotal);
+  dialog.addEventListener("change", (event) => {
+    if (event.target.name === "pkg") updateTotal();
+  });
 
   $("detailReserve").addEventListener("click", () => {
     if (!current) return;
+    const choice = dialog.querySelector('input[name="pkg"]:checked');
+    const pkg = PACKAGES.find((p) => p.id === choice?.value);
     window.Bleet?.toast(
       isPrivate(current)
-        ? "A concierge will contact you to confirm this experience."
-        : `${current.name} reservations are coming soon.`,
+        ? "A concierge will contact you to arrange this experience."
+        : `${pkg?.name ?? "Your"} package for ${current.name} is being reserved. We will confirm by email.`,
     );
   });
 
+  $("reserveFlight").addEventListener("click", () => {
+    const href = $("reserveFlight").dataset.href;
+    if (href) window.location.href = href;
+  });
+
+  $("reserveLater").addEventListener("click", () => dialog.close());
+
   renderPrivate();
   render();
+  renderAddons();
   updateVip();
 })();

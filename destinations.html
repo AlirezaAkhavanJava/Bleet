@@ -239,43 +239,7 @@
 
                     <fieldset class="vip-addons">
                         <legend>2 · Add private amenities</legend>
-
-                        <label class="addon">
-                            <span class="addon-name">Babysitter<small>Enabled on request</small></span>
-                            <span class="addon-price">+$1,500 / day</span>
-                            <input type="checkbox" name="addon" data-name="Babysitter" data-per-day="1500">
-                        </label>
-
-                        <label class="addon">
-                            <span class="addon-name">Private chef<small>Cooks in your residence</small></span>
-                            <span class="addon-price">+$2,500 / day</span>
-                            <input type="checkbox" name="addon" data-name="Private chef" data-per-day="2500">
-                        </label>
-
-                        <label class="addon">
-                            <span class="addon-name">Tennis coach<small>Dedicated pro, all day</small></span>
-                            <span class="addon-price">+$800 / day</span>
-                            <input type="checkbox" name="addon" data-name="Tennis coach" data-per-day="800">
-                        </label>
-
-                        <label class="addon">
-                            <span class="addon-name">Spa therapist<small>In-residence treatments</small></span>
-                            <span class="addon-price">+$1,200 / day</span>
-                            <input type="checkbox" name="addon" data-name="Spa therapist" data-per-day="1200">
-                        </label>
-
-                        <label class="addon">
-                            <span class="addon-name">Yacht charter<small>Crewed, half-day use</small></span>
-                            <span class="addon-price">+$6,000 / day</span>
-                            <input type="checkbox" name="addon" data-name="Yacht charter" data-per-day="6000">
-                        </label>
-
-                        <label class="addon">
-                            <span class="addon-name">Helicopter transfers<small>Private airport to
-                                    residence</small></span>
-                            <span class="addon-price">+$4,500 / day</span>
-                            <input type="checkbox" name="addon" data-name="Helicopter transfers" data-per-day="4500">
-                        </label>
+                        <div class="addon-list" id="addonList"></div>
                     </fieldset>
                 </div>
 
@@ -321,7 +285,7 @@
 
     </main>
 
-    <!-- DETAIL WINDOW -->
+    <!-- DETAIL WINDOW: trip facts, flights, itinerary, links, reserve question -->
     <dialog class="detail" id="detail" aria-labelledby="detailTitle">
         <button class="detail-close" type="button" id="detailClose" aria-label="Close">
             <i class="fa-solid fa-xmark" aria-hidden="true"></i>
@@ -336,6 +300,41 @@
 
             <ul class="detail-highlights" id="detailHighlights"></ul>
 
+            <dl class="trip-facts">
+                <div>
+                    <dt>Length</dt>
+                    <dd id="factNights"></dd>
+                </div>
+                <div>
+                    <dt>Flight time (from London)</dt>
+                    <dd id="factFlight"></dd>
+                </div>
+                <div>
+                    <dt>Arrival airport</dt>
+                    <dd id="factAirport"></dd>
+                </div>
+            </dl>
+
+            <section class="trip-section" id="flightSection">
+                <h3 class="info-sub">Flights</h3>
+                <label class="field-mini">
+                    <span>Depart from</span>
+                    <select id="originSelect"></select>
+                </label>
+                <p class="flight-line" id="flightLine"></p>
+                <ul class="flight-meta" id="flightMeta"></ul>
+            </section>
+
+            <section class="trip-section" id="itinerarySection">
+                <h3 class="info-sub">Itinerary</h3>
+                <ol class="itinerary" id="itinerary"></ol>
+            </section>
+
+            <section class="trip-section">
+                <h3 class="info-sub">Useful links</h3>
+                <div class="link-grid" id="tripLinks"></div>
+            </section>
+
             <fieldset class="packages" id="packagesField">
                 <legend>Choose your package</legend>
                 <div class="package-options" id="packageOptions"></div>
@@ -346,10 +345,43 @@
                     <span class="detail-total-label">Estimated total</span>
                     <strong id="detailTotal" aria-live="polite"></strong>
                 </div>
-                <button class="cat-btn cat-btn-primary cat-btn-lg" type="button" id="detailReserve">Reserve</button>
+            </div>
+
+            <div class="reserve-ask">
+                <p class="reserve-q" id="reserveQ"></p>
+                <div class="reserve-actions">
+                    <button class="cat-btn cat-btn-primary cat-btn-lg" type="button" id="detailReserve">Yes,
+                        reserve</button>
+                    <button class="cat-btn cat-btn-line" type="button" id="reserveFlight">Flights only</button>
+                    <button class="cat-btn cat-btn-line" type="button" id="reserveLater">Not yet</button>
+                </div>
             </div>
 
             <p class="fine">This is an estimate. The server confirms the final price at checkout.</p>
+        </div>
+    </dialog>
+
+    <!-- INFO WINDOW for add-on amenities -->
+    <dialog class="info-dialog" id="infoDialog" aria-labelledby="infoTitle">
+        <button class="detail-close" type="button" id="infoClose" aria-label="Close">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+
+        <div class="info-body">
+            <p class="kicker" id="infoKicker">Private amenity</p>
+            <h3 id="infoTitle"></h3>
+            <p class="info-price" id="infoPrice"></p>
+            <p class="info-desc" id="infoDesc"></p>
+
+            <h4 class="info-sub">Languages</h4>
+            <ul class="lang-list" id="infoLangs"></ul>
+
+            <h4 class="info-sub">What's included</h4>
+            <ul class="info-list" id="infoIncludes"></ul>
+
+            <p class="fine" id="infoNote"></p>
+
+            <button class="cat-btn cat-btn-primary cat-btn-lg" type="button" id="infoAdd">Add to my stay</button>
         </div>
     </dialog>
 
