@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <title>Destinations · Bleet</title>
+    <meta name="description" content="Curated destinations, private experiences and VIP journeys with Bleet.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/style/global.css">
+    <link rel="stylesheet" href="assets/style/heading.css">
+    <link rel="stylesheet" href="assets/style/destinations.css">
+    <link rel="stylesheet" href="assets/style/footer.css">
+</head>
+
+<body class="catalog-page">
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="brand" aria-label="Bleet home">
+                <img src="assets/images/black-logo.webp" alt="Bleet" height="36">
+            </a>
+
+            <nav class="main-nav" id="mainNav" aria-label="Primary">
+                <a href="index.html" class="nav-link is-active" aria-current="page">
+                    <i class="fa-solid fa-plane" aria-hidden="true"></i>Flights
+                </a>
+                <a href="trains.html" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>Trains
+                </a>
+                <a href="buses.html" class="nav-link">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>Buses
+                </a>
+                <a href="hotels.html" class="nav-link">
+                    <i class="fa-solid fa-hotel" aria-hidden="true"></i>Hotels
+                </a>
+                <a href="tours.html" class="nav-link">
+                    <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>Tours
+                </a>
+                <a href="visa.html" class="nav-link">
+                    <i class="fa-solid fa-passport" aria-hidden="true"></i>Visa
+                </a>
+                <a href="agency.html" class="nav-link">
+                    <i class="fa-solid fa-briefcase" aria-hidden="true"></i>Agency Panel
+                </a>
+                <a href="page.html?p=more" class="nav-link">
+                    <i class="fa-solid fa-ellipsis" aria-hidden="true"></i>More
+                </a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="login.html" class="btn btn-ghost">
+                    <i class="fa-solid fa-user" aria-hidden="true"></i><span>Login / Sign Up</span>
+                </a>
+                <a href="support.html" class="icon-link">
+                    <i class="fa-solid fa-headset" aria-hidden="true"></i><span>Support</span>
+                </a>
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mainNav"
+                    aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main" data-catalog>
+
+        <!-- HERO -->
+        <section class="cat-hero" aria-labelledby="catTitle">
+            <div class="orb orb-a" aria-hidden="true"></div>
+            <div class="orb orb-b" aria-hidden="true"></div>
+
+            <div class="container">
+                <p class="eyebrow-light">The Bleet catalogue</p>
+
+                <h1 class="cat-title" id="catTitle">
+                    <span data-split>Your next</span>
+                    <span class="grad-text" data-split>destination</span>
+                    <span data-split>awaits.</span>
+                </h1>
+
+                <p class="cat-lead">Curated stays, private experiences and VIP journeys. Compare, customise and reserve
+                    in a few clicks.</p>
+
+                <div class="cat-actions">
+                    <a class="btn btn-gold btn-lg" href="#catalog">Browse the catalogue</a>
+                    <a class="btn btn-outline-light btn-lg" href="#vip">Explore VIP</a>
+                </div>
+
+                <dl class="cat-stats">
+                    <div>
+                        <dt>Destinations</dt>
+                        <dd id="statDestinations">12</dd>
+                    </div>
+                    <div>
+                        <dt>Average rating</dt>
+                        <dd>4.9</dd>
+                    </div>
+                    <div>
+                        <dt>Concierge</dt>
+                        <dd>24/7</dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+
+        <!-- TICKER -->
+        <div class="ticker" aria-hidden="true">
+            <div class="ticker-track">
+                <span>Paris</span><span>Dubai</span><span>Santorini</span><span>Maldives</span><span>Tokyo</span><span>Kyoto</span><span>Amalfi
+                    Coast</span><span>Bali</span><span>Marrakech</span><span>Swiss Alps</span><span>Cape
+                    Town</span><span>Istanbul</span>
+                <span>Paris</span><span>Dubai</span><span>Santorini</span><span>Maldives</span><span>Tokyo</span><span>Kyoto</span><span>Amalfi
+                    Coast</span><span>Bali</span><span>Marrakech</span><span>Swiss Alps</span><span>Cape
+                    Town</span><span>Istanbul</span>
+            </div>
+        </div>
+
+        <!-- CATALOGUE -->
+        <section class="cat-section container" id="catalog" aria-labelledby="catalogTitle">
+            <div class="cat-head">
+                <div>
+                    <p class="kicker">Explore</p>
+                    <h2 id="catalogTitle">Destinations</h2>
+                </div>
+                <p class="cat-count" id="catCount" aria-live="polite"></p>
+            </div>
+
+            <div class="cat-toolbar">
+                <div class="chips" role="group" aria-label="Filter by region">
+                    <button class="chip" type="button" data-region="all" aria-pressed="true">All</button>
+                    <button class="chip" type="button" data-region="europe" aria-pressed="false">Europe</button>
+                    <button class="chip" type="button" data-region="middle-east" aria-pressed="false">Middle
+                        East</button>
+                    <button class="chip" type="button" data-region="asia" aria-pressed="false">Asia</button>
+                    <button class="chip" type="button" data-region="africa" aria-pressed="false">Africa</button>
+                </div>
+
+                <div class="toolbar-tools">
+                    <label class="vip-switch">
+                        <input type="checkbox" id="vipOnly">
+                        <span class="track" aria-hidden="true"></span>
+                        VIP only
+                    </label>
+
+                    <label class="sort">
+                        Sort by
+                        <select id="sortBy">
+                            <option value="featured">Featured</option>
+                            <option value="price-asc">Price: low to high</option>
+                            <option value="price-desc">Price: high to low</option>
+                            <option value="rating">Top rated</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <div class="dest-grid" id="destGrid"></div>
+            <p class="cat-empty" id="catEmpty" hidden>No destinations match these filters.</p>
+        </section>
+
+        <!-- VIP -->
+        <section class="vip" id="vip" aria-labelledby="vipTitle">
+            <div class="container">
+                <p class="eyebrow-light">Bleet VIP</p>
+                <h2 class="vip-title" id="vipTitle">Travel that <span class="grad-text">feels private.</span></h2>
+                <p class="vip-lead">A dedicated concierge, priority on everything and experiences that never appear on
+                    the open market.</p>
+
+                <div class="vip-grid">
+                    <article class="vip-card">
+                        <p class="vip-tier">Essential</p>
+                        <p class="vip-price"><span>From</span>$2,400</p>
+                        <ul class="vip-list">
+                            <li>Concierge by email</li>
+                            <li>Priority rebooking</li>
+                            <li>Lounge access on selected flights</li>
+                        </ul>
+                        <a class="btn btn-outline-light" href="support.html">Request Essential</a>
+                    </article>
+
+                    <article class="vip-card is-featured">
+                        <p class="vip-tier">Signature</p>
+                        <p class="vip-price"><span>From</span>$6,900</p>
+                        <ul class="vip-list">
+                            <li>Concierge available 24/7</li>
+                            <li>Private airport transfers</li>
+                            <li>Chef-curated dinner on arrival</li>
+                            <li>Hotel room upgrade when available</li>
+                        </ul>
+                        <a class="btn btn-gold" href="support.html">Request Signature</a>
+                    </article>
+
+                    <article class="vip-card">
+                        <p class="vip-tier">Ultra</p>
+                        <p class="vip-price"><span>From</span>$18,500</p>
+                        <ul class="vip-list">
+                            <li>Private jet on request</li>
+                            <li>Villa and yacht access</li>
+                            <li>Dedicated travel designer</li>
+                            <li>Security briefing and insurance</li>
+                        </ul>
+                        <a class="btn btn-outline-light" href="support.html">Request Ultra</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRIVATE COLLECTION -->
+        <section class="private container" aria-labelledby="privateTitle">
+            <div class="cat-head">
+                <div>
+                    <p class="kicker">Private collection</p>
+                    <h2 id="privateTitle">Experiences you can't book online</h2>
+                </div>
+                <p class="cat-count">Limited availability. Prices are indicative and confirmed by a concierge.</p>
+            </div>
+            <div class="private-row" id="privateRow"></div>
+        </section>
+
+    </main>
+
+    <!-- Detail window -->
+    <dialog class="detail" id="detail" aria-labelledby="detailTitle">
+        <button class="detail-close" type="button" id="detailClose" aria-label="Close">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+
+        <div class="detail-media" id="detailMedia"></div>
+
+        <div class="detail-body">
+            <p class="kicker" id="detailKicker"></p>
+            <h2 id="detailTitle"></h2>
+            <p class="detail-desc" id="detailDesc"></p>
+
+            <ul class="detail-highlights" id="detailHighlights"></ul>
+
+            <fieldset class="packages">
+                <legend>Choose your package</legend>
+                <div class="package-options" id="packageOptions"></div>
+            </fieldset>
+
+            <div class="detail-total">
+                <div>
+                    <span class="muted">Estimated total</span>
+                    <strong id="detailTotal" aria-live="polite"></strong>
+                </div>
+                <button class="btn btn-gold btn-lg" type="button" id="detailReserve">Reserve</button>
+            </div>
+
+            <p class="fine">This is an estimate. Our server calculates and confirms the final price at checkout.</p>
+        </div>
+    </dialog>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" aria-label="Bleet home">
+                        <img src="assets/images/black-logo.webp" alt="Bleet" height="36">
+                    </a>
+                    <p>Making every journey simpler. Discover the world with Bleet.</p>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"
+                                aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <nav class="footer-col" aria-label="Explore">
+                    <h4>Explore</h4>
+                    <a href="index.html">Flights</a>
+                    <a href="index.html#destinations">Popular Destinations</a>
+                    <a href="index.html#offers">Special Offers</a>
+                    <a href="page.html?p=guides">Travel Guides</a>
+                </nav>
+
+                <nav class="footer-col" aria-label="Company">
+                    <h4>Company</h4>
+                    <a href="page.html?p=about">About Us</a>
+                    <a href="page.html?p=careers">Careers</a>
+                    <a href="page.html?p=contact">Contact Us</a>
+                    <a href="page.html?p=partner">Become a Partner</a>
+                </nav>
+
+                <nav class="footer-col" aria-label="Support">
+                    <h4>Support</h4>
+                    <a href="page.html?p=help">Help Center</a>
+                    <a href="page.html?p=booking-info">Booking Information</a>
+                    <a href="page.html?p=cancellation">Cancellation Policy</a>
+                    <a href="page.html?p=privacy">Privacy Policy</a>
+                </nav>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2026 Bleet. All rights reserved.</span>
+                <span>Made for travelers, everywhere. <i class="fa-solid fa-plane" aria-hidden="true"></i></span>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script src="assets/logic/common.js" defer></script>
+    <script src="assets/logic/destinations.js" defer></script>
+</body>
+
+</html>
