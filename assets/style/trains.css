@@ -1,0 +1,35 @@
+/* TRAINS — rail theme: track lines on a teal hero band */
+
+body.theme-trains .svc-hero {
+  padding: 56px 0 96px;
+  color: #f0fdfa;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 46px,
+      rgba(255, 255, 255, 0.06) 46px 48px
+    ),
+    linear-gradient(120deg, #0b4f4a 0%, #0f766e 60%, #14968c 100%);
+}
+
+body.theme-trains .svc-hero .kicker {
+  color: #99f6e4;
+}
+body.theme-trains .svc-hero h1 {
+  color: #fff;
+}
+body.theme-trains .svc-hero .lead {
+  color: #ccfbf1;
+}
+
+/* Pull the search panel up over the band */
+body.theme-trains .svc-hero + section {
+  position: relative;
+  z-index: 2;
+  margin-top: -72px;
+}
+
+/* Results look like tickets: dashed edge */
+body.theme-trains .svc-result {
+  border-left-style: dashed;
+}

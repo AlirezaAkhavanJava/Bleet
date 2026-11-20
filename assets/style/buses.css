@@ -1,0 +1,39 @@
+/* BUSES — road theme: diagonal road stripes on an orange hero band */
+
+body.theme-buses .svc-hero {
+  padding: 56px 0 96px;
+  color: #fff7ed;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.07) 0 14px,
+      transparent 14px 28px
+    ),
+    linear-gradient(115deg, #9a3412 0%, #c2410c 55%, #ea580c 100%);
+}
+
+body.theme-buses .svc-hero .kicker {
+  color: #fed7aa;
+}
+body.theme-buses .svc-hero h1 {
+  color: #fff;
+}
+body.theme-buses .svc-hero .lead {
+  color: #ffedd5;
+}
+
+body.theme-buses .svc-hero + section {
+  position: relative;
+  z-index: 2;
+  margin-top: -72px;
+}
+
+/* Dashed top edge, like a coach route line */
+body.theme-buses .svc-panel {
+  border-top-style: dashed;
+}
+
+body.theme-buses .svc-result {
+  border-radius: 4px 14px 14px 4px;
+}
+

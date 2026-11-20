@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="assets/style/global.css">
     <link rel="stylesheet" href="assets/style/heading.css">
     <link rel="stylesheet" href="assets/style/service-search.css">
+    <link rel="stylesheet" href="assets/style/service-extras.css">
+    <link rel="stylesheet" href="assets/style/trains.css">
     <link rel="stylesheet" href="assets/style/footer.css">
 </head>
 
@@ -74,6 +76,14 @@
     </header>
 
     <main id="main">
+
+
+        <nav class="back-bar container" aria-label="Back navigation">
+            <a class="back-btn" href="index.html">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>Back to home
+            </a>
+        </nav>
+        <br>
         <section class="svc-hero">
             <div class="container">
                 <p class="kicker">Trains</p>
@@ -217,6 +227,51 @@
             </div>
             <div class="svc-list" id="resultsList"></div>
             <p class="svc-note">Sample results for layout only. Live schedules will come from the Spring Boot API.</p>
+        </section>
+        <section class="trip-info container" aria-labelledby="trainInfoTitle">
+            <div class="trip-info-head">
+                <h2 id="trainInfoTitle">About your train trip</h2>
+                <p>Rail is one of the easiest ways to travel between cities. These tips help you board smoothly and
+                    avoid last-minute stress.</p>
+            </div>
+
+            <div class="info-stats">
+                <div class="stat"><strong>20 min</strong><span>Arrive before departure</span></div>
+                <div class="stat"><strong>3</strong><span>Ticket classes</span></div>
+                <div class="stat"><strong>ID</strong><span>Carry it when travelling</span></div>
+            </div>
+
+            <div class="info-grid">
+                <article class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-ticket" aria-hidden="true"></i></div>
+                    <h3>Before you board</h3>
+                    <ul>
+                        <li>Check the platform on the departure board, as it can change.</li>
+                        <li>Have your ticket or booking reference ready on your phone or on paper.</li>
+                        <li>Allow extra time at busy stations.</li>
+                    </ul>
+                </article>
+
+                <article class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-couch" aria-hidden="true"></i></div>
+                    <h3>On the train</h3>
+                    <ul>
+                        <li>Check your seat number and carriage before you sit down.</li>
+                        <li>Keep valuables and small bags with you, not on the rack.</li>
+                        <li>Business and First class usually include more space and power sockets.</li>
+                    </ul>
+                </article>
+
+                <article class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-right-left" aria-hidden="true"></i></div>
+                    <h3>If you change trains</h3>
+                    <ul>
+                        <li>Leave at least 20 minutes between connections when possible.</li>
+                        <li>Check whether the next train is on the same platform or a different one.</li>
+                        <li>Keep every ticket until you reach your final stop.</li>
+                    </ul>
+                </article>
+            </div>
         </section>
     </main>
 

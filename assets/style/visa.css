@@ -1,0 +1,33 @@
+/* VISA — document theme: grid lines like a form, dashed stamp-style panel */
+
+body.theme-visa .svc-hero {
+  padding: 56px 0 96px;
+  color: #eef2ff;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px) 0 0 / 100%
+      28px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px) 0 0 /
+      28px 100%,
+    linear-gradient(120deg, #1e1b4b 0%, #4338ca 60%, #6366f1 100%);
+}
+
+body.theme-visa .svc-hero .kicker {
+  color: #c7d2fe;
+}
+body.theme-visa .svc-hero h1 {
+  color: #fff;
+}
+body.theme-visa .svc-hero .lead {
+  color: #e0e7ff;
+}
+
+body.theme-visa .svc-hero + section {
+  position: relative;
+  z-index: 2;
+  margin-top: -72px;
+}
+
+/* Stamp-like dashed frame around the form */
+body.theme-visa .svc-panel {
+  border: 2px dashed var(--accent);
+}
