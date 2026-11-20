@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <title>Live support · Bleet</title>
+    <meta name="description" content="Chat live with Bleet support, or send us a message.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/style/global.css">
+    <link rel="stylesheet" href="assets/style/heading.css">
+    <link rel="stylesheet" href="assets/style/support.css">
+    <link rel="stylesheet" href="assets/style/footer.css">
+</head>
+
+<body>
+
+    <!-- HEADER: copy from index.html (make the Support link active) -->
+
+    <main id="main" data-support>
+
+        <section class="support-hero">
+            <div class="container support-hero-row">
+                <div>
+                    <p class="kicker">Support</p>
+                    <h1>Talk to a person</h1>
+                    <p class="lead">Ask about a booking, a payment or your account. We reply here in real time.</p>
+                </div>
+                <p class="status-pill" id="supportStatus" data-state="unknown" role="status">
+                    <span class="dot" aria-hidden="true"></span>
+                    <span id="statusText">Checking availability…</span>
+                </p>
+            </div>
+        </section>
+
+        <div class="container support-grid">
+
+            <aside class="support-side" aria-label="Quick help">
+                <div class="side-card">
+                    <h2>How can we help?</h2>
+                    <div class="topics">
+                        <button class="topic" type="button" data-topic="Booking"><i class="fa-solid fa-ticket"
+                                aria-hidden="true"></i>Booking</button>
+                        <button class="topic" type="button" data-topic="Payment"><i class="fa-solid fa-credit-card"
+                                aria-hidden="true"></i>Payment</button>
+                        <button class="topic" type="button" data-topic="Cancellation"><i class="fa-solid fa-rotate-left"
+                                aria-hidden="true"></i>Cancellation</button>
+                        <button class="topic" type="button" data-topic="Account"><i class="fa-solid fa-user"
+                                aria-hidden="true"></i>Account</button>
+                        <button class="topic" type="button" data-topic="Visa"><i class="fa-solid fa-passport"
+                                aria-hidden="true"></i>Visa</button>
+                        <button class="topic" type="button" data-topic="Other"><i class="fa-solid fa-circle-question"
+                                aria-hidden="true"></i>Something else</button>
+                    </div>
+                </div>
+
+                <div class="side-card">
+                    <h2>Faster answers</h2>
+                    <ul class="faq-links">
+                        <li><a href="page.html?p=cancellation">Cancellation policy</a></li>
+                        <li><a href="page.html?p=booking-info">Booking information</a></li>
+                        <li><a href="page.html?p=help">Help center</a></li>
+                    </ul>
+                </div>
+
+                <div class="side-card side-note">
+                    <p><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Never share your full card number or
+                        password in chat. Our team will never ask for them.</p>
+                </div>
+            </aside>
+
+            <section class="support-main" aria-labelledby="chatTitle">
+
+                <p class="page-notice" id="pageNotice" role="alert" hidden></p>
+
+                <!-- Signed-in chat -->
+                <div class="chat-window" id="chatPanel" hidden>
+                    <header class="chat-head">
+                        <div class="agent-avatar" aria-hidden="true"><i class="fa-solid fa-headset"></i></div>
+                        <div>
+                            <h2 id="chatTitle">Bleet Support</h2>
+                            <p class="muted" id="chatSub">Connecting…</p>
+                        </div>
+                    </header>
+
+                    <div class="chat-log" id="chatLog" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+                    <p class="typing" id="typing" hidden aria-live="polite">
+                        Support is typing <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    </p>
+
+                    <form class="composer" id="chatForm" novalidate>
+                        <label class="sr-only" for="chatInput">Your message</label>
+                        <textarea id="chatInput" rows="1" maxlength="1000" placeholder="Type your message…"
+                            autocomplete="off"></textarea>
+                        <div class="composer-foot">
+                            <span class="char-count" id="charCount">0/1000</span>
+                            <button class="btn btn-primary" id="chatSend" type="submit" disabled>
+                                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>Send
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Guest: login prompt and ticket form -->
+                <div class="chat-window guest" id="guestPanel" hidden>
+                    <div class="guest-head">
+                        <h2>Chat with us after you log in</h2>
+                        <p class="muted">Logged-in customers get live chat with their bookings attached. Guests can send
+                            a message below and we'll reply by email.</p>
+                        <a class="btn btn-primary" href="login.html?next=support.html">Log in for live chat</a>
+                    </div>
+
+                    <form class="ticket-form" id="ticketForm" novalidate>
+                        <h3>Send us a message</h3>
+
+                        <div class="two-col">
+                            <div class="t-field">
+                                <label for="tName">Name</label>
+                                <input id="tName" name="name" required maxlength="100" autocomplete="name">
+                                <span class="t-error" aria-live="polite"></span>
+                            </div>
+                            <div class="t-field">
+                                <label for="tEmail">Email</label>
+                                <input id="tEmail" name="email" type="email" required maxlength="254"
+                                    autocomplete="email" spellcheck="false">
+                                <span class="t-error" aria-live="polite"></span>
+                            </div>
+                        </div>
+
+                        <div class="t-field">
+                            <label for="tTopic">Topic</label>
+                            <select id="tTopic" name="topic" required>
+                                <option value="Booking">Booking</option>
+                                <option value="Payment">Payment</option>
+                                <option value="Cancellation">Cancellation</option>
+                                <option value="Account">Account</option>
+                                <option value="Visa">Visa</option>
+                                <option value="Other">Something else</option>
+                            </select>
+                        </div>
+
+                        <div class="t-field">
+                            <label for="tMessage">Message</label>
+                            <textarea id="tMessage" name="message" rows="5" required minlength="10"
+                                maxlength="2000"></textarea>
+                            <span class="t-error" aria-live="polite"></span>
+                        </div>
+
+                        <!-- Honeypot: keep empty -->
+                        <div class="hp" aria-hidden="true">
+                            <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+                        </div>
+
+                        <button class="btn btn-primary btn-lg" type="submit">Send message</button>
+                    </form>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER: copy from index.html -->
+
+    <script src="assets/logic/common.js" defer></script>
+    <script src="assets/logic/api.js" defer></script>
+    <script src="assets/logic/support.js" defer></script>
+</body>
+
+</html>
