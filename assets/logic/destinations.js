@@ -1,9 +1,9 @@
 /* =========================================
    BLEET — DESTINATIONS CATALOGUE
-   Filters, sorting, animated counters, tilt cards and a detail window.
+   Filters, sorting, counters, cards, private collection,
+   detail window and the VIP builder.
    Every value is written with textContent.
-   Prices here are sample values. The server calculates and confirms
-   every price at checkout, so the browser can't set a lower price.
+   Prices are sample values. The server calculates and confirms every price.
    ========================================= */
 (() => {
   "use strict";
@@ -13,8 +13,6 @@
 
   const $ = (id) => document.getElementById(id);
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const canTilt =
-    matchMedia("(hover: hover) and (pointer: fine)").matches && !reduceMotion;
   const money = new Intl.NumberFormat(undefined, {
     style: "currency",
     currency: "USD",
@@ -28,6 +26,11 @@
     return node;
   };
 
+  /* Photo file: an explicit `photo` wins, otherwise it is named after the item
+     ("Swiss Alps" -> swiss-alps.webp). A missing file is removed, leaving the background. */
+  const slug = (name) => name.toLowerCase().replace(/\s+/g, "-");
+  const photoFile = (item) => item.photo ?? `${slug(item.name)}.webp`;
+
   const photo = (file) => {
     const img = el("img");
     img.src = `assets/images/cards/${file}`;
@@ -36,6 +39,7 @@
     img.height = 600;
     img.loading = "lazy";
     img.decoding = "async";
+    img.onerror = () => img.remove();
     return img;
   };
 
@@ -49,9 +53,6 @@
       price: 1890,
       rating: 4.8,
       nights: 4,
-      photo: "paris.webp",
-      from: "#4b5a70",
-      to: "#1c2430",
       desc: "Grand boulevards, world-class museums and riverside dinners.",
       highlights: [
         "Boutique 5-star hotel",
@@ -67,9 +68,6 @@
       price: 3450,
       rating: 4.9,
       nights: 5,
-      photo: "dubai.webp",
-      from: "#9a7b4f",
-      to: "#2a2116",
       desc: "Desert dunes, glass skylines and rooftop lounges above the marina.",
       highlights: [
         "Skyline suite with marina view",
@@ -85,9 +83,6 @@
       price: 990,
       rating: 4.7,
       nights: 4,
-      photo: "istanbul.webp",
-      from: "#3d5a6c",
-      to: "#142028",
       desc: "Two continents, a Bosphorus sunset and centuries of history.",
       highlights: [
         "Historic district hotel",
@@ -103,9 +98,6 @@
       price: 2750,
       rating: 4.9,
       nights: 6,
-      photo: "tokyo.webp",
-      from: "#6b3b4d",
-      to: "#1d1419",
       desc: "Neon districts, quiet temples and sushi counters worth the trip alone.",
       highlights: [
         "Shinjuku city-view room",
@@ -121,8 +113,6 @@
       price: 2980,
       rating: 4.9,
       nights: 5,
-      from: "#2c6e9b",
-      to: "#0d2a40",
       desc: "Whitewashed cliffs, caldera sunsets and infinity pools.",
       highlights: [
         "Cliffside suite with plunge pool",
@@ -138,8 +128,6 @@
       price: 5600,
       rating: 5.0,
       nights: 5,
-      from: "#1f8a9e",
-      to: "#0a3a45",
       desc: "Overwater villas, turquoise lagoons and total privacy.",
       highlights: [
         "Overwater villa",
@@ -155,8 +143,6 @@
       price: 2400,
       rating: 4.8,
       nights: 4,
-      from: "#4a6b7c",
-      to: "#16242c",
       desc: "Glacier railways, alpine chalets and fondue by the fire.",
       highlights: [
         "Chalet with mountain views",
@@ -172,8 +158,6 @@
       price: 1650,
       rating: 4.8,
       nights: 3,
-      from: "#7a5a3a",
-      to: "#2a1d12",
       desc: "Ryokan nights, bamboo groves and tea ceremonies.",
       highlights: ["Traditional ryokan", "Tea ceremony", "Bamboo grove walk"],
     },
@@ -185,8 +169,6 @@
       price: 1120,
       rating: 4.6,
       nights: 4,
-      from: "#8a4b2a",
-      to: "#2c160b",
       desc: "Riads, spice souks and rooftop mint tea at sunset.",
       highlights: [
         "Private riad with courtyard",
@@ -202,8 +184,6 @@
       price: 1980,
       rating: 4.7,
       nights: 6,
-      from: "#2f7d5b",
-      to: "#0f2a1f",
       desc: "Rice terraces, temple ceremonies and cliffside pools.",
       highlights: [
         "Jungle villa with pool",
@@ -219,8 +199,6 @@
       price: 3900,
       rating: 4.9,
       nights: 5,
-      from: "#b0603a",
-      to: "#3a1a0e",
       desc: "Pastel villages, lemon groves and dramatic coastal roads.",
       highlights: [
         "Clifftop suite",
@@ -236,8 +214,6 @@
       price: 2250,
       rating: 4.7,
       nights: 5,
-      from: "#3d6b5e",
-      to: "#122520",
       desc: "Table Mountain, wine valleys and safari days.",
       highlights: [
         "Atlantic view suite",
@@ -251,11 +227,9 @@
     {
       name: "Private yacht charter",
       country: "Amalfi Coast",
-      icon: "fa-sailboat",
+      photo: "amalfi-coast.webp",
       price: 85000,
       unit: "per week",
-      from: "#1b2a3a",
-      to: "#0b1118",
       desc: "A crewed 60-metre yacht, tailored menus and a private swim stop at every bay.",
       highlights: [
         "Crew of 8",
@@ -265,34 +239,28 @@
     },
     {
       name: "Overwater villa",
-      country: "Bora Bora",
-      icon: "fa-water",
+      country: "Maldives",
+      photo: "maldives.webp",
       price: 12500,
       unit: "per night",
-      from: "#16404a",
-      to: "#0b1118",
       desc: "Glass floor, private deck and a lagoon all to yourself.",
       highlights: ["Private plunge pool", "Butler service", "Sunset catamaran"],
     },
     {
       name: "Helicopter skyline tour",
       country: "Dubai",
-      icon: "fa-helicopter",
+      photo: "dubai.webp",
       price: 6800,
       unit: "per flight",
-      from: "#3a2e1a",
-      to: "#0b1118",
       desc: "See the desert, the coast and the skyline from above, with champagne on landing.",
       highlights: ["Private pilot", "Up to 3 guests", "Landing picnic"],
     },
     {
       name: "Private chef dinner",
       country: "Paris",
-      icon: "fa-utensils",
+      photo: "paris.webp",
       price: 4200,
       unit: "per evening",
-      from: "#2a1f33",
-      to: "#0b1118",
       desc: "A Michelin-trained chef cooks in your suite, with wine pairings selected for you.",
       highlights: ["Five courses", "Sommelier pairing", "Table for up to 6"],
     },
@@ -333,20 +301,13 @@
   const state = { region: "all", vipOnly: false, sort: "featured" };
   let current = null;
 
-  /* ---------- Hero: split the headline into words ---------- */
+  /* ---------- Hero: wrap each word so it can animate in turn ---------- */
   function splitWords(node, start) {
-    const isGold = node.classList.contains("grad-text");
-    node.classList.remove("grad-text");
-
     const words = node.textContent.trim().split(/\s+/);
     node.textContent = "";
 
     words.forEach((word, i) => {
-      const span = el(
-        "span",
-        isGold ? "split-word grad-word" : "split-word",
-        word,
-      );
+      const span = el("span", "split-word", word);
       span.style.setProperty("--i", start + i);
       node.append(span);
       if (i < words.length - 1) node.append(" ");
@@ -355,7 +316,7 @@
     return start + words.length;
   }
 
-  /* ---------- Count-up numbers, started when visible ---------- */
+  /* ---------- Counters start when they scroll into view ---------- */
   function animateNumber(node) {
     const target = Number(node.dataset.count) || 0;
     const isMoney = "money" in node.dataset;
@@ -372,7 +333,7 @@
 
     const tick = (now) => {
       const t = Math.min(1, (now - start) / duration);
-      node.textContent = format(target * (1 - Math.pow(1 - t, 3))); // ease-out cubic
+      node.textContent = format(target * (1 - Math.pow(1 - t, 3)));
       if (t < 1) requestAnimationFrame(tick);
     };
 
@@ -390,42 +351,20 @@
     { threshold: 0.6 },
   );
 
-  /* ---------- Tilt on hover (mouse only, skipped for reduced motion) ---------- */
-  function attachTilt(card) {
-    let frame = 0;
-
-    card.addEventListener("pointermove", (event) => {
-      const rect = card.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        card.style.setProperty("--ry", `${(x * 10).toFixed(2)}deg`);
-        card.style.setProperty("--rx", `${(-y * 10).toFixed(2)}deg`);
-      });
-    });
-
-    card.addEventListener("pointerleave", () => {
-      cancelAnimationFrame(frame);
-      card.style.setProperty("--rx", "0deg");
-      card.style.setProperty("--ry", "0deg");
-    });
-  }
-
-  /* ---------- Cards ---------- */
+  /* ---------- Destination cards ---------- */
   function renderCard(item, index) {
+    // Wrapper handles the entrance animation; the card handles the hover lift
+    const slot = el("div", "dest-item");
+    slot.style.setProperty("--d", `${Math.min(index, 10) * 70}ms`);
+
     const card = el("article", `dest-card tier-${item.tier}`);
-    card.style.setProperty("--d", `${Math.min(index, 10) * 70}ms`);
-    card.style.setProperty("--from", item.from);
-    card.style.setProperty("--to", item.to);
 
     const media = el("div", "dest-media");
     media.append(
-      el("span", "tier", TIER_LABEL[item.tier]),
+      el("span", "dest-tier", TIER_LABEL[item.tier]),
       el("span", "dest-rating", `★ ${item.rating.toFixed(1)}`),
+      photo(photoFile(item)),
     );
-    if (item.photo) media.append(photo(item.photo));
 
     const amount = el("strong", "", money.format(0));
     amount.dataset.count = String(item.price);
@@ -434,7 +373,7 @@
     const price = el("div", "dest-price");
     price.append(el("small", "", "From per person"), amount);
 
-    const view = el("button", "btn btn-ghost-dark", "View");
+    const view = el("button", "cat-btn cat-btn-line", "View");
     view.type = "button";
     view.addEventListener("click", () => openDetail(item));
 
@@ -450,9 +389,9 @@
     );
 
     card.append(media, body);
-    if (canTilt) attachTilt(card);
+    slot.append(card);
     counterObserver.observe(amount);
-    return card;
+    return slot;
   }
 
   function visibleItems() {
@@ -473,16 +412,14 @@
 
   /* ---------- Private collection ---------- */
   function renderPrivate() {
-    $("privateRow").replaceChildren(
-      ...PRIVATE.map((item) => {
-        const button = el("button", "private-item");
+    $("privateGrid").replaceChildren(
+      ...PRIVATE.map((item, index) => {
+        const button = el("button", "private-card");
         button.type = "button";
+        button.style.setProperty("--d", `${index * 80}ms`);
 
-        const icon = el("i", `fa-solid ${item.icon}`);
-        icon.setAttribute("aria-hidden", "true");
-
-        const text = el("div");
-        text.append(el("h3", "", item.name), el("p", "", item.country));
+        const media = el("div", "dest-media");
+        media.append(photo(photoFile(item)));
 
         const price = el("div", "private-price");
         price.append(
@@ -490,7 +427,14 @@
           el("small", "", item.unit),
         );
 
-        button.append(icon, text, price);
+        const body = el("div", "private-body");
+        body.append(
+          el("p", "dest-meta", item.country),
+          el("h3", "", item.name),
+          price,
+        );
+
+        button.append(media, body);
         button.addEventListener("click", () => openDetail(item));
         return button;
       }),
@@ -499,67 +443,111 @@
 
   /* ---------- Detail window ---------- */
   const dialog = $("detail");
-
-  function unitText(item) {
-    return item.unit ?? `per person · ${item.nights} nights`;
-  }
+  const isPrivate = (item) => Boolean(item.unit);
 
   function updateTotal() {
     if (!current) return;
+
+    if (isPrivate(current)) {
+      $("detailTotal").textContent =
+        `${money.format(current.price)} ${current.unit}`;
+      return;
+    }
+
     const choice = dialog.querySelector('input[name="pkg"]:checked');
     const pkg = PACKAGES.find((p) => p.id === choice?.value) ?? PACKAGES[0];
+    const total = Math.round(current.price * pkg.multiplier);
     $("detailTotal").textContent =
-      `${money.format(Math.round(current.price * pkg.multiplier))} ${unitText(current)}`;
+      `${money.format(total)} per person · ${current.nights} nights`;
   }
 
   function openDetail(item) {
     current = item;
+    const priv = isPrivate(item);
 
-    const media = $("detailMedia");
-    media.replaceChildren();
-    media.style.setProperty("--from", item.from);
-    media.style.setProperty("--to", item.to);
-    if (item.photo) media.append(photo(item.photo));
-
-    $("detailKicker").textContent =
-      `${item.country} · ${item.tier ? TIER_LABEL[item.tier] : "Private collection"}`;
+    $("detailMedia").replaceChildren(photo(photoFile(item)));
+    $("detailKicker").textContent = priv
+      ? item.country
+      : `${item.country} · ${TIER_LABEL[item.tier]}`;
     $("detailTitle").textContent = item.name;
     $("detailDesc").textContent = item.desc;
     $("detailHighlights").replaceChildren(
       ...item.highlights.map((text) => el("li", "", text)),
     );
+    $("detailReserve").textContent = priv ? "Enquire" : "Reserve";
+    $("packagesField").hidden = priv;
 
-    $("packageOptions").replaceChildren(
-      ...PACKAGES.map((pkg, index) => {
-        const wrap = el("div", "package");
+    if (!priv) {
+      $("packageOptions").replaceChildren(
+        ...PACKAGES.map((pkg, index) => {
+          const wrap = el("div", "package");
 
-        const input = el("input");
-        input.type = "radio";
-        input.name = "pkg";
-        input.value = pkg.id;
-        input.id = `pkg-${pkg.id}`;
-        input.checked = index === 0;
+          const input = el("input");
+          input.type = "radio";
+          input.name = "pkg";
+          input.value = pkg.id;
+          input.id = `pkg-${pkg.id}`;
+          input.checked = index === 0;
 
-        const label = el("label");
-        label.htmlFor = input.id;
-        label.append(
-          el("span", "pkg-name", pkg.name),
-          el("small", "", pkg.note),
-          el(
-            "strong",
-            "",
-            money.format(Math.round(item.price * pkg.multiplier)),
-          ),
-        );
+          const label = el("label");
+          label.htmlFor = input.id;
+          label.append(
+            el("span", "pkg-name", pkg.name),
+            el("small", "", pkg.note),
+            el(
+              "strong",
+              "",
+              money.format(Math.round(item.price * pkg.multiplier)),
+            ),
+          );
 
-        wrap.append(input, label);
-        return wrap;
-      }),
-    );
+          wrap.append(input, label);
+          return wrap;
+        }),
+      );
+    }
 
     updateTotal();
     dialog.showModal();
   }
+
+  /* ---------- VIP builder ---------- */
+  const builder = $("vipBuilder");
+  const vip = { days: 7 };
+
+  function updateVip() {
+    const tier = builder.querySelector('input[name="tier"]:checked');
+    if (!tier) return;
+
+    const addons = [...builder.querySelectorAll('input[name="addon"]:checked')];
+    const perDay =
+      Number(tier.dataset.perDay) +
+      addons.reduce((sum, addon) => sum + Number(addon.dataset.perDay), 0);
+
+    $("sumTier").textContent = tier.dataset.name;
+    $("sumAddons").textContent = addons.length
+      ? addons.map((a) => a.dataset.name).join(", ")
+      : "None";
+    $("sumPerDay").textContent = `${money.format(perDay)} per day`;
+    $("sumTotal").textContent = money.format(perDay * vip.days);
+    $("daysOut").textContent = String(vip.days);
+  }
+
+  builder.addEventListener("change", updateVip);
+
+  builder.querySelectorAll("[data-days]").forEach((button) => {
+    button.addEventListener("click", () => {
+      vip.days = Math.min(
+        30,
+        Math.max(1, vip.days + Number(button.dataset.days)),
+      );
+      updateVip();
+    });
+  });
+
+  $("vipEnquire").addEventListener("click", () => {
+    window.Bleet?.toast("A concierge will contact you to confirm this stay.");
+  });
 
   /* ---------- Init ---------- */
   let order = 0;
@@ -593,19 +581,23 @@
   });
 
   $("detailClose").addEventListener("click", () => dialog.close());
+
   dialog.addEventListener("click", (event) => {
-    if (event.target === dialog) dialog.close(); // click on the backdrop
+    if (event.target === dialog) dialog.close();
   });
+
   dialog.addEventListener("change", updateTotal);
 
   $("detailReserve").addEventListener("click", () => {
-    const choice = dialog.querySelector('input[name="pkg"]:checked');
     if (!current) return;
     window.Bleet?.toast(
-      `${current.name} · ${choice?.value ?? "package"} reservations are coming soon.`,
+      isPrivate(current)
+        ? "A concierge will contact you to confirm this experience."
+        : `${current.name} reservations are coming soon.`,
     );
   });
 
   renderPrivate();
   render();
+  updateVip();
 })();
