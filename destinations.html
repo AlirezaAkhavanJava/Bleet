@@ -22,9 +22,11 @@
     <link rel="stylesheet" href="assets/style/footer.css">
 </head>
 
-<body class="catalog-page">
+<body class="cat-page">
 
-    <!-- HEADER -->
+    <a class="sr-only" href="#main">Skip to content</a>
+
+    <!-- HEADER (unchanged) -->
     <header class="site-header">
         <div class="header-inner">
             <a href="index.html" class="brand" aria-label="Bleet home">
@@ -32,7 +34,7 @@
             </a>
 
             <nav class="main-nav" id="mainNav" aria-label="Primary">
-                <a href="index.html" class="nav-link is-active" aria-current="page">
+                <a href="index.html" class="nav-link">
                     <i class="fa-solid fa-plane" aria-hidden="true"></i>Flights
                 </a>
                 <a href="trains.html" class="nav-link">
@@ -73,19 +75,19 @@
         </div>
     </header>
 
-    <main id="main" data-catalog>
+    <main id="main" class="cat-main" data-catalog>
 
         <!-- HERO -->
         <section class="cat-hero" aria-labelledby="catTitle">
-            <div class="orb orb-a" aria-hidden="true"></div>
-            <div class="orb orb-b" aria-hidden="true"></div>
+            <img class="cat-hero-image" src="assets/images/cards/hero-banner.webp" alt="" fetchpriority="high"
+                decoding="async">
 
-            <div class="container">
-                <p class="eyebrow-light">The Bleet catalogue</p>
+            <div class="cat-hero-content">
+                <p class="cat-eyebrow">Destinations</p>
 
                 <h1 class="cat-title" id="catTitle">
                     <span data-split>Your next</span>
-                    <span class="grad-text" data-split>destination</span>
+                    <span data-split>destination</span>
                     <span data-split>awaits.</span>
                 </h1>
 
@@ -93,8 +95,8 @@
                     in a few clicks.</p>
 
                 <div class="cat-actions">
-                    <a class="btn btn-gold btn-lg" href="#catalog">Browse the catalogue</a>
-                    <a class="btn btn-outline-light btn-lg" href="#vip">Explore VIP</a>
+                    <a class="cat-btn cat-btn-primary cat-btn-lg" href="#catalog">Browse destinations</a>
+                    <a class="cat-btn cat-btn-ghost cat-btn-lg" href="#vip">Explore VIP</a>
                 </div>
 
                 <dl class="cat-stats">
@@ -114,24 +116,13 @@
             </div>
         </section>
 
-        <!-- TICKER -->
-        <div class="ticker" aria-hidden="true">
-            <div class="ticker-track">
-                <span>Paris</span><span>Dubai</span><span>Santorini</span><span>Maldives</span><span>Tokyo</span><span>Kyoto</span><span>Amalfi
-                    Coast</span><span>Bali</span><span>Marrakech</span><span>Swiss Alps</span><span>Cape
-                    Town</span><span>Istanbul</span>
-                <span>Paris</span><span>Dubai</span><span>Santorini</span><span>Maldives</span><span>Tokyo</span><span>Kyoto</span><span>Amalfi
-                    Coast</span><span>Bali</span><span>Marrakech</span><span>Swiss Alps</span><span>Cape
-                    Town</span><span>Istanbul</span>
-            </div>
-        </div>
-
         <!-- CATALOGUE -->
         <section class="cat-section container" id="catalog" aria-labelledby="catalogTitle">
             <div class="cat-head">
-                <div>
+                <div class="cat-head-text">
                     <p class="kicker">Explore</p>
                     <h2 id="catalogTitle">Destinations</h2>
+                    <p>Hand-picked places, each with a clear price and a set of inclusions.</p>
                 </div>
                 <p class="cat-count" id="catCount" aria-live="polite"></p>
             </div>
@@ -146,8 +137,8 @@
                     <button class="chip" type="button" data-region="africa" aria-pressed="false">Africa</button>
                 </div>
 
-                <div class="toolbar-tools">
-                    <label class="vip-switch">
+                <div class="cat-tools">
+                    <label class="switch">
                         <input type="checkbox" id="vipOnly">
                         <span class="track" aria-hidden="true"></span>
                         VIP only
@@ -169,68 +160,168 @@
             <p class="cat-empty" id="catEmpty" hidden>No destinations match these filters.</p>
         </section>
 
-        <!-- VIP -->
-        <section class="vip" id="vip" aria-labelledby="vipTitle">
-            <div class="container">
-                <p class="eyebrow-light">Bleet VIP</p>
-                <h2 class="vip-title" id="vipTitle">Travel that <span class="grad-text">feels private.</span></h2>
-                <p class="vip-lead">A dedicated concierge, priority on everything and experiences that never appear on
-                    the open market.</p>
-
-                <div class="vip-grid">
-                    <article class="vip-card">
-                        <p class="vip-tier">Essential</p>
-                        <p class="vip-price"><span>From</span>$2,400</p>
-                        <ul class="vip-list">
-                            <li>Concierge by email</li>
-                            <li>Priority rebooking</li>
-                            <li>Lounge access on selected flights</li>
-                        </ul>
-                        <a class="btn btn-outline-light" href="support.html">Request Essential</a>
-                    </article>
-
-                    <article class="vip-card is-featured">
-                        <p class="vip-tier">Signature</p>
-                        <p class="vip-price"><span>From</span>$6,900</p>
-                        <ul class="vip-list">
-                            <li>Concierge available 24/7</li>
-                            <li>Private airport transfers</li>
-                            <li>Chef-curated dinner on arrival</li>
-                            <li>Hotel room upgrade when available</li>
-                        </ul>
-                        <a class="btn btn-gold" href="support.html">Request Signature</a>
-                    </article>
-
-                    <article class="vip-card">
-                        <p class="vip-tier">Ultra</p>
-                        <p class="vip-price"><span>From</span>$18,500</p>
-                        <ul class="vip-list">
-                            <li>Private jet on request</li>
-                            <li>Villa and yacht access</li>
-                            <li>Dedicated travel designer</li>
-                            <li>Security briefing and insurance</li>
-                        </ul>
-                        <a class="btn btn-outline-light" href="support.html">Request Ultra</a>
-                    </article>
-                </div>
-            </div>
-        </section>
-
         <!-- PRIVATE COLLECTION -->
-        <section class="private container" aria-labelledby="privateTitle">
+        <section class="cat-block container" aria-labelledby="privateTitle">
             <div class="cat-head">
-                <div>
+                <div class="cat-head-text">
                     <p class="kicker">Private collection</p>
                     <h2 id="privateTitle">Experiences you can't book online</h2>
+                    <p>Limited availability. A concierge confirms each price and date.</p>
                 </div>
-                <p class="cat-count">Limited availability. Prices are indicative and confirmed by a concierge.</p>
             </div>
-            <div class="private-row" id="privateRow"></div>
+
+            <div class="private-grid" id="privateGrid"></div>
+        </section>
+
+        <!-- VIP -->
+        <section class="vip-band" id="vip" aria-labelledby="vipTitle">
+            <div class="vip-head">
+                <p class="kicker">Bleet VIP</p>
+                <h2 id="vipTitle">Your own private world.</h2>
+                <p class="vip-lead">Exclusive use of a private hotel, a dedicated team and the amenities most resorts
+                    don't offer. Priced per day and confirmed by a concierge.</p>
+            </div>
+
+            <div class="vip-builder" id="vipBuilder">
+
+                <div class="vip-main">
+                    <fieldset class="vip-tiers">
+                        <legend>1 · Choose your tier</legend>
+                        <div class="tier-options">
+
+                            <label class="tier-option">
+                                <input type="radio" name="tier" value="essential" data-name="Essential"
+                                    data-per-day="20000" checked>
+                                <span class="tier-box">
+                                    <span class="tier-name">Essential</span>
+                                    <span class="tier-price">$20,000<small> / day</small></span>
+                                    <ul class="tier-list">
+                                        <li>Exclusive use of a private hotel floor</li>
+                                        <li>1 dedicated staff member</li>
+                                        <li>Private gym</li>
+                                        <li>Tennis court, scheduled</li>
+                                    </ul>
+                                </span>
+                            </label>
+
+                            <label class="tier-option">
+                                <input type="radio" name="tier" value="signature" data-name="Signature"
+                                    data-per-day="32000">
+                                <span class="tier-box">
+                                    <span class="tier-name">Signature</span>
+                                    <span class="tier-price">$32,000<small> / day</small></span>
+                                    <ul class="tier-list">
+                                        <li>Exclusive use of a private hotel wing</li>
+                                        <li>2 dedicated staff members</li>
+                                        <li>Private gym and spa</li>
+                                        <li>Tennis court with a coach</li>
+                                        <li>Private cinema</li>
+                                    </ul>
+                                </span>
+                            </label>
+
+                            <label class="tier-option">
+                                <input type="radio" name="tier" value="ultra" data-name="Ultra" data-per-day="55000">
+                                <span class="tier-box">
+                                    <span class="tier-name">Ultra</span>
+                                    <span class="tier-price">$55,000<small> / day</small></span>
+                                    <ul class="tier-list">
+                                        <li>Entire private hotel</li>
+                                        <li>4 dedicated staff members</li>
+                                        <li>Private gym, spa and tennis complex</li>
+                                        <li>Helipad and daily transfers</li>
+                                    </ul>
+                                </span>
+                            </label>
+
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="vip-addons">
+                        <legend>2 · Add private amenities</legend>
+
+                        <label class="addon">
+                            <span class="addon-name">Babysitter<small>Enabled on request</small></span>
+                            <span class="addon-price">+$1,500 / day</span>
+                            <input type="checkbox" name="addon" data-name="Babysitter" data-per-day="1500">
+                        </label>
+
+                        <label class="addon">
+                            <span class="addon-name">Private chef<small>Cooks in your residence</small></span>
+                            <span class="addon-price">+$2,500 / day</span>
+                            <input type="checkbox" name="addon" data-name="Private chef" data-per-day="2500">
+                        </label>
+
+                        <label class="addon">
+                            <span class="addon-name">Tennis coach<small>Dedicated pro, all day</small></span>
+                            <span class="addon-price">+$800 / day</span>
+                            <input type="checkbox" name="addon" data-name="Tennis coach" data-per-day="800">
+                        </label>
+
+                        <label class="addon">
+                            <span class="addon-name">Spa therapist<small>In-residence treatments</small></span>
+                            <span class="addon-price">+$1,200 / day</span>
+                            <input type="checkbox" name="addon" data-name="Spa therapist" data-per-day="1200">
+                        </label>
+
+                        <label class="addon">
+                            <span class="addon-name">Yacht charter<small>Crewed, half-day use</small></span>
+                            <span class="addon-price">+$6,000 / day</span>
+                            <input type="checkbox" name="addon" data-name="Yacht charter" data-per-day="6000">
+                        </label>
+
+                        <label class="addon">
+                            <span class="addon-name">Helicopter transfers<small>Private airport to
+                                    residence</small></span>
+                            <span class="addon-price">+$4,500 / day</span>
+                            <input type="checkbox" name="addon" data-name="Helicopter transfers" data-per-day="4500">
+                        </label>
+                    </fieldset>
+                </div>
+
+                <aside class="vip-summary" aria-labelledby="sumTitle">
+                    <p class="kicker" id="sumTitle">3 · Your stay</p>
+
+                    <div class="days">
+                        <span>Days</span>
+                        <div class="counter">
+                            <button type="button" data-days="-1" aria-label="Remove a day">&minus;</button>
+                            <output id="daysOut" aria-live="polite">7</output>
+                            <button type="button" data-days="1" aria-label="Add a day">+</button>
+                        </div>
+                    </div>
+
+                    <dl class="sum">
+                        <div>
+                            <dt>Tier</dt>
+                            <dd id="sumTier">Essential</dd>
+                        </div>
+                        <div>
+                            <dt>Amenities</dt>
+                            <dd id="sumAddons">None</dd>
+                        </div>
+                        <div>
+                            <dt>Per day</dt>
+                            <dd id="sumPerDay">$20,000</dd>
+                        </div>
+                    </dl>
+
+                    <p class="sum-total">
+                        <span>Estimated total</span>
+                        <strong id="sumTotal" aria-live="polite">$140,000</strong>
+                    </p>
+
+                    <button class="cat-btn cat-btn-primary cat-btn-lg" type="button" id="vipEnquire">Request this
+                        stay</button>
+                    <p class="fine">Indicative pricing. A concierge confirms availability, taxes and staffing.</p>
+                </aside>
+
+            </div>
         </section>
 
     </main>
 
-    <!-- Detail window -->
+    <!-- DETAIL WINDOW -->
     <dialog class="detail" id="detail" aria-labelledby="detailTitle">
         <button class="detail-close" type="button" id="detailClose" aria-label="Close">
             <i class="fa-solid fa-xmark" aria-hidden="true"></i>
@@ -245,20 +336,20 @@
 
             <ul class="detail-highlights" id="detailHighlights"></ul>
 
-            <fieldset class="packages">
+            <fieldset class="packages" id="packagesField">
                 <legend>Choose your package</legend>
                 <div class="package-options" id="packageOptions"></div>
             </fieldset>
 
             <div class="detail-total">
                 <div>
-                    <span class="muted">Estimated total</span>
+                    <span class="detail-total-label">Estimated total</span>
                     <strong id="detailTotal" aria-live="polite"></strong>
                 </div>
-                <button class="btn btn-gold btn-lg" type="button" id="detailReserve">Reserve</button>
+                <button class="cat-btn cat-btn-primary cat-btn-lg" type="button" id="detailReserve">Reserve</button>
             </div>
 
-            <p class="fine">This is an estimate. Our server calculates and confirms the final price at checkout.</p>
+            <p class="fine">This is an estimate. The server confirms the final price at checkout.</p>
         </div>
     </dialog>
 
@@ -283,7 +374,7 @@
                 <nav class="footer-col" aria-label="Explore">
                     <h4>Explore</h4>
                     <a href="index.html">Flights</a>
-                    <a href="index.html#destinations">Popular Destinations</a>
+                    <a href="destinations.html">Popular Destinations</a>
                     <a href="index.html#offers">Special Offers</a>
                     <a href="page.html?p=guides">Travel Guides</a>
                 </nav>
@@ -311,8 +402,6 @@
             </div>
         </div>
     </footer>
-
-
 
     <script src="assets/logic/common.js" defer></script>
     <script src="assets/logic/destinations.js" defer></script>
