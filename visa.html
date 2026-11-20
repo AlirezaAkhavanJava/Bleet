@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="assets/style/global.css">
     <link rel="stylesheet" href="assets/style/heading.css">
     <link rel="stylesheet" href="assets/style/service-search.css">
+    <link rel="stylesheet" href="assets/style/service-extras.css">
+    <link rel="stylesheet" href="assets/style/visa.css">
     <link rel="stylesheet" href="assets/style/footer.css">
 </head>
 
@@ -74,6 +76,11 @@
     </header>
 
     <main id="main">
+        <nav class="back-bar container" aria-label="Back navigation">
+            <a class="back-btn" href="index.html">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>Back to home
+            </a>
+        </nav>
         <section class="svc-hero">
             <div class="container">
                 <p class="kicker">Visa</p>
@@ -184,6 +191,52 @@
             <div class="svc-list" id="resultsList"></div>
             <p class="svc-note">Sample fees and times for layout only. Official requirements must be confirmed with
                 the destination's embassy.</p>
+        </section>
+        <section class="trip-info container" aria-labelledby="visaInfoTitle">
+            <div class="trip-info-head">
+                <h2 id="visaInfoTitle">About your visa application</h2>
+                <p>Requirements differ by country and by your nationality. Use this page as a checklist, then confirm
+                    everything with the destination's embassy or consulate before you apply.</p>
+            </div>
+
+            <div class="info-stats">
+                <div class="stat"><strong>Early</strong><span>Apply weeks before you travel</span></div>
+                <div class="stat"><strong>6 mo</strong><span>Typical passport validity required, check yours</span>
+                </div>
+                <div class="stat"><strong>Official</strong><span>Confirm requirements with the embassy</span></div>
+            </div>
+
+            <div class="info-grid">
+                <article class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-folder-open" aria-hidden="true"></i></div>
+                    <h3>Documents</h3>
+                    <ul>
+                        <li>A passport with enough blank pages, and in good condition.</li>
+                        <li>Passport-style photos that meet the country's size and background rules.</li>
+                        <li>Proof of travel, accommodation and funds. Requirements vary by visa type.</li>
+                    </ul>
+                </article>
+
+                <article class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i></div>
+                    <h3>Timing</h3>
+                    <ul>
+                        <li>Appointment slots can be booked out for weeks, so start early.</li>
+                        <li>Processing times in the results are estimates, not guarantees.</li>
+                        <li>Keep a copy of every document you submit.</li>
+                    </ul>
+                </article>
+
+                <article class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+                    <h3>Avoid scams</h3>
+                    <ul>
+                        <li>Apply only through official government or embassy websites.</li>
+                        <li>Be wary of agencies that ask for payment outside official channels.</li>
+                        <li>Never share your passport details with anyone who contacts you unprompted.</li>
+                    </ul>
+                </article>
+            </div>
         </section>
     </main>
 

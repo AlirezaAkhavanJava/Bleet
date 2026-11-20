@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tours · Bleet</title>
-    <meta name="description"
-        content="City walks, day trips, food tastings and outdoor adventures – find your tour with Bleet.">
+    <title>Hotels · Bleet</title>
+    <meta name="description" content="Find hotels, apartments and hostels with transparent totals on Bleet.">
     <link rel="icon" href="assets/images/logo.webp" type="image/webp">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,10 +17,12 @@
     <link rel="stylesheet" href="assets/style/global.css">
     <link rel="stylesheet" href="assets/style/heading.css">
     <link rel="stylesheet" href="assets/style/service-search.css">
+    <link rel="stylesheet" href="assets/style/service-extras.css">
+    <link rel="stylesheet" href="assets/style/hotels.css">
     <link rel="stylesheet" href="assets/style/footer.css">
 </head>
 
-<body class="theme-tours">
+<body class="theme-hotels">
 
     <a class="sr-only" href="#main">Skip to content</a>
 
@@ -42,10 +43,10 @@
                 <a href="buses.html" class="nav-link">
                     <i class="fa-solid fa-bus" aria-hidden="true"></i>Buses
                 </a>
-                <a href="hotels.html" class="nav-link">
+                <a href="hotels.html" class="nav-link is-active" aria-current="page">
                     <i class="fa-solid fa-hotel" aria-hidden="true"></i>Hotels
                 </a>
-                <a href="tours.html" class="nav-link is-active" aria-current="page">
+                <a href="tours.html" class="nav-link">
                     <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>Tours
                 </a>
                 <a href="visa.html" class="nav-link">
@@ -75,74 +76,89 @@
     </header>
 
     <main id="main">
+        <nav class="back-bar container" aria-label="Back navigation">
+            <a class="back-btn" href="index.html">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>Back to home
+            </a>
+        </nav>
+        <br>
         <section class="svc-hero">
             <div class="container">
-                <p class="kicker">Tours</p>
-                <h1>Explore with a guide</h1>
-                <p class="lead">City walks, day trips, food tastings and outdoor adventures.</p>
+                <p class="kicker">Hotels</p>
+                <h1>Find your stay</h1>
+                <p class="lead">Hotels, apartments and hostels with transparent totals.</p>
             </div>
         </section>
 
         <section class="container">
-            <form class="svc-panel" data-service-form="tours" novalidate aria-label="Tour search">
+            <form class="svc-panel" data-service-form="hotels" novalidate aria-label="Hotel search">
+                <div class="svc-top">
+                    <div class="segmented" role="radiogroup" aria-label="Stay type">
+                        <input type="radio" id="stayHotel" name="type" value="hotel" checked>
+                        <label for="stayHotel">Hotel</label>
+                        <input type="radio" id="stayApt" name="type" value="apartment">
+                        <label for="stayApt">Apartment</label>
+                        <input type="radio" id="stayHostel" name="type" value="hostel">
+                        <label for="stayHostel">Hostel</label>
+                    </div>
+                </div>
+
                 <div class="svc-fields">
                     <div class="svc-field is-wide">
-                        <label class="svc-label" for="tourDest">Destination</label>
+                        <label class="svc-label" for="hotelDest">Destination</label>
                         <div class="svc-control">
                             <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                            <input id="tourDest" name="destination" type="text" placeholder="City or region"
+                            <input id="hotelDest" name="destination" type="text" placeholder="City, area or hotel name"
                                 autocomplete="off" required data-msg="Enter a destination.">
                         </div>
                         <span class="svc-error" aria-live="polite"></span>
                     </div>
 
                     <div class="svc-field">
-                        <label class="svc-label" for="tourDate">Date</label>
+                        <label class="svc-label" for="hotelCheckin">Check-in</label>
                         <div class="svc-control">
                             <i class="fa-regular fa-calendar" aria-hidden="true"></i>
-                            <input id="tourDate" name="date" type="date" data-offset="7" required
-                                data-msg="Choose a date." data-msg-range="Date can't be in the past.">
+                            <input id="hotelCheckin" name="checkin" type="date" data-offset="7" required
+                                data-msg="Choose a check-in date." data-msg-range="Date can't be in the past.">
                         </div>
                         <span class="svc-error" aria-live="polite"></span>
                     </div>
 
-                    <div class="svc-field is-small">
-                        <label class="svc-label" for="tourDuration">Duration</label>
+                    <div class="svc-field">
+                        <label class="svc-label" for="hotelCheckout">Check-out</label>
                         <div class="svc-control">
-                            <i class="fa-regular fa-clock" aria-hidden="true"></i>
-                            <select id="tourDuration" name="duration">
-                                <option value="half">Half day</option>
-                                <option value="full" selected>Full day</option>
-                                <option value="multi">2–3 days</option>
-                                <option value="long">4+ days</option>
-                            </select>
+                            <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                            <input id="hotelCheckout" name="checkout" type="date" data-after="hotelCheckin" data-gap="1"
+                                data-offset="8" required data-msg="Choose a check-out date."
+                                data-msg-range="Check-out must be after check-in.">
                         </div>
+                        <span class="svc-error" aria-live="polite"></span>
                     </div>
 
-                    <div class="svc-field picker" data-total-max="10">
-                        <span class="svc-label" id="tourGuestsLabel">Travellers</span>
+                    <div class="svc-field picker" data-total-max="8">
+                        <span class="svc-label" id="hotelGuestsLabel">Guests</span>
                         <button class="picker-trigger" type="button" aria-haspopup="dialog" aria-expanded="false"
-                            aria-controls="tourGuests" aria-labelledby="tourGuestsLabel picker-tourSummary">
+                            aria-controls="hotelGuests" aria-labelledby="hotelGuestsLabel picker-hotelSummary">
                             <i class="fa-solid fa-user-group" aria-hidden="true"></i>
-                            <span class="picker-summary" id="picker-tourSummary">1 Adult</span>
+                            <span class="picker-summary" id="picker-hotelSummary">2 Adults</span>
                             <i class="fa-solid fa-chevron-down picker-chevron" aria-hidden="true"></i>
                         </button>
 
-                        <div class="picker-panel" id="tourGuests" role="dialog" aria-label="Travellers">
-                            <div class="counter-row" data-key="adults" data-min="1" data-max="10" data-start="1"
+                        <div class="picker-panel" id="hotelGuests" role="dialog" aria-label="Guests">
+                            <div class="counter-row" data-key="adults" data-min="1" data-max="8" data-start="2"
                                 data-one="Adult" data-many="Adults">
                                 <div><strong>Adults</strong><small>13 years and over</small></div>
                                 <div class="counter">
                                     <button class="counter-btn" type="button" data-action="dec"
                                         aria-label="Remove an adult">&minus;</button>
-                                    <output>1</output>
+                                    <output>2</output>
                                     <button class="counter-btn" type="button" data-action="inc"
                                         aria-label="Add an adult">+</button>
                                 </div>
                             </div>
-                            <div class="counter-row" data-key="children" data-min="0" data-max="10" data-start="0"
+                            <div class="counter-row" data-key="children" data-min="0" data-max="6" data-start="0"
                                 data-one="Child" data-many="Children">
-                                <div><strong>Children</strong><small>2 to 12 years</small></div>
+                                <div><strong>Children</strong><small>Under 13</small></div>
                                 <div class="counter">
                                     <button class="counter-btn" type="button" data-action="dec"
                                         aria-label="Remove a child">&minus;</button>
@@ -158,27 +174,35 @@
                         </div>
                     </div>
 
-                    <div class="svc-field is-full">
-                        <span class="svc-label" id="tourStyleLabel">Tour style</span>
-                        <div class="chips" role="radiogroup" aria-labelledby="tourStyleLabel">
-                            <input type="radio" id="styleCity" name="style" value="city" checked>
-                            <label for="styleCity"><i class="fa-solid fa-city" aria-hidden="true"></i>City</label>
-                            <input type="radio" id="styleAdventure" name="style" value="adventure">
-                            <label for="styleAdventure"><i class="fa-solid fa-person-hiking"
-                                    aria-hidden="true"></i>Adventure</label>
-                            <input type="radio" id="styleCulture" name="style" value="culture">
-                            <label for="styleCulture"><i class="fa-solid fa-landmark"
-                                    aria-hidden="true"></i>Culture</label>
-                            <input type="radio" id="styleFood" name="style" value="food">
-                            <label for="styleFood"><i class="fa-solid fa-utensils" aria-hidden="true"></i>Food</label>
-                            <input type="radio" id="styleDaytrip" name="style" value="daytrip">
-                            <label for="styleDaytrip"><i class="fa-solid fa-route" aria-hidden="true"></i>Day
-                                trip</label>
+                    <div class="svc-field is-small">
+                        <label class="svc-label" for="hotelRooms">Rooms</label>
+                        <div class="svc-control">
+                            <i class="fa-solid fa-bed" aria-hidden="true"></i>
+                            <select id="hotelRooms" name="rooms">
+                                <option value="1">1 room</option>
+                                <option value="2">2 rooms</option>
+                                <option value="3">3 rooms</option>
+                                <option value="4">4 rooms</option>
+                                <option value="5">5 rooms</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="svc-field is-small">
+                        <label class="svc-label" for="hotelStars">Stars</label>
+                        <div class="svc-control">
+                            <i class="fa-solid fa-star" aria-hidden="true"></i>
+                            <select id="hotelStars" name="stars">
+                                <option value="0">Any</option>
+                                <option value="3">3+</option>
+                                <option value="4">4+</option>
+                                <option value="5">5 only</option>
+                            </select>
                         </div>
                     </div>
 
                     <button class="btn btn-lg svc-submit svc-search" type="submit">
-                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Search tours
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Search stays
                     </button>
                 </div>
             </form>
@@ -187,13 +211,58 @@
         <section class="svc-results container" id="results" aria-label="Search results">
             <div class="svc-results-head" id="resultsHead">
                 <div>
-                    <h2>Search tours</h2>
-                    <p>Pick a destination and style to see guided options.</p>
+                    <h2>Search stays</h2>
+                    <p>Enter a destination and dates to see places to stay.</p>
                 </div>
             </div>
             <div class="svc-list" id="resultsList"></div>
-            <p class="svc-note">Sample results for layout only. Live tour availability will come from the Spring Boot
-                API.</p>
+            <p class="svc-note">Sample results for layout only. Live availability will come from the Spring Boot API.
+            </p>
+        </section>
+        <section class="trip-info container" aria-labelledby="hotelInfoTitle">
+            <div class="trip-info-head">
+                <h2 id="hotelInfoTitle">About your stay</h2>
+                <p>Before you book, check the terms that often cost travellers money: cancellation, taxes and what's
+                    included.</p>
+            </div>
+
+            <div class="info-stats">
+                <div class="stat"><strong>14:00</strong><span>Typical check-in time</span></div>
+                <div class="stat"><strong>12:00</strong><span>Typical check-out time</span></div>
+                <div class="stat"><strong>Read</strong><span>Cancellation terms before paying</span></div>
+            </div>
+
+            <div class="info-grid">
+                <article class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i></div>
+                    <h3>Before you book</h3>
+                    <ul>
+                        <li>Check whether the price includes taxes and service fees.</li>
+                        <li>Look for free cancellation, and note the deadline.</li>
+                        <li>Confirm whether breakfast is included or charged separately.</li>
+                    </ul>
+                </article>
+
+                <article class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-key" aria-hidden="true"></i></div>
+                    <h3>At check-in</h3>
+                    <ul>
+                        <li>Bring your booking reference and a photo ID.</li>
+                        <li>Some hotels place a deposit on a card, so keep it available.</li>
+                        <li>Arriving early? Ask whether your room is ready, or leave your bags at reception.</li>
+                    </ul>
+                </article>
+
+                <article class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i></div>
+                    <h3>Choosing the area</h3>
+                    <ul>
+                        <li>Check the distance to the nearest metro or bus stop on a map.</li>
+                        <li>Read recent reviews that mention noise, cleanliness and location.</li>
+                        <li>Save the hotel address offline, in case your phone loses signal.</li>
+                    </ul>
+                </article>
+            </div>
         </section>
     </main>
 
